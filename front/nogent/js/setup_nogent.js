@@ -17,7 +17,7 @@ $(function()
 	
 	// Key API
 	App.Views.appView.proxy = "../core/proxy/ba-simple-proxy.php?url=";
-	App.Views.appView.initAdminParams( "Clef", "Api", "3WUWr77hbTf6gaH48fnUj9yhp442vbeH" );
+	App.Views.appView.initAdminParams( "mazerte", "desperados", "90f1de8a-6c03-45d8-8c8a-89b10893" );
 
 	// Carte
 	App.Views.appView.mapURL = "medias/cartes/Nogent.jpg";

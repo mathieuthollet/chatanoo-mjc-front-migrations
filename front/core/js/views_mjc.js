@@ -290,8 +290,8 @@ var MJCAppView = AppView.extend({
 		var t = this;
 		
 		// Adresses des différents services (webs services, mediaCenter, upload)
-		this.serviceURL = "http://ws.chatanoo.org/services";
-		this.mediaCenterURL = "http://mc.chatanoo.org/m/";
+		this.serviceURL = "http://core.aws.chatanoo.org/services";
+		this.mediaCenterURL = "http://medias.aws.chatanoo.org/";
 		this.uploadURL = "http://mc.chatanoo.org/upload";
 		
 		// Valeurs par défaut des 4 termes (peut être modifié via l'admin, en ajoutant des métas-données à chaque question)

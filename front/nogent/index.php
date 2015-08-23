@@ -22,6 +22,8 @@
     <script src="../core/js/libs/greensock/utils/Draggable.min.js"></script>
     <script src="../core/js/libs/greensock/TimelineLite.min.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1.36/aws-sdk.js"></script>
+    
  	<!-- Emoji --> 
 	<link rel="stylesheet" href="../core/styles/jquery.emojipicker.css" type="text/css" />
 	<link rel="stylesheet" href="../core/styles/jquery.emojipicker.a.css" type="text/css" />
@@ -123,7 +125,7 @@
             
             <div class="creativecommons">
             Dispositif mutualisé par l'association Concert-Urbain sous un contrat Creative Commons (CC BY-NC-ND 3.0 FR) 
-            <img src="../core/images/cc.png"" alt="" />
+            <img src="../core/images/cc.png" alt="" />
             </div>
             
         </div>
@@ -136,7 +138,7 @@
 	<script src="../core/js/draw_mjc.js"></script>
 	<script src="../core/js/models_backbone.js"></script>
 	<script src="../core/js/views_backbone.js"></script>
-	<script src="../core/js/views_controler.js"></script>
+	<script src="../core/js/views_controler_aws.js"></script>
 	<script src="../core/js/views_mjc.js"></script>
 	<script src="../core/js/router_backbone.js"></script>
 	<script src="js/setup_nogent.js"></script>

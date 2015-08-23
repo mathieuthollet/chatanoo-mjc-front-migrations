@@ -13,12 +13,13 @@ var AppView = Backbone.View.extend({
 	initialize: function () {
 		
 		this.proxy = "proxy/ba-simple-proxy.php?url=";
-		this.serviceURL = "http://ws.dring93.org/services";
+		this.serviceURL = "http://core.aws.chatanoo.org/services";
 		this.uploadURL = "http://ms.dring93.org/upload";
-		this.mediaCenterURL = "http://ms.dring93.org/m/";
+		this.mediaCenterURL = "http://medias.aws.chatanoo.org";
 		this.mapURL = "medias/cartes/CARTE_DRING13.jpg";
+		this.queriesPrefix = "";
 		
-		this.initAdminParams( "mazerte", "desperados", "qJlCaSsBbYBYypwF9TT8KmCOxhuZ3wIj" );
+		this.initAdminParams( "mazerte", "desperados", "90f1de8a-6c03-45d8-8c8a-89b10893" );
 		
 		this.axeHorizontal = { gauche:"individuel.", droite:"collectif." };
 		this.axeVertical   = { bas:"réaliste.", haut:"utopique." };
@@ -145,7 +146,10 @@ var AppView = Backbone.View.extend({
 			//
 			// Création de la liste des projets (Queries) sur la page d'accueil
 			//
-			
+
+			jsonResult = _(jsonResult).filter( function(query) {
+				return query.content.indexOf(t.queriesPrefix) == 0; 
+			});
 			App.Views.QueriesView = new Chatanoo.QueriesView(jsonResult);
 			
 			// 
@@ -1218,14 +1222,14 @@ var AppView = Backbone.View.extend({
 		}
 		
 		var s3 = new AWS.S3({apiVersion: '2006-03-01'})
-		s3.listObjects({ Bucket: 'chatanoo-medias-input' }, function (err, data) {
-			console.log(err, data);
-			if (err) {
-				console.log('Could not load objects from S3');
-			} else {
-				console.log('Loaded ' + data.Contents.length + ' items from S3');
-			}
-		});
+		// s3.listObjects({ Bucket: 'chatanoo-medias-input' }, function (err, data) {
+		// 	console.log(err, data);
+		// 	if (err) {
+		// 		console.log('Could not load objects from S3');
+		// 	} else {
+		// 		console.log('Loaded ' + data.Contents.length + ' items from S3');
+		// 	}
+		// });
 	
 		var files;
 		var uploadFiles = function (event)
