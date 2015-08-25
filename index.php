@@ -175,7 +175,7 @@
             App.Router = new AppRouter();
             
             App.Views.appView = new MJCAppView();
-            App.Views.appView.serviceURL = "<?php echo $_ENV["SERVICE_URL"] ?>";
+            App.Views.appView.serviceURL = "<?php echo $_ENV["SERVICE_URL"] ?>/services";
             App.Views.appView.mediaCenterURL = "<?php echo $_ENV["MEDIAS_CENTER_URL"] ?>";
             App.Views.appView.titreAccueil = "<?php echo $_ENV["TITLE"] ?>";
             App.Views.appView.queriesPrefix = "<?php echo $_ENV["QUERIES_PREFIX"] ?>";
