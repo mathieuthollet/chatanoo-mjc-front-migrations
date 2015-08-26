@@ -402,16 +402,19 @@ var MJCAppView = AppView.extend({
 			var randomImages = _.shuffle(images);
 			var randomImage = _(randomImages[0]).strip();
 			
-			if (randomImage.indexOf("-P") == -1)
+			if (randomImage.indexOf("http") == 0) {
+				randomImagePath = randomImage;
+			}
+			else if (randomImage.indexOf("-P") !== -1)
+			{
+				// Images du MediaCenter
+				var randomImagePath = this.mediaCenterURL + randomImage + ".jpg";
+			}
+			else
 			{
 				// Images du XML
 				var subfolder = queryMediasModel.get("subfolder");
 				var randomImagePath = "medias/images/" + (subfolder ? subfolder : "") + randomImage;
-			}
-			else
-			{
-				// Images du MediaCenter
-				var randomImagePath = this.mediaCenterURL + randomImage + ".jpg";
 			}
 			
 			t.backgroundImage = "url('" + randomImagePath + "')";

@@ -185,7 +185,15 @@ var AppView = Backbone.View.extend({
 				if (metaVO.name === "BACKGROUND_IMAGE_ACCUEIL") {
 					
 					var imageID = metaVO.content;
-					var backgroundImageURL = t.mediaCenterURL + imageID + ".jpg";
+
+					var backgroundImageURL;
+					if (imageID.indexOf('http') == 0) {
+					  backgroundImageURL = imageID;
+					} else if(imageID.indexOf('-P') !== -1) {
+					  backgroundImageURL = t.mediaCenterURL + imageID + ".jpg";
+					} else {
+					  backgroundImageURL = t.mediaCenterURL + imageID + '/image.png';
+					}
 					
 					$(".global .container .ecrans .accueil").css("background-image", "url('" + backgroundImageURL + "')");
 					
