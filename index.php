@@ -86,7 +86,7 @@
                                     <div class="close">x</div>
                                 </div>
                                 <div class="introduction">
-                                    <span class="couleur_base">Bienvenue au site de débat "Conflit de Canards" !</span>
+                                    <span class="couleur_base">Bienvenue au site de débat "<?php echo $_ENV["TITLE"] ?>" !</span>
                                     Choisissez une question, écoutez ce que chacun en dit, participez en envoyant une vidéo, un texte
                                     ou un enregistrement sonore. Vous pourrez voir qui a participé, où et quels mots-clés structurent le débat.
                                 </div>
