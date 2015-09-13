@@ -6,7 +6,8 @@
 var AppView = Backbone.View.extend({
 
 	authentificationID: null,
-	
+	awsURL: "https://medias.aws.chatanoo.org/",
+
 	accueilElement: $(".global .centre .accueil"),
 	mosaiqueElement: $(".global .centre .mosaique"),
 	
@@ -559,8 +560,8 @@ var AppView = Backbone.View.extend({
 			gauche: t.axeHorizontal.gauche,
 			droite: t.axeHorizontal.droite,
 			bas: t.axeVertical.bas,
-			haut: t.axeVertical.haut,
-		}
+			haut: t.axeVertical.haut
+		};
 		
 		var popUp = new Chatanoo.PopUpView( { el : popUpElement } ).render( options );
 		
@@ -585,8 +586,8 @@ var AppView = Backbone.View.extend({
 	
 	createImageView: function( element, itemId, mediaId, urlImage ) {
 		var t = this;
-		var mediaPath = "https://medias.aws.chatanoo.org/" + urlImage;
-		var model = new MediaModel( { itemId: itemId, id: mediaId, mediaPath } );
+		var mediaPath = t.awsURL + urlImage + "/image.png";
+		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath } );
 		var imageView = new Chatanoo.ImageView( { el: element, model: model } ).render();
 		
 		return { model:model, view:imageView };
@@ -597,9 +598,9 @@ var AppView = Backbone.View.extend({
 		
 		var extension = ".mp4";
 		var mime = "video/mp4";
-		var mediaPath = "https://medias.aws.chatanoo.org/" + urlVideo + "/video.mp4";
+		var mediaPath = t.awsURL + urlVideo + "/video.mp4";
 		
-		var model = new MediaModel( { itemId: itemId, id: mediaId, url: t.mediaCenterURL + urlVideo + extension, mime:mime, width:width, height:height, autoplay: true } );
+		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath, mime:mime, width:width, height:height, autoplay: true } );
 		var videoView = new Chatanoo.VideoView( { el: element, model: model } ).loadVideo();
 		
 		return { model:model, view:videoView };
@@ -610,8 +611,9 @@ var AppView = Backbone.View.extend({
 		
 		var extension = ".mp3";
 		var mime = "audio/mp3";
-		
-		var model = new MediaModel( { itemId: itemId, id: mediaId, url: t.mediaCenterURL + urlAudio + extension, mime:mime, autoplay: true } );
+		var mediaPath = t.awsURL + urlAudio + "/audio.mp3";
+
+		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath, mime:mime, autoplay: true } );
 		var audioView = new Chatanoo.AudioView( { el: element, model: model } ).loadAudio();
 		
 		return { model:model, view:audioView };
@@ -649,7 +651,7 @@ var AppView = Backbone.View.extend({
 				var titreImage = imageObject.title;
 				var urlImage = imageObject.url;
 				
-				// console.log(imageId, titreImage, urlImage);
+				console.log(imageId, titreImage, urlImage);
 				
 				var image = t.createImageView( mediaParent, itemId, imageId, urlImage );
 				
@@ -662,7 +664,7 @@ var AppView = Backbone.View.extend({
 				var titreVideo = videoObject.title;
 				var urlVideo = videoObject.url;
 				
-				// console.log(videoId, titreVideo, urlVideo);
+				console.log(videoId, titreVideo, urlVideo);
 				
 				var video = t.createVideoView( mediaParent, itemId, videoId, urlVideo, mediaWidth, mediaHeight );
 				
@@ -675,7 +677,7 @@ var AppView = Backbone.View.extend({
 				var titreAudio = audioObject.title;
 				var urlAudio = audioObject.url;
 				
-				// console.log(audioId, titreAudio, urlAudio);
+				console.log(audioId, titreAudio, urlAudio);
 				
 				var audio = t.createAudioView( mediaParent, itemId, audioId, urlAudio );
 				
@@ -1229,16 +1231,8 @@ var AppView = Backbone.View.extend({
 		    s4() + '-' + s4() + s4() + s4();
 		}
 		
-		var s3 = new AWS.S3({apiVersion: '2006-03-01'})
-		// s3.listObjects({ Bucket: 'chatanoo-medias-input' }, function (err, data) {
-		// 	console.log(err, data);
-		// 	if (err) {
-		// 		console.log('Could not load objects from S3');
-		// 	} else {
-		// 		console.log('Loaded ' + data.Contents.length + ' items from S3');
-		// 	}
-		// });
-	
+		var s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
 		var files;
 		var uploadFiles = function (event)
 		{
@@ -1265,40 +1259,33 @@ var AppView = Backbone.View.extend({
 		
 			var loadingAnimation = t.startLoadingAnimation();
 
-    		var bucketName;
+    		var bucketName = 'chatanoo-medias-input';
 			var prefix, filenameToSave, filenameForUpload;
 			var extension = file.name.split('.').pop();
 			
 			if ( file.type.indexOf("image/") == 0)
 			{
-				// RQ1 : On upload directement dans le bucket "output"
-				// RQ2 : On conserve l'extension du media d'origine dans la base
-				bucketName = 'chatanoo-medias-input';
+				// L'image sera uploadée dans "input" puis convertie dans "output"
 				prefix = "P";
-				filenameToSave = prefix + "-" + guid();
-				filenameForUpload = filenameToSave + "." + extension;
 			}
 			else if ( file.type.indexOf("video/") == 0)
 			{
 				// La vidéo sera uploadée dans "input" puis convertie dans "output"
-				bucketName = 'chatanoo-medias-input';
 				prefix = "M";
-				filenameToSave = prefix + "-" + guid();
-				filenameForUpload = filenameToSave + "." + extension;
 			}
 			else if ( file.type.indexOf("audio/") == 0)
 			{
 				// Le son sera uploadé dans "input" puis converti dans "output"
-				bucketName = 'chatanoo-medias-input';	
-				prefix = "I";
-				filenameToSave = prefix + "-" + guid();
-				filenameForUpload = filenameToSave + "." + extension;
+				prefix = "A";
 			}
 			else
 			{
 				return;
 			}
-			
+
+			filenameToSave = prefix + "-" + guid();
+			filenameForUpload = filenameToSave + "." + extension;
+
 			var params = {
 				Bucket: bucketName, 
 				Key: filenameForUpload, 
@@ -1310,9 +1297,8 @@ var AppView = Backbone.View.extend({
 			
 			s3.upload(params, function (err, data) {
 				
-				console.log(err ? 'ERROR!' : 'UPLOADED.')
+				console.log(err ? 'ERROR!' : 'UPLOADED2');
 				
-				/*
 				t.stopLoadingAnimation(loadingAnimation);
 				
 				if (! err)
@@ -1324,9 +1310,8 @@ var AppView = Backbone.View.extend({
 				{
 					$(".uploadStatus").html("Echec de l'envoi du média");
 				}
-				*/
 			});
-		}		
+		};
 		
 		$('input[type=file]').off().on('change', function (event)
 		{
@@ -1347,7 +1332,7 @@ var AppView = Backbone.View.extend({
 			  			&& (file.type.indexOf("video/") == -1) && (file.type.indexOf("audio/") == -1)) {
 							
 				// Type incompatible : on bloque le bouton "Envoyer votre media"
-				console.log("Type incompatible", file.type)
+				console.log("Type incompatible", file.type);
 				t.disableUploadSubmitButton(true);
 				return;
 			  }
@@ -1372,7 +1357,7 @@ var AppView = Backbone.View.extend({
 		{
 			case "P": return "Picture";
 			case "M": return "Video";
-			case "I": return "Audio";
+			case "A": return "Audio";
 			case "T": return "Text";
 		}
 		
@@ -1395,9 +1380,10 @@ var AppView = Backbone.View.extend({
 		
 		var mediaType = t.getMediaTypeFromFileName(mediaFileName);
 		
-		var uploadParent = $(".uploadParent"); 
+		var uploadButton = $("#uploadButton");
 		uploadButton.disabled = true;
-			
+
+		var uploadParent = $(".uploadParent");
 		var mediaParent = $(".uploadedMedia", uploadParent);
 		
 		$(".envoiTexte").css("display", "none");
@@ -1418,7 +1404,7 @@ var AppView = Backbone.View.extend({
 			case "Video" :
 			var video = t.createVideoView( mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight );
 			break;
-		};
+		}
 		
 		// La suite est maintenant accessible : étape 2
 		$("#toEtape2Button").siblings(".etape").css("display", "inline");
