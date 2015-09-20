@@ -10,7 +10,7 @@
 
 <script id="itemTemplate" type="text/template">
     <div class="itemTitre item<%= id %>"  data-id="<%= id %>" style="position:absolute;left:<%= left %>px;top:<%= top %>px">
-        <a href="#"><img src='medias/divers/cercleRouge.png' alt='<%= title %>' /></a>
+        <a href="#"><img src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='<%= title %>' /></a>
     </div>
 </script>
 
@@ -40,7 +40,7 @@
 
 <script id="itemMapTemplate" type="text/template">
     <div class="itemTitre item<%= id %>"  data-id="<%= id %>" style="position:absolute;left:<%= mapLeft %>px;top:<%= mapTop %>px">
-        <a href="#"><img src='medias/divers/cercleRouge.png' alt='<%= title %>' /></a>
+        <a href="#"><img src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='<%= title %>' /></a>
     </div>
 </script>
 
@@ -245,7 +245,7 @@
                 <div>
                     <div id="formMap" class="mapParent">
                         <img class="map" src="<%= urlCarte %>" alt="" />
-                        <img class="item" src='medias/divers/cercleRouge.png' alt='' />
+                        <img class="item" src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='' />
                     </div>
                 </div>
                 <div class="buttonParent">
