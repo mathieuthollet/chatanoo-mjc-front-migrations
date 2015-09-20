@@ -864,16 +864,15 @@ var AppView = Backbone.View.extend({
 		{
 			// b. Envoi d'un témoignage media (image, vidéo, audio)
 			var mediaArray = mediaFilename.split("-");
-			var mediaType = mediaArray[mediaArray.length - 1];
-			var mediaClass;
-			 
+			var mediaType = mediaFilename.charAt(0);
+
 			switch(mediaType)
 			{
 				case "P":
 				mediaVO = {"users_id":userId, "url":mediaFilename, "title":mediaTitle, "__className":"Vo_Media_Picture", "isValid":true, "id":0, "preview":null, "width":null,"height":null, "description":null, "setDate":null, "addDate":null};
 				break;
 				
-				case "V":
+				case "M":
 				mediaVO = {"users_id":userId, "url":mediaFilename, "title":mediaTitle, "__className":"Vo_Media_Video", "isValid":true, "id":0, "preview":null, "width":null,"height":null, "description":null, "setDate":null, "addDate":null};
 				break;
 				
@@ -1228,13 +1227,13 @@ var AppView = Backbone.View.extend({
 		
 		var uploadButton = $("#uploadButton");
 		t.disableUploadSubmitButton(true);
-		
-		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-		  IdentityPoolId: 'eu-west-1:b263aeab-02ae-4268-b338-95e7ea79e255',
-		});
-		
+
 		// http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
 		AWS.config.region = 'eu-west-1';
+
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+		  IdentityPoolId: 'eu-west-1:b263aeab-02ae-4268-b338-95e7ea79e255'
+		});
 
 		function guid() {
 		  function s4() {

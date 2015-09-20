@@ -777,8 +777,16 @@ textarea
 
 .global .uploadParent .uploadContent .uploadBody .uploadedMedia {
 	float:left;
-	max-width:340px;
+	max-width:190px;
 	max-height:400px;
+}
+
+.global .uploadParent .uploadContent .uploadBody .uploadedMedia img {
+	width:190px;
+}
+
+.global .uploadParent .uploadContent .uploadBody .uploadedMedia video {
+	width:190px;
 }
 
 .global .uploadParent .uploadContent .uploadBody .uploadForm .elementForm .envoiTexte textarea {
