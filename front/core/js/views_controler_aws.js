@@ -6,7 +6,7 @@
 var AppView = Backbone.View.extend({
 
 	authentificationID: null,
-	awsURL: "https://medias.aws.chatanoo.org/",
+	awsURL: "http://medias.aws.chatanoo.org/",  // "https://s3-eu-west-1.amazonaws.com/";
 
 	accueilElement: $(".global .centre .accueil"),
 	mosaiqueElement: $(".global .centre .mosaique"),
@@ -583,39 +583,51 @@ var AppView = Backbone.View.extend({
 
 		return popUp;
 	},
-	
-	createImageView: function( element, itemId, mediaId, urlImage ) {
+
+	getImageKey: function( imageID ) {
+		return imageID + "/image.png";
+	},
+
+	createImageView: function( element, itemId, mediaId, imageID ) {
 		var t = this;
-		var mediaPath = t.awsURL + urlImage + "/image.png";
+		var mediaPath = this.awsURL + t.getImageKey(imageID);
 		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath } );
 		var imageView = new Chatanoo.ImageView( { el: element, model: model } ).render();
-		
+
 		return { model:model, view:imageView };
 	},
-	
-	createVideoView: function( element, itemId, mediaId, urlVideo, width, height) {
+
+	getVideoKey: function( videoID ) {
+		return videoID + "/video.mp4";
+	},
+
+	createVideoView: function( element, itemId, mediaId, videoID, width, height) {
 		var t = this;
-		
+
 		var extension = ".mp4";
 		var mime = "video/mp4";
-		var mediaPath = t.awsURL + urlVideo + "/video.mp4";
-		
+		var mediaPath = t.awsURL + t.getVideoKey(videoID);
+
 		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath, mime:mime, width:width, height:height, autoplay: true } );
 		var videoView = new Chatanoo.VideoView( { el: element, model: model } ).loadVideo();
-		
+
 		return { model:model, view:videoView };
 	},
-	
-	createAudioView: function( element, itemId, mediaId, urlAudio) {
+
+	getAudioPath: function( audioID ) {
+		return this.awsURL + audioID + "/audio.mp3";
+	},
+
+	createAudioView: function( element, itemId, mediaId, audioID) {
 		var t = this;
-		
+
 		var extension = ".mp3";
 		var mime = "audio/mp3";
-		var mediaPath = t.awsURL + urlAudio + "/audio.mp3";
+		var mediaPath = t.getAudioPath(audioID);
 
 		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath, mime:mime, autoplay: true } );
 		var audioView = new Chatanoo.AudioView( { el: element, model: model } ).loadAudio();
-		
+
 		return { model:model, view:audioView };
 	},
 	
@@ -990,6 +1002,7 @@ var AppView = Backbone.View.extend({
 	
 	closeUploadView: function() {
 		var t = this;
+		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
 		if (t.popupUpload) t.popupUpload.closePopUp();
 	},
 	
@@ -1393,32 +1406,69 @@ var AppView = Backbone.View.extend({
 		var mediaWidth  =  mediaParent.width() || uploadParent.width() * 0.5;
 		var mediaHeight = mediaWidth * 2 / 3;
 
-		// console.log(mediaFileName, mediaType);
+		console.log("displayButtonToValidateUploadMedia", mediaFileName, mediaType);
 
 		switch(mediaType)
 		{
 			case "Picture" :
-			var image = t.createImageView( mediaParent, itemId, mediaId, mediaFileName );
-			break;
-			
+				var callback = function() {
+					console.log("... createImageView", mediaParent, itemId, mediaId, mediaFileName);
+					var image = t.createImageView( mediaParent, itemId, mediaId, mediaFileName );
+				}
+				t.tryToLoadConvertedMedia( t.getImageKey(mediaFileName), callback);
+				break;
+
 			case "Video" :
-			var video = t.createVideoView( mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight );
-			break;
-		}
-		
+				var callback = function() {
+					var video = t.createVideoView( mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight );
+				}
+				t.tryToLoadConvertedMedia( t.getVideoKey(mediaFileName), callback);
+				break;
+		};
+
 		// La suite est maintenant accessible : étape 2
 		$("#toEtape2Button").siblings(".etape").css("display", "inline");
 		$("#toEtape2Button").css("display", "inline");
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape2( mediaType, mediaTitle, mediaFileName, null ); } );
 
 	},
-	
+
+	tryToLoadConvertedMedia: function( mediaAWSKey, callback, nbTrials ) {
+
+		var t = this;
+		var s3 = new AWS.S3({apiVersion: '2006-03-01'})
+		var bucketName = "chatanoo-medias-output";
+
+		if (! nbTrials) nbTrials = 0;
+
+		nbTrials++;
+
+		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
+
+		t.tryToLoadConvertedTimeout = setInterval( function() {
+
+			$(".uploadStatus").html("Conversion et chargement du média...");
+
+			s3.getObject({ Bucket: bucketName, Key: mediaAWSKey }, function (err, data) {
+				if (err) {
+					console.log('Could not get objects from S3');
+				} else {
+					$(".uploadStatus").html("Votre média a bien été ajouté !");
+					clearInterval(t.tryToLoadConvertedTimeout);
+					callback();
+				}
+			});
+
+		}, 1500);
+	},
+
 	validUploadEtape2: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {
 		
 		// console.log("validUploadEtape2");
 		
 		var t = this;
-		
+		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
+
 		t.uploadMediaType = mediaType;
 		t.uploadMediaTitle = mediaTitle;
 		t.uploadMediaFileName = mediaFileName;
