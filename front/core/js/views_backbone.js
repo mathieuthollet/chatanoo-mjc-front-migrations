@@ -321,7 +321,7 @@ Chatanoo.PopUpView = Backbone.View.extend({
 	
 	initialize: function (param) {
 
-		Backbone.View.prototype.initialize.call(this, param)
+		Backbone.View.prototype.initialize.call(this, param);
 
 		this.template = _.template($("#popUpTemplate").html());
 	},

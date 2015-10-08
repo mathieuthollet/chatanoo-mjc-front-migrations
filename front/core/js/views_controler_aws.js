@@ -584,8 +584,6 @@ var AppView = Backbone.View.extend({
 		popUpContentMedia.css("width", mediaWidth + "px");
 		popUpContentMedia.css("height", mediaHeight + "px");
 
-		popUpViewEl.css("width", mediaWidth + "px");
-		
 		// popUpContentMedia.css("margin-left", (popUpWidth * 0.05) + "px");
 		// popUpContentMedia.css("margin-top", (popUpHeight * 0.05) + "px");
 		
