@@ -326,7 +326,7 @@ Chatanoo.PopUpView = Backbone.View.extend({
     events: {
 		"click .popupClose": "closePopUp",
 		"click .voteButton": "vote",
-		"click .emojiButton": "emojiPicker",
+		"click .emojiButton": "emojiPicker"
 	},	
 
  	emojiPicker: function(e) {
@@ -361,7 +361,10 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
 		t.$el.css("height", "");
+
+
 		if (t.subview && t.subview.close) subview.close();
+
 		t.close()
 	},
 	

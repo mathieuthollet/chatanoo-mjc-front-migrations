@@ -736,7 +736,7 @@ var AppView = Backbone.View.extend({
 		var t = this;
 		var rate = t.getRate(voteIc, voteRu);
 		
-		// console.log("vote", itemId, "ic", voteIc, "ru", voteRu, "rate", rate, "check vote = ", t.getVoteFromRate(rate));
+		console.log("[CONTROLER] voteMediaItem > vote", itemId, "ic", voteIc, "ru", voteRu, "rate", rate, "check vote = ", t.getVoteFromRate(rate));
 		
 		var success = function(jsonResult) {
 			
@@ -789,7 +789,7 @@ var AppView = Backbone.View.extend({
 			
 			t.getDataVoteById(voteId, getDataVoteByIdSuccess);
 			
-		}
+		};
 		
 		t.addDataVoteToItem(itemId, rate, success);
 	},

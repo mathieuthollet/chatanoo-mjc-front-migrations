@@ -1126,7 +1126,7 @@ var MJCAppView = AppView.extend({
 	
 	voteMediaItem: function(itemId, voteIc, voteRu) {
 		
-		console.log("voteMediaItem", itemId, voteIc, voteRu);
+		console.log("[VIEWS] voteMediaItem > ", itemId, voteIc, voteRu);
 		
 		var t = this;
 		
@@ -1203,7 +1203,7 @@ var MJCAppView = AppView.extend({
 			// On récupère les votes pour mettre à jour la mosaïque
 			t.getDataVoteById(voteId, getDataVoteByIdSuccess);
 			
-		}
+		};
 		
 		// On ajoute le vote à l'item
 		t.addDataVoteToItem(itemId, rate, successVote);
