@@ -1126,7 +1126,7 @@ var MJCAppView = AppView.extend({
 	
 	voteMediaItem: function(itemId, voteIc, voteRu) {
 		
-		// console.log(itemId, voteIc, voteRu);
+		console.log("voteMediaItem", itemId, voteIc, voteRu);
 		
 		var t = this;
 		
@@ -1215,7 +1215,7 @@ var MJCAppView = AppView.extend({
 		if (commentaire.length > 0)
 		{
 			var userId = t.currentUserId ? t.currentUserId : 0;
-			var commentJson = {"content":commentaire, "items_id":userId, "isValid":false, "id":0, "users_id":0, "addDate":null, "setDate":null, "__className":"Vo_Comment"};
+			var commentJson = {"content":commentaire, "items_id":itemId, "isValid":false, "id":0, "users_id":userId, "addDate":null, "setDate":null, "__className":"Vo_Comment"};
 			
 			var addCommentSuccess = function(jsonResult) {
 	
