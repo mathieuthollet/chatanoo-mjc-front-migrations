@@ -531,6 +531,8 @@ var AppView = Backbone.View.extend({
 		// TODO On affiche la popUp avec un Gif de chargement
 		
 		var popUpElement = $("#popup");
+		popUpElement.off();
+		popUpElement.html("");
 		popUpElement.css("display", "block");
 		
 		if (playerX) popUpElement.css("left", playerX + "px");
@@ -547,10 +549,13 @@ var AppView = Backbone.View.extend({
 			gauche: t.axeHorizontal.gauche,
 			droite: t.axeHorizontal.droite,
 			bas: t.axeVertical.bas,
-			haut: t.axeVertical.haut,
-		}
-		
-		var popUp = new Chatanoo.PopUpView( { el : popUpElement } ).render( options );
+			haut: t.axeVertical.haut
+		};
+
+		popUpElement.append("<div class='tempPopUp'></div>");
+
+		var popUpViewEl = $(".tempPopUp", popUpElement);
+		var popUp = new Chatanoo.PopUpView( { el : popUpViewEl } ).render( options );
 		
 		var mediaWidth = Math.floor(popUpWidth * 0.5);
 		var mediaHeight = Math.floor(popUpHeight * 0.5);

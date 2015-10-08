@@ -320,7 +320,7 @@ Chatanoo.PopUpView = Backbone.View.extend({
 	subview:null,
 	
 	initialize: function (param) {
-		this.template = _.template($("#popUpTemplate").html())		
+		this.template = _.template($("#popUpTemplate").html());
 	},
 
     events: {
@@ -352,16 +352,18 @@ Chatanoo.PopUpView = Backbone.View.extend({
 	},
 	
  	closePopUp: function(e) {
+
 		var t = this;
-		
+
+		console.log("CLOSE POPUP", $(t.el));
+
 		$(t.el).undelegate('.popupClose', 'click');
 		$(t.el).undelegate('.popupClose', 'click');
 		$(t.el).undelegate('.emojiButton', 'click');
-		
+
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
 		t.$el.css("height", "");
-
 
 		if (t.subview && t.subview.close) subview.close();
 

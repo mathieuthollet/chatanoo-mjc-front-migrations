@@ -55,7 +55,7 @@ Chatanoo.CoolPasCoolItemView = Backbone.View.extend({
 		
 		var v = App.eventManager;
 		if (v) v.trigger("itemSelection", itemId, motCle);
-	},
+	}
 });
 
 
