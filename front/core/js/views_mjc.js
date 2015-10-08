@@ -1125,7 +1125,9 @@ var MJCAppView = AppView.extend({
 	},
 	
 	voteMediaItem: function(itemId, voteIc, voteRu) {
-		
+
+		if (isNaN(voteIc) || isNaN(voteRu)) return;
+
 		console.log("[VIEWS] voteMediaItem > ", itemId, voteIc, voteRu);
 		
 		var t = this;
