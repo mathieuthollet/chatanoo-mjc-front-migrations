@@ -1216,7 +1216,7 @@ var MJCAppView = AppView.extend({
 			commentaire = trimWhiteSpace (commentaire);
 
 			var userId = t.currentUserId ? t.currentUserId : 0;
-			var commentJson = {"content":commentaire, "items_id":itemId, "isValid":false, "id":0, "users_id":userId, "addDate":null, "setDate":null, "__className":"Vo_Comment"};
+			var commentJson = {"content":commentaire, "items_id":0, "isValid":false, "id":0, "users_id":userId, "addDate":null, "setDate":null, "__className":"Vo_Comment"};
 			
 			var addCommentSuccess = function(jsonResult) {
 	

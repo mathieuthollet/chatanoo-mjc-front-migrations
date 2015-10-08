@@ -409,7 +409,9 @@ var AppView = Backbone.View.extend({
 	/* Commentaires des items */
 	
 	fetchCommentsOfItem: function(itemId, success) {
-		
+
+		console.log("fetchCommentsOfItem", itemId);
+
 		var t = this;
 		
 		var jsonInput = {
@@ -444,6 +446,8 @@ var AppView = Backbone.View.extend({
 	},
 
 	addCommentToItem: function(itemId, commentModel, vote, success) {
+
+		console.log("addCommentToItem", itemId, "->", commentModel.get("content"));
 
 		// JSON ou model BackBoneJS ?
 		var commentJSON = commentModel.toJSON ? commentModel.toJSON() : commentModel;
@@ -532,7 +536,7 @@ var AppView = Backbone.View.extend({
 	/* MediaPlayer */
 	
 	openMediaItem: function(itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo) {
-		// console.log(itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo)
+		console.log("itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 		var popupView = this.prepareMediaPlayer();
 		this.openMediaItemInPlayer(popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo);
 	},
@@ -663,7 +667,7 @@ var AppView = Backbone.View.extend({
 				var titreImage = imageObject.title;
 				var urlImage = imageObject.url;
 				
-				console.log(imageId, titreImage, urlImage);
+				console.log("media", imageId, titreImage, urlImage);
 				
 				var image = t.createImageView( mediaParent, itemId, imageId, urlImage );
 				
@@ -676,7 +680,7 @@ var AppView = Backbone.View.extend({
 				var titreVideo = videoObject.title;
 				var urlVideo = videoObject.url;
 				
-				console.log(videoId, titreVideo, urlVideo);
+				console.log("media", videoId, titreVideo, urlVideo);
 				
 				var video = t.createVideoView( mediaParent, itemId, videoId, urlVideo, mediaWidth, mediaHeight );
 				
@@ -689,7 +693,7 @@ var AppView = Backbone.View.extend({
 				var titreAudio = audioObject.title;
 				var urlAudio = audioObject.url;
 				
-				console.log(audioId, titreAudio, urlAudio);
+				console.log("media", audioId, titreAudio, urlAudio);
 				
 				var audio = t.createAudioView( mediaParent, itemId, audioId, urlAudio );
 				
@@ -793,6 +797,8 @@ var AppView = Backbone.View.extend({
 	addDataVoteToItem: function(itemId, rate, success) {
 		
 		var t = this;
+
+		console.log("addDataVoteToItem",itemId, rate);
 		
 		var userId = t.currentUserId ? t.currentUserId : 0;
 		var dataVo = {"users_id":userId, "rate":rate, "__className":"Vo_Data_Vote", "id":0, "setDate":null, "addDate":null};
