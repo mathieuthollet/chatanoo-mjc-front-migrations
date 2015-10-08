@@ -447,7 +447,7 @@ var AppView = Backbone.View.extend({
 
 	addCommentToItem: function(itemId, commentModel, vote, success) {
 
-		console.log("addCommentToItem", itemId, "->", commentModel.get("content"));
+		console.log("addCommentToItem", itemId, "->", commentModel);
 
 		// JSON ou model BackBoneJS ?
 		var commentJSON = commentModel.toJSON ? commentModel.toJSON() : commentModel;
