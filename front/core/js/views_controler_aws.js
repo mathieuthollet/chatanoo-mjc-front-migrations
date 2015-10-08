@@ -541,7 +541,6 @@ var AppView = Backbone.View.extend({
 		console.log("[CONTROLER AWS] itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 
 		var popupView = this.prepareMediaPlayer();
-		// popupView.on("voteMedia", this.voteMediaItem, this);
 
 		this.openMediaItemInPlayer(popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo);
 	},
@@ -572,11 +571,9 @@ var AppView = Backbone.View.extend({
 			haut: t.axeVertical.haut
 		};
 
-		popUpElement.append("<div class='tempPopUp'></div>");
+		var popUp = new Chatanoo.PopUpView( { el : popUpElement } ).render( options );
+		popUp.on("voteMedia", this.voteMediaItem, this);
 
-		var popUpViewEl = $(".tempPopUp", popUpElement);
-		var popUp = new Chatanoo.PopUpView( { el : popUpViewEl } ).render( options );
-		
 		var mediaWidth = Math.floor(popUpWidth * 0.5);
 		var mediaHeight = Math.floor(popUpHeight * 0.5);
 		
@@ -586,6 +583,8 @@ var AppView = Backbone.View.extend({
 		var popUpContentMedia = $(".popupMedia", popUpElement);
 		popUpContentMedia.css("width", mediaWidth + "px");
 		popUpContentMedia.css("height", mediaHeight + "px");
+
+		popUpViewEl.css("width", mediaWidth + "px");
 		
 		// popUpContentMedia.css("margin-left", (popUpWidth * 0.05) + "px");
 		// popUpContentMedia.css("margin-top", (popUpHeight * 0.05) + "px");
@@ -744,7 +743,7 @@ var AppView = Backbone.View.extend({
 		var t = this;
 		var rate = t.getRate(voteIc, voteRu);
 		
-		console.log("[CONTROLER] voteMediaItem > vote", itemId, "ic", voteIc, "ru", voteRu, "rate", rate, "check vote = ", t.getVoteFromRate(rate));
+		console.log("[CONTROLER AWS] voteMediaItem > vote", itemId, "ic", voteIc, "ru", voteRu, "rate", rate, "check vote = ", t.getVoteFromRate(rate));
 		
 		var success = function(jsonResult) {
 			

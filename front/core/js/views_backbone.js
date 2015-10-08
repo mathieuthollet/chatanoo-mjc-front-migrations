@@ -320,12 +320,15 @@ Chatanoo.PopUpView = Backbone.View.extend({
 	subview:null,
 	
 	initialize: function (param) {
+
+		Backbone.View.prototype.initialize.call(this, param)
+
 		this.template = _.template($("#popUpTemplate").html());
 	},
 
     events: {
 		"click .popupClose": "closePopUp",
-		"click .voteButton": "vote",
+		"click .voteButton": "voteAndComment",
 		"click .emojiButton": "emojiPicker"
 	},
 
@@ -333,8 +336,9 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		e.preventDefault();
 		$('#newComment').emojiPicker('toggle');
 	},
-	
- 	vote: function(e) {
+
+	voteAndComment: function(e) {
+
 		var t = this;
 		
 		var itemId = t.model.get("itemId");
@@ -345,8 +349,10 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		var ic = parseInt(icSlider.val()) / 100;
 		var ru = parseInt(ruSlider.val()) / 100;
 		
-		var v = App.eventManager;
-		if (v) v.trigger("voteMedia", itemId, ic, ru);
+		// var v = App.eventManager;
+		// if (v) v.trigger("voteMedia", itemId, ic, ru);
+
+		t.trigger("voteMedia", itemId, ic, ru);
 
 		t.closePopUp();
 	},
@@ -354,6 +360,8 @@ Chatanoo.PopUpView = Backbone.View.extend({
  	closePopUp: function(e) {
 
 		var t = this;
+
+		console.log("closePopUp", $('.popupClose'), $('.voteButton'));
 
 		$('.popupClose').off();
 		$('.voteButton').off();
