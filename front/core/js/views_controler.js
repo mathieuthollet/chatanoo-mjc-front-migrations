@@ -96,7 +96,7 @@ var AppView = Backbone.View.extend({
 		v.on("itemDrawEvolution", this.drawEvolutionVote, this);
 		v.on("itemClearEvolution", this.clearEvolutionVote, this);
 		
-		// v.on("voteMedia", this.voteMediaItem, this);
+		v.on("voteMedia", this.voteMediaItem, this);
 
 		v.on("closePopUpWithCloseButton", this.closePopUpWithCloseButton, this);
 	},
@@ -524,7 +524,7 @@ var AppView = Backbone.View.extend({
 		console.log("[CONTROLER] itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 
 		var popupView = this.prepareMediaPlayer();
-		popupView.on("voteMedia", this.voteMediaItem, this);
+		// popupView.on("voteMedia", this.voteMediaItem, this);
 
 		this.openMediaItemInPlayer(popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo);
 	},

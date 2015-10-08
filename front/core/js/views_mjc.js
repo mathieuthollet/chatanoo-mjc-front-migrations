@@ -1252,7 +1252,7 @@ var MJCAppView = AppView.extend({
 		var popUpTop = 20;
 		
 		var popupView = this.prepareMediaPlayer(popUpWith, popUpHeight, popUpLeft, popUpTop);
-		popupView.on("voteMedia", this.voteMediaItem, this);
+		// popupView.on("voteMedia", this.voteMediaItem, this);
 
 		this.openMediaItemInPlayer(popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo);
 		this.loadComments(itemId);
@@ -1273,7 +1273,7 @@ var MJCAppView = AppView.extend({
 			// Mise à jour de la vue des commentaires dans le player
 			if (App.Views.CommentsView) App.Views.CommentsView.close();
 			App.Views.CommentsView = new Chatanoo.CommentsView(commentCollection);
-		}
+		};
 		
 		t.fetchCommentsOfItem(itemId, success)
 	},

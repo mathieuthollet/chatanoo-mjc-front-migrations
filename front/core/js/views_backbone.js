@@ -308,7 +308,7 @@ Chatanoo.CommentView = Backbone.View.extend({
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
-	},
+	}
 });
 
 
@@ -345,9 +345,9 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		var ic = parseInt(icSlider.val()) / 100;
 		var ru = parseInt(ruSlider.val()) / 100;
 		
-		this.trigger("voteMedia", itemId, ic, ru);
+		var v = App.eventManager;
+		if (v) v.trigger("voteMedia", itemId, ic, ru);
 
-		t.off();
 		t.closePopUp();
 	},
 	

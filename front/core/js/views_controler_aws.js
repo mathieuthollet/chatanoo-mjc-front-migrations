@@ -98,7 +98,7 @@ var AppView = Backbone.View.extend({
 		v.on("itemDrawEvolution", this.drawEvolutionVote, this);
 		v.on("itemClearEvolution", this.clearEvolutionVote, this);
 		
-		// v.on("voteMedia", this.voteMediaItem, this);
+		v.on("voteMedia", this.voteMediaItem, this);
 
 		v.on("closePopUpWithCloseButton", this.closePopUpWithCloseButton, this);
 	},
@@ -541,7 +541,7 @@ var AppView = Backbone.View.extend({
 		console.log("[CONTROLER AWS] itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 
 		var popupView = this.prepareMediaPlayer();
-		popupView.on("voteMedia", this.voteMediaItem, this);
+		// popupView.on("voteMedia", this.voteMediaItem, this);
 
 		this.openMediaItemInPlayer(popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo);
 	},
@@ -571,8 +571,11 @@ var AppView = Backbone.View.extend({
 			bas: t.axeVertical.bas,
 			haut: t.axeVertical.haut
 		};
-		
-		var popUp = new Chatanoo.PopUpView( { el : popUpElement } ).render( options );
+
+		popUpElement.append("<div class='tempPopUp'></div>");
+
+		var popUpViewEl = $(".tempPopUp", popUpElement);
+		var popUp = new Chatanoo.PopUpView( { el : popUpViewEl } ).render( options );
 		
 		var mediaWidth = Math.floor(popUpWidth * 0.5);
 		var mediaHeight = Math.floor(popUpHeight * 0.5);
