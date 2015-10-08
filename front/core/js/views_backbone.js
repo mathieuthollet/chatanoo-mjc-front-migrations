@@ -323,16 +323,10 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		this.template = _.template($("#popUpTemplate").html());
 	},
 
-	render: function (options) {
-
-		Backbone.View.prototype.render.call(this, options);
-
-		var t = this;
-
-		console.log("render popupClose ?", $(".popupClose", this.$el));
-		$(".popupClose", this.$el).on("click", function() { t.closePopUp() });
-		$(".voteButton", this.$el).on("click", function() { t.vote() });
-		$(".emojiButton", this.$el).on("click", function() { t.emojiPicker() });
+    events: {
+		"click .popupClose": "closePopUp",
+		"click .voteButton": "vote",
+		"click .emojiButton": "emojiPicker"
 	},
 
  	emojiPicker: function(e) {
@@ -361,12 +355,9 @@ Chatanoo.PopUpView = Backbone.View.extend({
 
 		var t = this;
 
-		console.log("CLOSE POPUP NEW2", t.$el, $('.popupClose', t.$el));
-
-		$('.popupClose', t.$el).off();
-		$('.vote', t.$el).off();
-		$('.emojiButton', t.$el).off();
-
+		$('.popupClose').off();
+		$('.voteButton').off();
+		$('.emojiButton').off();
 
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
