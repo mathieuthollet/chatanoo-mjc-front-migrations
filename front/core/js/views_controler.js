@@ -692,7 +692,7 @@ var AppView = Backbone.View.extend({
 
 			var onDragEnd = function(e) {
 				var itemDragged = e.currentTarget;
-				var draggableObject = Draggable.get(item);
+				var draggableObject = Draggable.get(itemDragged);
 			};
 				
 			Draggable.create(popUpElement,{ type:"x,y", trigger:popUpHeader, onDragEnd:onDragEnd });			
