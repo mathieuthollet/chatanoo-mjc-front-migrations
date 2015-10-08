@@ -1210,10 +1210,11 @@ var MJCAppView = AppView.extend({
 		
 		
 		// 2. Commentaire 
-		
-		var commentaire = trimWhiteSpace ( $("#newComment").val() );
-		if (commentaire.length > 0)
+		var commentaire = $("#newComment").val();
+		if (commentaire && (commentaire.length > 0))
 		{
+			commentaire = trimWhiteSpace (commentaire);
+
 			var userId = t.currentUserId ? t.currentUserId : 0;
 			var commentJson = {"content":commentaire, "items_id":itemId, "isValid":false, "id":0, "users_id":userId, "addDate":null, "setDate":null, "__className":"Vo_Comment"};
 			
