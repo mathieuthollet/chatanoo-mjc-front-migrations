@@ -1241,8 +1241,8 @@ var MJCAppView = AppView.extend({
 	// --------------------------------------------------
 
 	openMediaItem: function(itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo) {
-		
-		// console.log(itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo)
+
+		console.log("[CONTROLER MJC] itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 		
 		var ecrans = $(".ecrans");
 		
@@ -1252,7 +1252,8 @@ var MJCAppView = AppView.extend({
 		var popUpTop = 20;
 		
 		var popupView = this.prepareMediaPlayer(popUpWith, popUpHeight, popUpLeft, popUpTop);
-		
+		popupView.on("voteMedia", this.voteMediaItem, this);
+
 		this.openMediaItemInPlayer(popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo);
 		this.loadComments(itemId);
 	},

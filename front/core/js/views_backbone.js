@@ -345,9 +345,9 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		var ic = parseInt(icSlider.val()) / 100;
 		var ru = parseInt(ruSlider.val()) / 100;
 		
-		var v = App.eventManager;
-		if (v) v.trigger("voteMedia", itemId, ic, ru);
-		
+		this.trigger("voteMedia", itemId, ic, ru);
+
+		t.off();
 		t.closePopUp();
 	},
 	
