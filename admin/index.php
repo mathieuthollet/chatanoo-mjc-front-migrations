@@ -42,7 +42,7 @@
 		so.addVariable("apiKey", "<?php echo $_ENV["API_KEY"] ?>");
 		so.addVariable("queryPrefix", "<?php echo $_ENV["QUERIES_PREFIX"] ?>");
 		so.addVariable("wsURL", "<?php echo $_ENV["SERVICE_URL"] ?>");
-		so.addVariable("mediaBaseURL", "<?php echo $_ENV["MEDIAS_CENTER_URL "] ?>");
+		so.addVariable("mediaBaseURL", "<?php echo $_ENV["MEDIAS_CENTER_URL"] ?>");
 		so.addVariable("awsS3", "true");
 
 		// so.addVariable("googleMapsKey", "<?php echo $_ENV["GOOGLE_MAP_KEY"] ?>");
