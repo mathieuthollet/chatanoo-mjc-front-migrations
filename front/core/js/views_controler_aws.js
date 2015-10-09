@@ -572,7 +572,9 @@ var AppView = Backbone.View.extend({
 		};
 
 		var popUp = new Chatanoo.PopUpView( { el : popUpElement } ).render( options );
-		popUp.on("voteMedia", this.voteMediaItem, this);
+
+		// TODO : remplacer le passage par l'eventManager
+		// popUp.on("voteMedia", this.voteMediaItem, this);
 
 		var mediaWidth = Math.floor(popUpWidth * 0.5);
 		var mediaHeight = Math.floor(popUpHeight * 0.5);

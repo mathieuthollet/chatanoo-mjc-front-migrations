@@ -96,7 +96,7 @@ var AppView = Backbone.View.extend({
 		v.on("itemDrawEvolution", this.drawEvolutionVote, this);
 		v.on("itemClearEvolution", this.clearEvolutionVote, this);
 		
-		// v.on("voteMedia", this.voteMediaItem, this);
+		v.on("voteMedia", this.voteMediaItem, this);
 
 		v.on("closePopUpWithCloseButton", this.closePopUpWithCloseButton, this);
 	},
@@ -557,7 +557,9 @@ var AppView = Backbone.View.extend({
 		};
 
 		var popUp = new Chatanoo.PopUpView( { el : popUpElement } ).render( options );
-		popUp.on("voteMedia", this.voteMediaItem, this);
+
+		// TODO : remplacer le passage par l'eventManager
+		// popUp.on("voteMedia", this.voteMediaItem, this);
 
 		var mediaWidth = Math.floor(popUpWidth * 0.5);
 		var mediaHeight = Math.floor(popUpHeight * 0.5);
@@ -711,7 +713,7 @@ var AppView = Backbone.View.extend({
 		var t = this;
 		var rate = t.getRate(voteIc, voteRu);
 		
-		// console.log("vote", itemId, "ic", voteIc, "ru", voteRu, "rate", rate, "check vote = ", t.getVoteFromRate(rate));
+		console.log("[CONTROLER] vote", itemId, "ic", voteIc, "ru", voteRu, "rate", rate, "check vote = ", t.getVoteFromRate(rate));
 		
 		var success = function(jsonResult) {
 			

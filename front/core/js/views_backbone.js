@@ -7,16 +7,15 @@
 
 Backbone.View.prototype.close = function(){
 	
-	this.$el.empty();
-	
 	this.off();
-	 
+	this.remove();
+
 	// Méthode à ajouter dans la vue pour supprimer les évènements bind présent dans le "initialize" par exemple
 	if (this.onClose)
 	{
 		this.onClose();
 	}
-}
+};
 
 Backbone.CollectionView = Backbone.View.extend({
 	
@@ -201,7 +200,7 @@ Chatanoo.MosaiqueItemView = Backbone.View.extend({
     events: {
 		"click .itemTitre a": "selectItem",
 		"mouseover a": "rollOverItem",
-		"mouseout a": "rollOutItem",
+		"mouseout a": "rollOutItem"
 	},
 
     rollOverItem: function (e)
@@ -246,7 +245,7 @@ Chatanoo.MosaiqueItemView = Backbone.View.extend({
 		
 		var v = App.eventManager;
 		if (v) v.trigger("itemSelection", itemId, motCle, motCle1, motCle2, motCle3, titre, user, position);
-	},
+	}
 });
 
 
@@ -296,7 +295,7 @@ Chatanoo.CommentView = Backbone.View.extend({
 	tagName: "div",
 	
 	initialize: function (param) {
-		this.template = _.template($("#commentTemplate").html())
+		this.template = _.template($("#commentTemplate").html());
 		this.model.on("change:rate", this.updateBackground, this);
 	},
 	
@@ -326,12 +325,6 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		this.template = _.template($("#popUpTemplate").html());
 	},
 
-    events: {
-		"click .popupClose": "closePopUp",
-		"click .voteButton": "voteAndComment",
-		"click .emojiButton": "emojiPicker"
-	},
-
  	emojiPicker: function(e) {
 		e.preventDefault();
 		$('#newComment').emojiPicker('toggle');
@@ -349,10 +342,10 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		var ic = parseInt(icSlider.val()) / 100;
 		var ru = parseInt(ruSlider.val()) / 100;
 		
-		// var v = App.eventManager;
-		// if (v) v.trigger("voteMedia", itemId, ic, ru);
+		var v = App.eventManager;
+		if (v) v.trigger("voteMedia", itemId, ic, ru);
 
-		t.trigger("voteMedia", itemId, ic, ru);
+		// t.trigger("voteMedia", itemId, ic, ru);
 
 		t.closePopUp();
 	},
@@ -363,17 +356,18 @@ Chatanoo.PopUpView = Backbone.View.extend({
 
 		console.log("closePopUp", $('.popupClose'), $('.voteButton'));
 
-		$('.popupClose').off();
-		$('.voteButton').off();
-		$('.emojiButton').off();
+		$('.popupClose',  t.$el).off();
+		$('.voteButton',  t.$el).off();
+		$('.emojiButton', t.$el).off();
+
+		if (t.subview && t.subview.close) subview.close();
 
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
 		t.$el.css("height", "");
+		t.$el.empty();
 
-		if (t.subview && t.subview.close) subview.close();
-
-		t.close()
+		t.off();
 	},
 	
  	render: function( options ) {
@@ -400,7 +394,19 @@ Chatanoo.PopUpView = Backbone.View.extend({
         	height: '200px',
         	button: false
       	});
-		
+
+		$('.popupClose',  t.$el).off().on("click", function() {
+			t.closePopUp();
+		});
+
+		$('.voteButton',  t.$el).off().on("click", function() {
+			t.voteAndComment();
+		});
+
+		$('.emojiButton',  t.$el).off().on("click", function() {
+			t.emojiPicker();
+		});
+
 		return this;
     }
 });
@@ -569,7 +575,7 @@ Chatanoo.UploadView = Backbone.View.extend({
     },
 	
     events: {
-		"click .uploadClose": "closePopUp",
+		"click .uploadClose": "closePopUp"
 	},	
 	
  	closePopUp: function(e) {
@@ -581,10 +587,10 @@ Chatanoo.UploadView = Backbone.View.extend({
 		t.$el.css("width", "");
 		t.$el.css("height", "");
 		if (t.subview && t.subview.close) subview.close();
-		t.close()
+		t.close();
 		
 		var v = App.eventManager;
 		if (v) v.trigger("closePopUpWithCloseButton");
-	},	
+	}
 });
 
