@@ -1510,7 +1510,7 @@ var AppView = Backbone.View.extend({
 			t.mediaViewAndModel.view.close();
 		}
 
-		$(".uploadParent .uploadedMedia".empty();
+		$(".uploadParent .uploadedMedia").empty();
 
 		t.uploadMediaType = mediaType;
 		t.uploadMediaTitle = mediaTitle;
