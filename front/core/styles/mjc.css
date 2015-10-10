@@ -777,16 +777,16 @@ textarea
 
 .global .uploadParent .uploadContent .uploadBody .uploadedMedia {
 	float:left;
-	width:190px;
+	width:190px !important;
 	height:190px;
 }
 
 .global .uploadParent .uploadContent .uploadBody .uploadedMedia img {
-	width:190px;
+	width:190px !important;
 }
 
 .global .uploadParent .uploadContent .uploadBody .uploadedMedia > div {
-	width:190px;
+	width:190px !important;
 }
 
 .global .uploadParent .uploadContent .uploadBody .uploadForm .elementForm .envoiTexte textarea {

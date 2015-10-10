@@ -68,9 +68,11 @@
 				  console.log("Key", params.Key);
 				  
 				  s3.upload(params, function (err, data) {
-						results.innerHTML = err ? 'ECHEC !' : 'UPLOAD -> ID = ' + params.Key;				 
+						var keySansExtension = params.Key.split(".")[0];
+						results.innerHTML = err ? 'ECHEC !' : 'UPLOAD ID:' + keySansExtension;
+
 						// console.log(err ? 'ERROR!' : 'UPLOAD -> ID = ' + params.Key)
-						// console.log("data", data);						
+						// console.log("data", data);
 				  });
 				  
 				} else {

@@ -1421,10 +1421,10 @@ var AppView = Backbone.View.extend({
 
 		var itemId = t.uploadItemId;
 		var mediaId = 0;
-		var mediaWidth  =  mediaParent.width() || uploadParent.width() * 0.40;
+		var mediaWidth  =  mediaParent.width() || uploadParent.width() * 0.50;
 		var mediaHeight = mediaWidth * 2 / 3;
 
-		console.log("displayButtonToValidateUploadMedia", mediaFileName, mediaType);
+		console.log("displayButtonToValidateUploadMedia", mediaFileName, mediaType, mediaWidth);
 
 		switch(mediaType)
 		{
@@ -1471,7 +1471,7 @@ var AppView = Backbone.View.extend({
 
 		$(".uploadStatus").html("Conversion et chargement du média...");
 
-		// On interroge le bucket output pour savoir si le media est disponible
+		// On interroge le bucket "output" pour savoir si le media est disponible
 
 		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
 
@@ -1490,22 +1490,27 @@ var AppView = Backbone.View.extend({
 					// Le bouton Suite est affiché
 					success();
 
-					//
+					// Callback
 					callback();
 				}
 			});
 
-		}, 1500);
+		}, 3000);
 	},
 
 	validUploadEtape2: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {
 		
-		// console.log("validUploadEtape2");
-		
 		var t = this;
 
 		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
-		if (t.mediaViewAndModel && t.mediaViewAndModel.view) t.mediaViewAndModel.view.close();
+
+		console.log("validUploadEtape2", t.mediaViewAndModel);
+
+		if (t.mediaViewAndModel && t.mediaViewAndModel.view) {
+			t.mediaViewAndModel.view.close();
+		}
+
+		$(".uploadParent .uploadedMedia".empty();
 
 		t.uploadMediaType = mediaType;
 		t.uploadMediaTitle = mediaTitle;
@@ -1565,7 +1570,7 @@ var AppView = Backbone.View.extend({
 			// console.log("fetchMetasOfQuery", metas.length);
 			
 			t.initUploadKeywordSelect(metas);
-		}
+		};
 	
 		// console.log("fetchMetasOfQuery queryId = ", t.uploadQueryId);
 	
@@ -1793,7 +1798,7 @@ var AppView = Backbone.View.extend({
 			if (! jsonResult) return;
 			
 			t.envoiCartoUpload()
-		}
+		};
 	
 		// Envoi du mot-clé
 		t.addMetaIntoVo(t.uploadItemId, t.uploadKeyWordId, t.uploadKeyWordContent, successAddKeyWordToItem);
