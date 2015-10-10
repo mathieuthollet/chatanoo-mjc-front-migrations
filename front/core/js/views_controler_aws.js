@@ -625,8 +625,8 @@ var AppView = Backbone.View.extend({
 		return { model:model, view:videoView };
 	},
 
-	getAudioPath: function( audioID ) {
-		return this.awsURL + audioID + "/audio.mp3";
+	getAudioKey: function( audioID ) {
+		return audioID + "/audio.mp3";
 	},
 
 	createAudioView: function( element, itemId, mediaId, audioID) {
@@ -634,7 +634,7 @@ var AppView = Backbone.View.extend({
 
 		var extension = ".mp3";
 		var mime = "audio/mp3";
-		var mediaPath = t.getAudioPath(audioID);
+		var mediaPath = this.awsURL + t.getAudioKey(audioID);
 
 		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath, mime:mime, autoplay: true } );
 		var audioView = new Chatanoo.AudioView( { el: element, model: model } ).loadAudio();
@@ -985,10 +985,9 @@ var AppView = Backbone.View.extend({
 			gauche: t.axeHorizontal.gauche,
 			droite: t.axeHorizontal.droite,
 			bas: t.axeVertical.bas,
-			haut: t.axeVertical.haut,
-		}
-		
-		
+			haut: t.axeVertical.haut
+		};
+
 		t.popupUpload = new Chatanoo.UploadView( { el : popUpElement } );
 		t.popupUpload.urlCarte = t.mapURL;
 		t.popupUpload.render( options );
@@ -1400,7 +1399,6 @@ var AppView = Backbone.View.extend({
 		
 		var mediaTitle = $("#itemTitle").val();
 		
-		// TODO : Chargement du media pour contrôler ce qui a été transmis
 		// console.log("displayButtonToValidateUploadMedia", mediaFileName);
 		
 		var mediaType = t.getMediaTypeFromFileName(mediaFileName);
@@ -1426,47 +1424,65 @@ var AppView = Backbone.View.extend({
 				var callback = function() {
 					console.log("... createImageView", mediaParent, itemId, mediaId, mediaFileName);
 					var image = t.createImageView( mediaParent, itemId, mediaId, mediaFileName );
-				}
+				};
 				t.tryToLoadConvertedMedia( t.getImageKey(mediaFileName), callback);
 				break;
 
 			case "Video" :
+				console.log("... createVideoView", mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight);
 				var callback = function() {
 					var video = t.createVideoView( mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight );
-				}
+				};
 				t.tryToLoadConvertedMedia( t.getVideoKey(mediaFileName), callback);
 				break;
-		};
+
+			case "Audio" :
+				console.log("... createAudioView", mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight);
+				var callback = function() {
+					var audio = t.createAudioView( mediaParent, itemId, mediaId, mediaFileName, mediaWidth, mediaHeight );
+				};
+				t.tryToLoadConvertedMedia( t.getAudioKey(mediaFileName), callback);
+				break;
+		}
 
 		// La suite est maintenant accessible : étape 2
-		$("#toEtape2Button").siblings(".etape").css("display", "inline");
-		$("#toEtape2Button").css("display", "inline");
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape2( mediaType, mediaTitle, mediaFileName, null ); } );
 
 	},
 
-	tryToLoadConvertedMedia: function( mediaAWSKey, callback, nbTrials ) {
+	tryToLoadConvertedMedia: function( mediaAWSKey, callback ) {
 
 		var t = this;
-		var s3 = new AWS.S3({apiVersion: '2006-03-01'})
+		var s3 = new AWS.S3({apiVersion: '2006-03-01'});
 		var bucketName = "chatanoo-medias-output";
 
-		if (! nbTrials) nbTrials = 0;
+		var success = function() {
+			$("#toEtape2Button").siblings(".etape").css("display", "inline");
+			$("#toEtape2Button").css("display", "inline");
+		};
 
-		nbTrials++;
+		$(".uploadStatus").html("Conversion et chargement du média...");
+
+		// On interroge le bucket output pour savoir si le media est disponible
 
 		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
 
 		t.tryToLoadConvertedTimeout = setInterval( function() {
 
-			$(".uploadStatus").html("Conversion et chargement du média...");
-
 			s3.getObject({ Bucket: bucketName, Key: mediaAWSKey }, function (err, data) {
-				if (err) {
-					console.log('Could not get objects from S3');
-				} else {
+				if (err)
+				{
+					console.log('Pas encore disponible sur S3 output : mediaAWSKey');
+				}
+				else
+				{
 					$(".uploadStatus").html("Votre média a bien été ajouté !");
 					clearInterval(t.tryToLoadConvertedTimeout);
+
+					// Le bouton Suite est affiché
+					success();
+
+					//
 					callback();
 				}
 			});

@@ -39,16 +39,14 @@ Backbone.CollectionView = Backbone.View.extend({
 			// cf prototype.close un peu plus haut
 			childView.close();
 		  }
-		})
+		});
 		
 		this.$el.find("article").remove();
 	},
 	
 	render: function () {
 		this.removeSubviews();
-		
-		var html =  "";
-		
+
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item);
 		}, this);
@@ -92,7 +90,6 @@ Chatanoo.QueriesView = Backbone.CollectionView.extend({
 		
 		this.removeSubviews();
 		
-		var html =  "";
 		var no = 0;
 		
 		_.each(this.collection.models, function (item) {
@@ -130,14 +127,14 @@ Chatanoo.QueryView = Backbone.View.extend({
 	
     events: {
 		"click .queryTitre a": "selectQuery",
-		"click .queryDescription a": "selectQuery",
+		"click .queryDescription a": "selectQuery"
 	},
 
     selectQuery: function (e)
 	{
 		var queryId = this.model.get("id");
 		App.Views.appView.loadQuery(queryId);
-	},
+	}
 });
 
 
@@ -395,15 +392,15 @@ Chatanoo.PopUpView = Backbone.View.extend({
         	button: false
       	});
 
-		$('.popupClose',  t.$el).off().on("click", function() {
+		$('.popupClose', t.$el).off().on("click", function() {
 			t.closePopUp();
 		});
 
-		$('.voteButton',  t.$el).off().on("click", function() {
+		$('.voteButton', t.$el).off().on("click", function() {
 			t.voteAndComment();
 		});
 
-		$('.emojiButton',  t.$el).off().on("click", function() {
+		$('.emojiButton', t.$el).off().on("click", function() {
 			t.emojiPicker();
 		});
 
@@ -481,7 +478,7 @@ Chatanoo.VideoView = Backbone.View.extend({
 				endCallback();
 			}, false);
 			
-		}
+		};
 	
 		var endCallback = endCallback || function() {};
 		
@@ -535,7 +532,7 @@ Chatanoo.AudioView = Backbone.View.extend({
 				endCallback();
 			}, false);
 			
-		}
+		};
 	
 		var endCallback = endCallback || function() {};
 		
@@ -558,7 +555,10 @@ Chatanoo.UploadView = Backbone.View.extend({
 	},
 	
 	render: function( options ) {
-		
+
+		var t = this;
+
+		// Par défaut :
 		var model = { gauche:"individuel", droite:"collectif", bas:"réaliste", haut:"utopique", urlCarte: this.urlCarte };
 		
 		if (options)
@@ -570,25 +570,27 @@ Chatanoo.UploadView = Backbone.View.extend({
 		}
 		
 		this.$el.html(this.template( model ));
-		
+
+		$('.uploadClose', t.$el).on("click", function() {
+			t.closePopUp();
+		});
+
 		return this;
     },
-	
-    events: {
-		"click .uploadClose": "closePopUp"
-	},	
-	
+
  	closePopUp: function(e) {
+
 		var t = this;
-		
-		$(t.el).undelegate('.uploadClose', 'click');
-		
+
+		$('.uploadClose', t.$el).off();
+
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
 		t.$el.css("height", "");
 		if (t.subview && t.subview.close) subview.close();
-		t.close();
-		
+		t.$el.empty();
+		t.off();
+
 		var v = App.eventManager;
 		if (v) v.trigger("closePopUpWithCloseButton");
 	}
