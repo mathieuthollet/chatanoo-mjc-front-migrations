@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Upload vers Amazon S3</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1.36/aws-sdk.js"></script>
 	<script>
-		var bucketName = 'chatanoo-medias-output';
+
+		var bucketName = 'chatanoo-medias-input';
+
 		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 		  IdentityPoolId: 'eu-west-1:b263aeab-02ae-4268-b338-95e7ea79e255',
 		});
@@ -25,6 +27,11 @@
 	</script>
 </head>
 <body>
+
+	<div>
+		<h2>Cette page permet d'ajouter une image sur le serveur Amazon.</h2>
+		<h3>A la fin de l'envoi, le service renvoie un identifiant qui peut être utilisé pour les images de fond dans l'admin Flash.</h3>
+	</div>
 
 	<div id="status"></div>
     
