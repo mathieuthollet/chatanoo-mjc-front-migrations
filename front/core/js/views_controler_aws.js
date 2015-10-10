@@ -654,7 +654,12 @@ var AppView = Backbone.View.extend({
 	openMediaItemInPlayer: function( popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo) {
 		
 		var t = this;
-		
+
+		if (t.mediaViewAndModel && t.mediaViewAndModel.view) {
+			t.mediaViewAndModel.view.close();
+			t.mediaViewAndModel = null;
+		}
+
 		var popUpElement = popupView.$el;
 		var mediaTitle = $(".popupTitle", popUpElement);
 		var mediaParent = $(".popupMedia", popUpElement);
@@ -675,10 +680,10 @@ var AppView = Backbone.View.extend({
 				var urlImage = imageObject.url;
 				
 				console.log("media", imageId, titreImage, urlImage);
-				
-				var image = t.createImageView( mediaParent, itemId, imageId, urlImage );
-				
-				popupView.model = image.model;
+
+				t.mediaViewAndModel = t.createImageView( mediaParent, itemId, imageId, urlImage );
+
+				popupView.model = t.mediaViewAndModel.model;
 			}
 			else if (jsonResult.Video && (jsonResult.Video.length > 0))
 			{
@@ -688,10 +693,10 @@ var AppView = Backbone.View.extend({
 				var urlVideo = videoObject.url;
 				
 				console.log("media", videoId, titreVideo, urlVideo);
+
+				t.mediaViewAndModel = t.createVideoView( mediaParent, itemId, videoId, urlVideo, mediaWidth, mediaHeight );
 				
-				var video = t.createVideoView( mediaParent, itemId, videoId, urlVideo, mediaWidth, mediaHeight );
-				
-				popupView.model = video.model;
+				popupView.model = t.mediaViewAndModel.model;
 			}
 			else if (jsonResult.Sound && (jsonResult.Sound.length > 0))
 			{
@@ -701,10 +706,10 @@ var AppView = Backbone.View.extend({
 				var urlAudio = audioObject.url;
 				
 				console.log("media", audioId, titreAudio, urlAudio);
-				
-				var audio = t.createAudioView( mediaParent, itemId, audioId, urlAudio );
-				
-				popupView.model = audio.model;
+
+				t.mediaViewAndModel = t.createAudioView( mediaParent, itemId, audioId, urlAudio );
+
+				popupView.model = mediaViewAndModel.model;
 			}
 			else if (jsonResult.Text && (jsonResult.Text.length > 0))
 			{
@@ -712,15 +717,18 @@ var AppView = Backbone.View.extend({
 				var textObject = jsonResult.Text[0];
 				var textId = textObject.id;
 				var textContent = textObject.content;
+
+				t.mediaViewAndModel.model = t.createTextView( mediaParent, itemId, textId, textContent );
 				
-				var texte = t.createTextView( mediaParent, itemId, textId, textContent );
-				
-				popupView.model = texte.model;
+				popupView.model = t.mediaViewAndModel.model;
 			}
 			else
 			{
 				// console.log("openMediaItem : type non prévu", jsonResult );
 			}
+
+
+			// Drag and drop de la popUp
 			
 			var popUpHeader = $(".popupHeader", popUpElement);
 
@@ -1142,7 +1150,7 @@ var AppView = Backbone.View.extend({
 				
 				t.ajax("users", jsonInput, success)
 			}
-		}
+		};
 		
 		// On vérifie d'abord que le couple n'existe pas déjà :
 		t.getUserByLogin( pseudo, password, success );
@@ -1413,7 +1421,7 @@ var AppView = Backbone.View.extend({
 
 		var itemId = t.uploadItemId;
 		var mediaId = 0;
-		var mediaWidth  =  mediaParent.width() || uploadParent.width() * 0.5;
+		var mediaWidth  =  mediaParent.width() || uploadParent.width() * 0.40;
 		var mediaHeight = mediaWidth * 2 / 3;
 
 		console.log("displayButtonToValidateUploadMedia", mediaFileName, mediaType);
@@ -1495,7 +1503,9 @@ var AppView = Backbone.View.extend({
 		// console.log("validUploadEtape2");
 		
 		var t = this;
+
 		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
+		if (t.mediaViewAndModel && t.mediaViewAndModel.view) t.mediaViewAndModel.view.close();
 
 		t.uploadMediaType = mediaType;
 		t.uploadMediaTitle = mediaTitle;
