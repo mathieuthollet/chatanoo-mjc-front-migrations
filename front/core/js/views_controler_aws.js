@@ -605,9 +605,9 @@ var AppView = Backbone.View.extend({
 		if (imageID.indexOf('http') == 0) {
 			return imageID;
 		} else if(imageID.indexOf('-P') !== -1) {
-			return t.awsURL + imageID + ".jpg";
+			return this.awsURL + imageID + ".jpg";
 		} else {
-			return t.awsURL + this.getImageKey(imageID);
+			return this.awsURL + this.getImageKey(imageID);
 		}
 	},
 
