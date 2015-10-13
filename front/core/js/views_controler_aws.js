@@ -1519,6 +1519,7 @@ var AppView = Backbone.View.extend({
 		console.log("validUploadEtape2", t.mediaViewAndModel);
 
 		if (t.mediaViewAndModel && t.mediaViewAndModel.view) {
+			console.log("validUploadEtape2 view", t.mediaViewAndModel);
 			t.mediaViewAndModel.view.close();
 		}
 

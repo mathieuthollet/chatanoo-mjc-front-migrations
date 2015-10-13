@@ -500,11 +500,13 @@ Chatanoo.VideoView = Backbone.View.extend({
 
 	close: function() {
 
+		console.log("videoView close", this.mediaElement);
+
 		if (this.mediaElement) {
 			this.mediaElement.off("canplay");
 			this.mediaElement.off("ended");
 
-			if (this.mediaElement.stop) this.mediaElement.stop();
+			if (this.mediaElement.pause) this.mediaElement.pause();
 
 			this.mediaElement = null;
 		}
@@ -575,11 +577,13 @@ Chatanoo.AudioView = Backbone.View.extend({
 
 	close: function() {
 
+		console.log("audioView close", this.mediaElement);
+
 		if (this.mediaElement) {
 			this.mediaElement.off("canplay");
 			this.mediaElement.off("ended");
 
-			if (this.mediaElement.stop) this.mediaElement.stop();
+			if (this.mediaElement.pause) this.mediaElement.pause();
 
 			this.mediaElement = null;
 		}
