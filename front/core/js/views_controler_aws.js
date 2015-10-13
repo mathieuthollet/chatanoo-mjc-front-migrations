@@ -709,7 +709,7 @@ var AppView = Backbone.View.extend({
 
 				t.mediaViewAndModel = t.createAudioView( mediaParent, itemId, audioId, urlAudio );
 
-				popupView.model = mediaViewAndModel.model;
+				popupView.model = t.mediaViewAndModel.model;
 			}
 			else if (jsonResult.Text && (jsonResult.Text.length > 0))
 			{

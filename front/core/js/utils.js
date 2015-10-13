@@ -204,3 +204,7 @@ function getSplinePoints(anchorPoints, isClosed)
 		
 	return p;
 }
+
+function decode_utf8(s) {
+	return decodeURIComponent(escape(s));
+}

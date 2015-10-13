@@ -182,20 +182,20 @@
                     <div class="elementForm">
                         <p class="rubrique">Titre de votre témoignage :</p>
                         <input type="input" id="itemTitle" name="itemTitle" value="" />
+                        <p class="sousrubrique">Faites attention que votre témoignage ne traite que d'une idée, avec un parti pris clair. Cela permettra à chacun e bien cibler sa réponse.</p>
                     </div>
                     
                     <div class="elementForm">
-                        <p class="rubrique">Chargez votre média (jpeg, png, mp3, mp4) :</p>
-						<p class="sousrubrique">Attention : </p>
-						<p class="sousrubrique">- Le poids de votre media ne doit pas dépasser 20 Mo.</p>
-						<p class="sousrubrique">- Les vidéos mp4 doivent être encodées avec les codecs vidéo H264 et audio AAC.</p>
-                        <form id="fileUploadForm" action="http://ms.dring93.org/upload" method="POST">
+                        <p>Vous avez deux choix :</p>
+                        <p class="rubrique">A. Chargez votre média (jpeg, png, mp3, mp4) :</p>
+						<p class="sousrubrique">Attention : le poids de votre media ne doit pas dépasser 20 Mo.</p>
+                        <form id="fileUploadForm" enctype="multipart/form-data" method="POST">
                             <input type="file" id="fileSelect" name="file[]" />
                             <button type="submit" id="uploadButton">Envoyer votre media</button>
                 			<p class="uploadStatus"></p>
                         </form>
 						<div class="envoiTexte">
-							<p class="rubrique">Ou bien envoyez-nous un simple témoignage écrit :</p>
+							<p class="rubrique">B. Ou bien envoyez-nous un simple témoignage écrit :</p>
 							<textarea type="text" id="newTextMedia"></textarea>
 							<button type="submit" id="sendTextMediaButton">Envoyer votre texte</button>
 						</div>

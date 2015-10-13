@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload vers Amazon S3</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1.36/aws-sdk.js"></script>
+	<script>
+
+		var bucketName = 'chatanoo-medias-input';
+
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+		  IdentityPoolId: 'eu-west-1:b263aeab-02ae-4268-b338-95e7ea79e255',
+		});
+		
+		// http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
+		AWS.config.region = 'eu-west-1';
+
+		function guid() {
+		  function s4() {
+		    return Math.floor((1 + Math.random()) * 0x10000)
+		      .toString(16)
+		      .substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+		    s4() + '-' + s4() + s4() + s4();
+		}
+	</script>
+</head>
+<body>
+
+	<div>
+		<h3>Cette page permet d'ajouter une video sur le serveur Amazon.</h3>
+	</div>
+
+	<div id="status"></div>
+    
+    <form id="fileUploadForm" method="post" enctype="multipart/form-data">
+        <input type="file" id="fileSelect" name="file[]" />
+        <button type="submit" id="uploadButton">Envoyer votre media</button>
+        <p id="uploadStatus"></p>
+    </form> 
+
+    <script>
+    	var s3 = new AWS.S3({apiVersion: '2006-03-01'});
+		
+		var fileChooser = document.getElementById('fileSelect');
+		var button = document.getElementById('uploadButton');
+		var results = document.getElementById('uploadStatus');
+			  
+			button.addEventListener('click', function(event) {
+				
+				event.preventDefault();
+				event.stopPropagation();
+				  
+				var file = fileChooser.files[0];
+				if (file) {
+					
+				  results.innerHTML = '';		
+				  
+				  var params = {
+				  	Bucket: bucketName, 
+				  	Key: "M-" + guid() + "." + file.name.split('.').pop(),
+				  	ContentType: file.type, 
+				  	Body: file
+				  };
+				  
+				  console.log("Key", params.Key);
+				  
+				  s3.upload(params, function (err, data) {
+						var keySansExtension = params.Key.split(".")[0];
+						results.innerHTML = err ? 'ECHEC !' : 'UPLOAD ID:' + keySansExtension;
+
+						// console.log(err ? 'ERROR!' : 'UPLOAD -> ID = ' + params.Key)
+						// console.log("data", data);
+				  });
+				  
+				} else {
+				  results.innerHTML = 'Aucun fichier à uploader...';
+				}
+				
+				
+			}, false); 
+
+    </script>
+
+</body>
+</html>
