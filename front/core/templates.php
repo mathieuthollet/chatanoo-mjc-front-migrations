@@ -182,7 +182,7 @@
                     <div class="elementForm">
                         <p class="rubrique">Titre de votre témoignage :</p>
                         <input type="input" id="itemTitle" name="itemTitle" value="" />
-                        <p class="sousrubrique">Faites attention que votre témoignage ne traite que d'une idée, avec un parti pris clair. Cela permettra à chacun de bien cibler sa réponse.</p>
+                        <p class="sousrubrique">Faites attention que votre témoignage ne traite que d'une idée, avec un parti pris clair.<br/>Cela permettra à chacun de bien cibler sa réponse.</p>
                     </div>
                     
                     <div class="elementForm">

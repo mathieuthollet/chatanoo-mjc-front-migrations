@@ -692,6 +692,7 @@ textarea
 .global .uploadParent .uploadContent .uploadBody .rubrique.principale {
 	text-transform: uppercase;
 	color: #C00306;
+	background-image: none;
 }
 
 .global .uploadParent .uploadContent .uploadBody .rubrique.etape {
@@ -704,7 +705,7 @@ textarea
 	padding-top: 3px;
 }
 .global .uploadParent .uploadContent .uploadBody .elementForm {
-	padding:10px 50px 0px 0px;
+	padding:0px 50px 0px 0px;
 }
 
 .global .uploadParent .uploadContent .uploadBody .elementForm p {
@@ -782,9 +783,11 @@ textarea
 }
 
 .global .uploadParent .uploadContent .uploadBody .uploadedMedia {
-	float:left;
-	width:190px !important;
-	height:190px;
+	position: absolute;
+	width: 200px !important;
+	height: 200px;
+	top: 50px;
+	right: 20px;
 }
 
 .global .uploadParent .uploadContent .uploadBody .uploadedMedia img {
