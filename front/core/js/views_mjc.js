@@ -655,21 +655,22 @@ var MJCAppView = AppView.extend({
 					
 					if ((jsonItem.content) && (jsonItem.content.length > 0))
 					{
+						var imageID = jsonItem.content;
+						var imageURL = t.getImagePath(imageID);
+
 						if (isMetaDataForBackgroundImage == false) {
 							isMetaDataForBackgroundImage = true;
-							queryMediasModel.set("images", [jsonItem.content]);
+							queryMediasModel.set("images", [imageURL]);
 						}
 						else
 						{
 							var images = queryMediasModel.get("images");
-							images.push(jsonItem.content);
+							images.push(imageURL);
 						}
 					}
 				}
 			}
 
-		
-	
 			t.updateTermes();
 			t.updateBackground(queryId);
 			

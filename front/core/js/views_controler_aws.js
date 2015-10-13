@@ -24,6 +24,16 @@ var AppView = Backbone.View.extend({
 		
 		this.axeHorizontal = { gauche:"individuel.", droite:"collectif." };
 		this.axeVertical   = { bas:"réaliste.", haut:"utopique." };
+
+		(function($){
+			$.event.special.removed = {
+				remove: function(o) {
+					if (o.handler) {
+						o.handler()
+					}
+				}
+			}
+		})(jQuery)
 	},
 	
 	initAdminParams: function( u1 , u2, u3 ) {
@@ -187,16 +197,8 @@ var AppView = Backbone.View.extend({
 				if (metaVO.name === "BACKGROUND_IMAGE_ACCUEIL") {
 					
 					var imageID = metaVO.content;
+					var backgroundImageURL = t.getImagePath(imageID);
 
-					var backgroundImageURL;
-					if (imageID.indexOf('http') == 0) {
-					  backgroundImageURL = imageID;
-					} else if(imageID.indexOf('-P') !== -1) {
-					  backgroundImageURL = t.mediaCenterURL + imageID + ".jpg";
-					} else {
-					  backgroundImageURL = t.mediaCenterURL + imageID + '/image.png';
-					}
-					
 					$(".global .container .ecrans .accueil").css("background-image", "url('" + backgroundImageURL + "')");
 					
 					break;
@@ -599,9 +601,19 @@ var AppView = Backbone.View.extend({
 		return imageID + "/image.png";
 	},
 
+	getImagePath: function( imageID ) {
+		if (imageID.indexOf('http') == 0) {
+			return imageID;
+		} else if(imageID.indexOf('-P') !== -1) {
+			return t.awsURL + imageID + ".jpg";
+		} else {
+			return t.awsURL + this.getImageKey(imageID);
+		}
+	},
+
 	createImageView: function( element, itemId, mediaId, imageID ) {
 		var t = this;
-		var mediaPath = this.awsURL + t.getImageKey(imageID);
+		var mediaPath = t.getImagePath(imageID);
 		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath } );
 		var imageView = new Chatanoo.ImageView( { el: element, model: model } ).render();
 

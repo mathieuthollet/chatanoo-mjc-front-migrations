@@ -460,7 +460,9 @@ Chatanoo.VideoView = Backbone.View.extend({
     },
 	
     loadVideo: function( endCallback ) {
-		
+
+		var t = this;
+
 		this.render();
 		
 		var autoPlay = this.model.get("autoPlay");
@@ -485,8 +487,29 @@ Chatanoo.VideoView = Backbone.View.extend({
 		var hideControls = false;
 		var alwaysShowControls = false;
 		var features = ['playpause','progress','current','fullscreen']; // ,'duration','volume'
-		
-		$('video', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
+
+		this.mediaElement = $('video', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
+
+		this.$el.on('removed', function() {
+			console.log("video removed !");
+			t.close();
+		});
+
+		return this;
+	},
+
+	close: function() {
+
+		if (this.mediaElement) {
+			this.mediaElement.off("canplay");
+			this.mediaElement.off("ended");
+
+			if (this.mediaElement.stop) this.mediaElement.stop();
+
+			this.mediaElement = null;
+		}
+
+		Backbone.View.prototype.close.call(this);
 	}
 });
 
@@ -539,10 +562,32 @@ Chatanoo.AudioView = Backbone.View.extend({
 		var hideControls = false;
 		var alwaysShowControls = false;
 		var features = ['playpause','progress','current']; // ,'duration','volume'
-		
-		$('audio', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', audioWidth:255, audioHeight:220, autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
+
+		this.mediaElement = $('audio', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', audioWidth:255, audioHeight:220, autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
+
+		this.$el.on('removed', function() {
+			console.log("audio removed !");
+			t.close();
+		});
+
+		return this;
+	},
+
+	close: function() {
+
+		if (this.mediaElement) {
+			this.mediaElement.off("canplay");
+			this.mediaElement.off("ended");
+
+			if (this.mediaElement.stop) this.mediaElement.stop();
+
+			this.mediaElement = null;
+		}
+
+		Backbone.View.prototype.close.call(this);
 	}
 });
+
 
 // D. Upload
 
