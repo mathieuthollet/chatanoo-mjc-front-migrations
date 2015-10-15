@@ -179,7 +179,8 @@
             App.Views.appView.mediaCenterURL = "<?php echo $_ENV["MEDIAS_CENTER_URL"] ?>";
             App.Views.appView.titreAccueil = "<?php echo $_ENV["TITLE"] ?>";
             App.Views.appView.queriesPrefix = "<?php echo $_ENV["QUERIES_PREFIX"] ?>";
-            
+            App.Views.appView.imageAccueil = "<?php echo $_ENV["IMAGE_ACCUEIL_URL"] ?>";
+
             // Key API
             App.Views.appView.proxy = "front/core/proxy/ba-simple-proxy.php?url=";
             App.Views.appView.initAdminParams( 

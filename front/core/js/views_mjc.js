@@ -335,8 +335,16 @@ var MJCAppView = AppView.extend({
 			
 			t.redrawViews();
 			t.updateTermes();
-		}
-		
+		};
+
+		$.event.special.removed = {
+			remove: function(o) {
+				if (o.handler) {
+					o.handler()
+				}
+			}
+		};
+
 		window.onresize = function()
 		{
 			resize();
@@ -1243,7 +1251,7 @@ var MJCAppView = AppView.extend({
 
 	openMediaItem: function(itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo) {
 
-		console.log("[CONTROLER MJC] itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
+		console.log("[CONTROLER MJC] openMediaItem itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 		
 		var ecrans = $(".ecrans");
 		

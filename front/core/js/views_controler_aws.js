@@ -25,15 +25,13 @@ var AppView = Backbone.View.extend({
 		this.axeHorizontal = { gauche:"individuel.", droite:"collectif." };
 		this.axeVertical   = { bas:"réaliste.", haut:"utopique." };
 
-		(function($){
-			$.event.special.removed = {
-				remove: function(o) {
-					if (o.handler) {
-						o.handler()
-					}
+		$.event.special.removed = {
+			remove: function(o) {
+				if (o.handler) {
+					o.handler()
 				}
 			}
-		})(jQuery)
+		}
 	},
 	
 	initAdminParams: function( u1 , u2, u3 ) {
@@ -152,23 +150,31 @@ var AppView = Backbone.View.extend({
 		};
 		
 		var success = function(jsonResult) {
-			
+
 			// console.log("queries", App.Views.QueriesView.collection.length);
-			
+
 			//
 			// Création de la liste des projets (Queries) sur la page d'accueil
 			//
 
-			jsonResult = _(jsonResult).filter( function(query) {
-				return query.content.indexOf(t.queriesPrefix) == 0; 
+			jsonResult = _(jsonResult).filter(function (query) {
+				return query.content.indexOf(t.queriesPrefix) == 0;
 			});
 			App.Views.QueriesView = new Chatanoo.QueriesView(jsonResult);
-			
+
+
 			// 
-			// Chargement des metas données du projet
+			// Chargement des metas données du projet (pour l'image de fond de l'accueil)
 			//
-			
-			t.fetchMetas();
+
+			var backgroundAccueilImageID = App.Views.appView.imageAccueil;
+			if ((backgroundAccueilImageID && backgroundAccueilImageID.length > 0)) {
+				t.loadBackgroundImageAccueil(backgroundAccueilImageID);
+			}
+			else
+			{
+				t.fetchMetas();
+			}
 		};
 		
 		t.ajax("queries", jsonInput, success);
@@ -187,20 +193,15 @@ var AppView = Backbone.View.extend({
 		var success = function(jsonResult) {
 			
 			// console.log("metas", jsonResult);
-			// {"__className":"Vo_Meta","id":"741","name":"BACKGROUND_IMAGE_ACCUEIL","content":"MC-EsuhxTee-P","__className":"Vo_Meta"},
-			
+
 			// A-t-on défini une image de fond pour l'accueil du projet ?
 			var i, n = jsonResult.length, metaVO;
 			for(i=0; i<n; i++)
 			{
 				metaVO = jsonResult[i];
-				if (metaVO.name === "BACKGROUND_IMAGE_ACCUEIL") {
-					
-					var imageID = metaVO.content;
-					var backgroundImageURL = t.getImagePath(imageID);
 
-					$(".global .container .ecrans .accueil").css("background-image", "url('" + backgroundImageURL + "')");
-					
+				if (metaVO.name === "BACKGROUND_IMAGE_ACCUEIL") {
+					t.loadBackgroundImageAccueil(metaVO.content);
 					break;
 				}
 			}
@@ -208,7 +209,13 @@ var AppView = Backbone.View.extend({
 		
 		t.ajax("search", jsonInput, success);
 	},
-	
+
+	loadBackgroundImageAccueil: function(imageID) {
+		var t = this;
+		var backgroundImageURL = t.getImagePath(imageID);
+		$(".global .container .ecrans .accueil").css("background-image", "url('" + backgroundImageURL + "')");
+	},
+
 	loadQuery: function(queryId) {
 		
 		var t = this;
@@ -540,7 +547,7 @@ var AppView = Backbone.View.extend({
 	
 	openMediaItem: function(itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo) {
 
-		console.log("[CONTROLER AWS] itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
+		console.log("[CONTROLER AWS] openMediaItem itemId = ", itemId); // , motCle, motCle1, motCle2, motCle3, titre, pseudo);
 
 		var popupView = this.prepareMediaPlayer();
 
@@ -625,6 +632,9 @@ var AppView = Backbone.View.extend({
 	},
 
 	createVideoView: function( element, itemId, mediaId, videoID, width, height) {
+
+		console.log("createVideoView");
+
 		var t = this;
 
 		var extension = ".mp4";
@@ -664,7 +674,9 @@ var AppView = Backbone.View.extend({
 	},
 	
 	openMediaItemInPlayer: function( popupView, itemId, motCle, motCle1, motCle2, motCle3, titre, pseudo) {
-		
+
+		console.log("openMediaItemInPlayer", itemId);
+
 		var t = this;
 
 		if (t.mediaViewAndModel && t.mediaViewAndModel.view) {
@@ -683,7 +695,9 @@ var AppView = Backbone.View.extend({
 		mediaTitle.html(titre + "<br/><span class='username'>par " + pseudo + "</span>");
 		
 		var success = function(jsonResult) {
-			
+
+			console.log("openMediaItemInPlayer success", itemId);
+
 			if (jsonResult.Picture && (jsonResult.Picture.length > 0))
 			{
 				var imageObject = jsonResult.Picture[0];
@@ -1465,9 +1479,8 @@ var AppView = Backbone.View.extend({
 				break;
 		}
 
-		// La suite est maintenant accessible : étape 2
+		// Script du bouton suite (pas encore visible, en attente de la conversion)
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape2( mediaType, mediaTitle, mediaFileName, null ); } );
-
 	},
 
 	tryToLoadConvertedMedia: function( mediaAWSKey, callback ) {
@@ -1477,6 +1490,7 @@ var AppView = Backbone.View.extend({
 		var bucketName = "chatanoo-medias-output";
 
 		var success = function() {
+			// Bouton suite visible suite à la conversion
 			$("#toEtape2Button").siblings(".etape").css("display", "inline");
 			$("#toEtape2Button").css("display", "inline");
 		};
@@ -1488,6 +1502,8 @@ var AppView = Backbone.View.extend({
 		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
 
 		t.tryToLoadConvertedTimeout = setInterval( function() {
+
+			console.log("**** tryToLoadConvertedTimeout ****", mediaAWSKey);
 
 			s3.getObject({ Bucket: bucketName, Key: mediaAWSKey }, function (err, data) {
 				if (err)
@@ -1507,7 +1523,7 @@ var AppView = Backbone.View.extend({
 				}
 			});
 
-		}, 3000);
+		}, 5000);
 	},
 
 	validUploadEtape2: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {

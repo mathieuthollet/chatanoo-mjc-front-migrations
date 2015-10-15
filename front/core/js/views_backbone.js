@@ -1,4 +1,4 @@
-	
+
 /* Vues */
 
 //
@@ -6,7 +6,7 @@
 //
 
 Backbone.View.prototype.close = function(){
-	
+
 	this.off();
 	this.remove();
 
@@ -17,34 +17,67 @@ Backbone.View.prototype.close = function(){
 	}
 };
 
-Backbone.CollectionView = Backbone.View.extend({
-	
-	initialize: function() {
+Backbone.ChatanooView = Backbone.View.extend({
+
+	render: function() {
+		Backbone.View.prototype.render.call(this, param);
+		this.addRemovedEvent();
+	},
+
+	addRemovedEvent: function() {
+		if (this.$el) {
+			var t = this;
+			this.$el.on('removed', function() {
+				console.log("view removed !");
+				t.close();
+			});
+		}
+	},
+
+	removeRemovedEvent: function() {
+		if (this.$el) {
+			this.$el.off('removed');
+		}
+	},
+
+	close: function() {
+		console.log("ChatanooView CLOSE");
+		this.removeRemovedEvent();
+		Backbone.View.prototype.close.call(this);
+	}
+});
+
+
+Backbone.CollectionView = Backbone.ChatanooView.extend({
+
+	initialize: function(param) {
+		Backbone.ChatanooView.prototype.initialize.call(this, param);
 		this.initSubviews();
 	},
-	
+
 	initSubviews: function() {
 		this.childViews = [];
 	},
-  	 
+
 	addSubview: function(subview) {
 		this.childViews.push(subview);
 	},
-	
+
 	removeSubviews: function () {
-		
+
 		_.each(this.childViews, function(childView)
 		{
-		  if (childView.close) {
-			// cf prototype.close un peu plus haut
-			childView.close();
-		  }
+			if (childView.close) {
+				// cf prototype.close un peu plus haut
+				childView.close();
+			}
 		});
-		
+
 		this.$el.find("article").remove();
 	},
-	
+
 	render: function () {
+
 		this.removeSubviews();
 
 		_.each(this.collection.models, function (item) {
@@ -63,35 +96,35 @@ Backbone.CollectionView = Backbone.View.extend({
 // A. Queries
 
 Chatanoo.QueriesView = Backbone.CollectionView.extend({
-	
+
 	el: "#queries",
-	
+
 	initialize: function (queries) {
-		
+
 		this.initSubviews();
-		
+
 		// On n'affiche que les question validée dans l'admin
 		var validQueries = [];
 		var i, n = queries.length, query;
-		
+
 		for(i=0; i<n; i++) {
 			query = queries[i];
 			if (query._isValid == "1") {
 				validQueries.push(query);
 			}
 		}
-		
+
 		// Liste des questions
 		this.collection = new QueriesCollection(validQueries);
 		this.render();
 	},
-	
+
 	render: function () {
-		
+
 		this.removeSubviews();
-		
+
 		var no = 0;
-		
+
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item, no++);
 		}, this);
@@ -103,34 +136,34 @@ Chatanoo.QueriesView = Backbone.CollectionView.extend({
 		var queryView = new Chatanoo.QueryView({
 			model: item
 		});
-		
+
 		// cf CollectionView
 		this.addSubview(queryView);
-		
-		this.$el.append( queryView.render().el );	
+
+		this.$el.append( queryView.render().el );
 	}
 });
 
-Chatanoo.QueryView = Backbone.View.extend({
-	
+Chatanoo.QueryView = Backbone.ChatanooView.extend({
+
 	tagName: "article",
 	className: "query",
-	
+
 	initialize: function (param) {
 		this.template = _.template($("#queryTemplate").html())
 	},
-	
+
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
 	},
-	
-    events: {
+
+	events: {
 		"click .queryTitre a": "selectQuery",
 		"click .queryDescription a": "selectQuery"
 	},
 
-    selectQuery: function (e)
+	selectQuery: function (e)
 	{
 		var queryId = this.model.get("id");
 		App.Views.appView.loadQuery(queryId);
@@ -141,26 +174,26 @@ Chatanoo.QueryView = Backbone.View.extend({
 // B. Items
 
 Chatanoo.MosaiqueItemsView = Backbone.CollectionView.extend({
-	
+
 	el: "#items",
-	
+
 	initialize: function (itemCollection) {
-		
+
 		this.initSubviews();
-		
+
 		// Liste des items
 		this.collection = itemCollection;
-		
+
 		this.render();
 	},
-	
+
 	render: function () {
-		
+
 		this.removeSubviews();
-		
+
 		var html =  "";
 		var no = 0;
-		
+
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item, no++);
 		}, this);
@@ -172,74 +205,74 @@ Chatanoo.MosaiqueItemsView = Backbone.CollectionView.extend({
 		var itemView = new Chatanoo.MosaiqueItemView({
 			model: item
 		});
-		
+
 		// cf CollectionView
 		this.addSubview(itemView);
-		
-		this.$el.append( itemView.render().el );	
+
+		this.$el.append( itemView.render().el );
 	}
 });
 
 Chatanoo.MosaiqueItemView = Backbone.View.extend({
-	
+
 	tagName: "article",
 	className: "item",
-	
+
 	initialize: function (param) {
 		this.template = _.template($("#itemTemplate").html())
 	},
-	
+
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
 	},
-	
-    events: {
+
+	events: {
 		"click .itemTitre a": "selectItem",
 		"mouseover a": "rollOverItem",
 		"mouseout a": "rollOutItem"
 	},
 
-    rollOverItem: function (e)
+	rollOverItem: function (e)
 	{
 		var el = $(e.currentTarget);
 		var position = el.offset();
-		
+
 		var itemId = this.model.get("id");
 		var titre = this.model.get("title");
 		var user = this.model.get("user").get("pseudo");
-		
+
 		var v = App.eventManager;
 		if (v) v.trigger("itemRollOver", itemId, titre, user, position);
 	},
 
-    rollOutItem: function (e)
+	rollOutItem: function (e)
 	{
 		var el = $(e.currentTarget);
 		var position = el.offset();
-		
+
 		var itemId = this.model.get("id");
 		var titre = this.model.get("titre");
 		var user = this.model.get("user").get("pseudo");
-		
+
 		var v = App.eventManager;
 		if (v) v.trigger("itemRollOut", itemId, titre, user, position);
 	},
 
-    selectItem: function (e)
+	selectItem: function (e)
 	{
 		var el = $(e.currentTarget);
 		var position = el.offset();
-		
+
 		var itemId = this.model.get("id");
 		var titre = this.model.get("titre");
 		var user = this.model.get("user").get("pseudo");
-		
-		var motCle  = this.model.get("motCle");	
+
+		var motCle  = this.model.get("motCle");
 		var motCle1 = this.model.get("motCle1");
 		var motCle2 = this.model.get("motCle2");
 		var motCle3 = this.model.get("motCle3");
-		
+
 		var v = App.eventManager;
 		if (v) v.trigger("itemSelection", itemId, motCle, motCle1, motCle2, motCle3, titre, user, position);
 	}
@@ -249,25 +282,25 @@ Chatanoo.MosaiqueItemView = Backbone.View.extend({
 // C. Comments
 
 Chatanoo.CommentsView = Backbone.CollectionView.extend({
-	
+
 	el: "#comments",
-	
+
 	initialize: function (commentCollection) {
-		
+
 		this.initSubviews();
-		
+
 		// Liste des items
 		this.collection = commentCollection;
-		
+
 		this.render();
 	},
-	
+
 	render: function () {
-		
+
 		this.removeSubviews();
-		
+
 		var no = 0;
-		
+
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item, no++);
 		}, this);
@@ -279,32 +312,39 @@ Chatanoo.CommentsView = Backbone.CollectionView.extend({
 		var itemView = new Chatanoo.CommentView({
 			model: item
 		});
-		
+
 		// cf CollectionView
 		this.addSubview(itemView);
-		
-		this.$el.append( itemView.render().el );	
+
+		this.$el.append( itemView.render().el );
 	}
 });
 
-Chatanoo.CommentView = Backbone.View.extend({
-	
+Chatanoo.CommentView = Backbone.ChatanooView.extend({
+
 	tagName: "div",
-	
+
 	initialize: function (param) {
 		this.template = _.template($("#commentTemplate").html());
 		this.model.on("change:rate", this.updateBackground, this);
 	},
-	
+
 	updateBackground: function () {
 		this.model.set("bgcolor", this.model.get("rate") < 0 ? "rouge" : "vert");
 		this.render();
 	},
-	
+
 	render: function () {
 		this.$el.html(this.template(this.model.toJSON()));
+		this.addRemovedEvent();
 		return this;
+	},
+
+	close: function() {
+		this.model.off("change:rate");
+		Backbone.ChatanooView.prototype.close.call(this);
 	}
+
 });
 
 
@@ -312,9 +352,9 @@ Chatanoo.CommentView = Backbone.View.extend({
 // D. Autres classes de base : PopUp, Image, Vidéo
 
 Chatanoo.PopUpView = Backbone.View.extend({
-	
+
 	subview:null,
-	
+
 	initialize: function (param) {
 
 		Backbone.View.prototype.initialize.call(this, param);
@@ -322,7 +362,7 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		this.template = _.template($("#popUpTemplate").html());
 	},
 
- 	emojiPicker: function(e) {
+	emojiPicker: function(e) {
 		e.preventDefault();
 		$('#newComment').emojiPicker('toggle');
 	},
@@ -330,15 +370,15 @@ Chatanoo.PopUpView = Backbone.View.extend({
 	voteAndComment: function(e) {
 
 		var t = this;
-		
+
 		var itemId = t.model.get("itemId");
-		
+
 		var icSlider = $("#sliderIc");
 		var ruSlider = $("#sliderRu");
-		
+
 		var ic = parseInt(icSlider.val()) / 100;
 		var ru = parseInt(ruSlider.val()) / 100;
-		
+
 		var v = App.eventManager;
 		if (v) v.trigger("voteMedia", itemId, ic, ru);
 
@@ -346,8 +386,8 @@ Chatanoo.PopUpView = Backbone.View.extend({
 
 		t.closePopUp();
 	},
-	
- 	closePopUp: function(e) {
+
+	closePopUp: function(e) {
 
 		var t = this;
 
@@ -357,40 +397,43 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		$('.voteButton',  t.$el).off();
 		$('.emojiButton', t.$el).off();
 
+		$(".popupMedia div", t.$el).remove();
+
 		if (t.subview && t.subview.close) subview.close();
 
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
 		t.$el.css("height", "");
+
 		t.$el.empty();
 
 		t.off();
 	},
-	
- 	render: function( options ) {
-		
+
+	render: function( options ) {
+
 		var t = this;
 		var model = { gauche:"individuel", droite:"collectif", bas:"réaliste", haut:"utopique" };
-		
+
 		if (options)
 		{
 			if (options.width) t.$el.css("width", options.width);
 			if (options.height) t.$el.css("height", options.height);
-			
+
 			if (options.gauche) model.gauche = options.gauche;
 			if (options.droite) model.droite = options.droite;
 			if (options.bas)    model.bas = options.bas;
 			if (options.haut)   model.haut = options.haut;
 		}
-		
+
 		t.$el.css("display", "block");
 		t.$el.html(t.template( model ));
-		
+
 		$('#newComment').emojiPicker({
-        	width: '200px',
-        	height: '200px',
-        	button: false
-      	});
+			width: '200px',
+			height: '200px',
+			button: false
+		});
 
 		$('.popupClose', t.$el).off().on("click", function() {
 			t.closePopUp();
@@ -405,45 +448,46 @@ Chatanoo.PopUpView = Backbone.View.extend({
 		});
 
 		return this;
-    }
+	}
 });
 
-Chatanoo.TextMediaView = Backbone.View.extend({
-	
+Chatanoo.TextMediaView = Backbone.ChatanooView.extend({
+
 	initialize: function (param) {
+		Backbone.ChatanooView.prototype.initialize.call(this, param);
 		this.template = _.template($("#textMediaTemplate").html())
 	},
-	
- 	render: function() {
-		
+
+	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
-		
+		this.addRemovedEvent();
 		return this;
-    }
+	}
 });
 
-Chatanoo.ImageView = Backbone.View.extend({
-	
+Chatanoo.ImageView = Backbone.ChatanooView.extend({
+
 	initialize: function (param) {
+		Backbone.ChatanooView.prototype.initialize.call(this, param);
 		this.template = _.template($("#imageTemplate").html())
 	},
-	
- 	render: function() {
-		
+
+	render: function() {
 		this.$el.html(this.template(this.model.toJSON()));
-		
+		this.addRemovedEvent();
 		return this;
-    }
+	}
 });
 
-Chatanoo.VideoView = Backbone.View.extend({
-	
+Chatanoo.VideoView = Backbone.ChatanooView.extend({
+
 	initialize: function (param) {
+		Backbone.ChatanooView.prototype.initialize.call(this, param);
 		this.template = _.template($("#videoTemplate").html())
 	},
-	
+
 	render: function( options ) {
-		
+
 		if (this.model.get("autoplay") == true) {
 			this.model.set("html5options", "autoplay='autoplay' controls='controls' preload='auto'");
 		}
@@ -451,49 +495,46 @@ Chatanoo.VideoView = Backbone.View.extend({
 		{
 			this.model.set("html5options", "controls='controls' preload='auto'");
 		}
-		
+
 		if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) { }
-		
+
 		this.$el.html(this.template(this.model.toJSON()));
-		
+
 		return this;
-    },
-	
-    loadVideo: function( endCallback ) {
+	},
+
+	loadVideo: function( endCallback ) {
 
 		var t = this;
 
 		this.render();
-		
+
 		var autoPlay = this.model.get("autoPlay");
-		
+
 		var success =  function(mediaElement, domObject) {
-			
+
 			// Flash : autoplay
 			if (autoPlay && (mediaElement.pluginType == 'flash')) {
 				mediaElement.addEventListener('canplay', function() {
 					mediaElement.play();
 				}, false);
 			}
-			
+
 			mediaElement.addEventListener('ended', function(e) {
 				endCallback();
 			}, false);
-			
+
 		};
-	
+
 		var endCallback = endCallback || function() {};
-		
+
 		var hideControls = false;
 		var alwaysShowControls = false;
 		var features = ['playpause','progress','current','fullscreen']; // ,'duration','volume'
 
 		this.mediaElement = $('video', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
 
-		this.$el.on('removed', function() {
-			console.log("video removed !");
-			t.close();
-		});
+		this.addRemovedEvent();
 
 		return this;
 	},
@@ -511,18 +552,19 @@ Chatanoo.VideoView = Backbone.View.extend({
 			this.mediaElement = null;
 		}
 
-		Backbone.View.prototype.close.call(this);
+		Backbone.ChatanooView.prototype.close.call(this);
 	}
 });
 
-Chatanoo.AudioView = Backbone.View.extend({
-	
+Chatanoo.AudioView = Backbone.ChatanooView.extend({
+
 	initialize: function (param) {
+		Backbone.ChatanooView.prototype.initialize.call(this, param);
 		this.template = _.template($("#audioTemplate").html())
 	},
-	
+
 	render: function( options ) {
-		
+
 		if (this.model.get("autoplay") == true) {
 			this.model.set("html5options", "autoplay='autoplay' controls='controls' preload='auto'");
 		}
@@ -530,47 +572,44 @@ Chatanoo.AudioView = Backbone.View.extend({
 		{
 			this.model.set("html5options", "controls='controls' preload='auto'");
 		}
-		
+
 		if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) { }
-		
+
 		this.$el.html(this.template(this.model.toJSON()));
-		
+
 		return this;
-    },
-	
-    loadAudio: function( endCallback ) {
-		
+	},
+
+	loadAudio: function( endCallback ) {
+
 		this.render();
-		
+
 		var autoPlay = this.model.get("autoPlay");
-		
+
 		var success =  function(mediaElement, domObject) {
-			
+
 			// Flash : autoplay
 			if (autoPlay && (mediaElement.pluginType == 'flash')) {
 				mediaElement.addEventListener('canplay', function() {
 					mediaElement.play();
 				}, false);
 			}
-			
+
 			mediaElement.addEventListener('ended', function(e) {
 				endCallback();
 			}, false);
-			
+
 		};
-	
+
 		var endCallback = endCallback || function() {};
-		
+
 		var hideControls = false;
 		var alwaysShowControls = false;
 		var features = ['playpause','progress','current']; // ,'duration','volume'
 
 		this.mediaElement = $('audio', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', audioWidth:255, audioHeight:220, autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
 
-		this.$el.on('removed', function() {
-			console.log("audio removed !");
-			t.close();
-		});
+		this.addRemovedEvent();
 
 		return this;
 	},
@@ -588,7 +627,7 @@ Chatanoo.AudioView = Backbone.View.extend({
 			this.mediaElement = null;
 		}
 
-		Backbone.View.prototype.close.call(this);
+		Backbone.ChatanooView.prototype.close.call(this);
 	}
 });
 
@@ -596,20 +635,20 @@ Chatanoo.AudioView = Backbone.View.extend({
 // D. Upload
 
 Chatanoo.UploadView = Backbone.View.extend({
-	
+
 	urlCarte: "medias/cartes/NON_PRECISEE.jpg",
-	
+
 	initialize: function (param) {
 		this.template = _.template($("#uploadFormTemplate").html())
 	},
-	
+
 	render: function( options ) {
 
 		var t = this;
 
 		// Par défaut :
 		var model = { gauche:"individuel", droite:"collectif", bas:"réaliste", haut:"utopique", urlCarte: this.urlCarte };
-		
+
 		if (options)
 		{
 			if (options.gauche) model.gauche = options.gauche;
@@ -617,7 +656,7 @@ Chatanoo.UploadView = Backbone.View.extend({
 			if (options.bas)    model.bas = options.bas;
 			if (options.haut)   model.haut = options.haut;
 		}
-		
+
 		this.$el.html(this.template( model ));
 
 		$('.uploadClose', t.$el).on("click", function() {
@@ -625,9 +664,9 @@ Chatanoo.UploadView = Backbone.View.extend({
 		});
 
 		return this;
-    },
+	},
 
- 	closePopUp: function(e) {
+	closePopUp: function(e) {
 
 		var t = this;
 
@@ -636,7 +675,10 @@ Chatanoo.UploadView = Backbone.View.extend({
 		t.$el.css("display", "none");
 		t.$el.css("width", "");
 		t.$el.css("height", "");
+
+		$(".uploadedMedia div", t.$el).remove();
 		if (t.subview && t.subview.close) subview.close();
+
 		t.$el.empty();
 		t.off();
 
