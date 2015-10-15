@@ -15,7 +15,7 @@ Chatanoo.CoolPasCoolItemView = Backbone.View.extend({
     events: {
 		"click a": "selectItem",
 		"mouseover a": "rollOverItem",
-		"mouseout a": "rollOutItem",
+		"mouseout a": "rollOutItem"
 	},
 
     rollOverItem: function (e)
@@ -271,7 +271,7 @@ Chatanoo.MapItemView = Chatanoo.CoolPasCoolItemView.extend({
 	
 	initialize: function (param) {
 		this.template = _.template($("#itemMapTemplate").html())
-	},
+	}
 	
 });
 
@@ -565,6 +565,9 @@ var MJCAppView = AppView.extend({
 		t.currentQuery = queryId;
 		
 		t.selectVue(0, 0, 1, 0, 0);
+
+		console.log("** loadQuery **");
+
 		$(".onglet.items").addClass("active");
 		
 		// On masque l'accueil et on affiche la mosaique
@@ -577,7 +580,12 @@ var MJCAppView = AppView.extend({
 		$(".header .titre p").text(titre);
 		
 		this.hideBackground();
-		
+
+		if (App.Views.MosaiqueItemsView) App.Views.MosaiqueItemsView.close();
+		if (App.Views.KeywordsView) App.Views.KeywordsView.close();
+		if (App.Views.UsersView) App.Views.UsersView.close();
+		if (App.Views.MapItemsView) App.Views.MapItemsView.close();
+
 		// Chargement des données
 		t.loadDatasOfQuery(queryId);
 	},
@@ -867,7 +875,7 @@ var MJCAppView = AppView.extend({
 			t.stage = new Kinetic.Stage({
 				container: 'items',
 				width : 2000, // mosaiqueWidth,
-				height: 1200, // mosaiqueHeight
+				height: 1200  // mosaiqueHeight
 			});
 			
 			t.voteLayer = new Kinetic.Layer();
@@ -902,7 +910,7 @@ var MJCAppView = AppView.extend({
 			});
 		
 			t.layer.draw();
-		}
+		};
 
 		var canvas = new CanvasManager();
 		
@@ -977,7 +985,8 @@ var MJCAppView = AppView.extend({
 			});
 			
 		});
-		
+
+
 		// Dimension de la carte
 		var geoms = t.getMapGeoms( mosaiqueWidth, mosaiqueHeight );
 		
@@ -1005,11 +1014,10 @@ var MJCAppView = AppView.extend({
 		});
 		
 		if (App.Views.KeywordsView) App.Views.KeywordsView.close();
-		App.Views.KeywordsView = new Chatanoo.KeywordsView(keywordsCollection);		
+		App.Views.KeywordsView = new Chatanoo.KeywordsView(keywordsCollection);
 		
 		
 		// 4) Construction de l'écran de la carte
-		
 		if (App.Views.MapItemsView) App.Views.MapItemsView.close();
 		App.Views.MapItemsView = new Chatanoo.MapItemsView( itemsCollection, this.mapURL );
 		
