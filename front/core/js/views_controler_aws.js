@@ -744,7 +744,7 @@ var AppView = Backbone.View.extend({
 				var textId = textObject.id;
 				var textContent = textObject.content;
 
-				t.mediaViewAndModel.model = t.createTextView( mediaParent, itemId, textId, textContent );
+				t.mediaViewAndModel = t.createTextView( mediaParent, itemId, textId, textContent );
 				
 				popupView.model = t.mediaViewAndModel.model;
 			}
