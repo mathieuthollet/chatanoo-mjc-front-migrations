@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset='UTF-8'>
-	<title>TEST<?php echo $_ENV["TITLE"] ?></title>
+	<title><?php echo $_ENV["TITLE"] ?></title>
     
 	<link rel='stylesheet' href='front/core/styles/mjc.css' type='text/css' />
    	<link rel='stylesheet' href='front/core/mediaelement/mediaelementplayer.min.css' type='text/css' />    
