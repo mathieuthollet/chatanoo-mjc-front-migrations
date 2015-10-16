@@ -43,7 +43,6 @@ Backbone.ChatanooView = Backbone.View.extend({
 	close: function() {
 		console.log("ChatanooView CLOSE");
 		this.removeRemovedEvent();
-		Backbone.View.prototype.close.call(this);
 	}
 });
 
@@ -83,6 +82,10 @@ Backbone.CollectionView = Backbone.ChatanooView.extend({
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item);
 		}, this);
+	},
+
+	close: function () {
+		this.removeSubviews();
 	}
 });
 
