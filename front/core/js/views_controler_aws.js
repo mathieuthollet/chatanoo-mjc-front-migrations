@@ -1031,7 +1031,15 @@ var AppView = Backbone.View.extend({
 		popUpContent.css("height", mosaiqueHeight + "px");
 		
 		t.changeLayoutForUpload();
-		t.initLoginForm();
+		
+		// Mathieu Thollet
+		// t.initLoginForm();
+		t.uploadUserId = t.currentUserId ? t.currentUserId : 0;
+		if (t.uploadUserId != 0)
+			t.initLoginForm();
+		else
+			t.initUploadForm();
+		// /Mathieu Thollet
 	},
 
 	changeLayoutForUpload: function() {
