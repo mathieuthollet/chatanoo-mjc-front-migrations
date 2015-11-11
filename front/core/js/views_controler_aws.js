@@ -1033,12 +1033,12 @@ var AppView = Backbone.View.extend({
 		t.changeLayoutForUpload();
 		
 		// Mathieu Thollet
-		// t.initLoginForm();
-		t.uploadUserId = t.currentUserId ? t.currentUserId : 0;
+		t.initLoginForm();
+		/*t.uploadUserId = t.currentUserId ? t.currentUserId : 0;
 		if (t.uploadUserId == 0)
 			t.initLoginForm();
 		else
-			t.initUploadForm();
+			t.initUploadForm();*/
 		// /Mathieu Thollet
 	},
 
