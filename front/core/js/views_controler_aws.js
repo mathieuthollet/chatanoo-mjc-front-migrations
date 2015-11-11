@@ -1035,7 +1035,7 @@ var AppView = Backbone.View.extend({
 		// Mathieu Thollet
 		// t.initLoginForm();
 		t.uploadUserId = t.currentUserId ? t.currentUserId : 0;
-		if (t.uploadUserId != 0)
+		if (t.uploadUserId == 0)
 			t.initLoginForm();
 		else
 			t.initUploadForm();
