@@ -808,14 +808,19 @@ textarea
 
 /* vote */
 /*.global .uploadParent .uploadContent .uploadBody .etape_vote {*/
+.global .uploadParent .uploadContent .uploadBody .etape_1 {		/* Mathieu Thollet lot 1.2 */
+	padding: 40px 50px 20px 50px;
+}
+
 .global .uploadParent .uploadContent .uploadBody .etape_2 {		/* Mathieu Thollet lot 1.2 */
 	padding: 40px 50px 20px 50px;
 }
 
-/* carte */
+/* carte *//* Mathieu Thollet lot 1.2 */
+/*
 .global .uploadParent .uploadContent .uploadBody .etape_map {
 	padding: 40px 50px 20px 50px;
-}
+}*/
 
 .global .uploadParent .uploadContent .uploadBody .mapParent {
 	
@@ -844,7 +849,7 @@ textarea
 
 /* mots-clés */
 /*.global .uploadParent .uploadContent .uploadBody .etape_keyword {*/
-.global .uploadParent .uploadContent .uploadBody .etape_keyword 	/* Mathieu Thollet lot 1.2 */
+.global .uploadParent .uploadContent .uploadBody .etape_3 	/* Mathieu Thollet lot 1.2 */
 	padding: 40px 50px 20px 50px;
 }
 

@@ -238,7 +238,7 @@
             </div>
             
             <!-- <div id="etape_vote" class="etape_vote" style="display:none"> -->
-            <div id="etape_2" class="etape_vote" style="display:none"><!-- Mathieu Thollet lot 1.2 -->
+            <div id="etape_2" class="etape_2" style="display:none"><!-- Mathieu Thollet lot 1.2 -->
 	            <!-- Mathieu Thollet lot 1.2 -->
 	            <!--
                 <p class="rubrique">Donnez votre sentiment :</p>
