@@ -1608,7 +1608,7 @@ var AppView = Backbone.View.extend({
 		$("#etape_2").css("display", "none");
 		$("#etape_3").css("display", "block");
 		
-		initStep3Form();
+		t.initStep3Form();
 	},
 	/* /Mathieu Thollet lot 1.2 */
 	
