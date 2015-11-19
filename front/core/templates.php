@@ -171,8 +171,9 @@
                 </div>
             </div>
             
-            <div id="etape_upload" class="etape_upload" style="display:none">
-                <div id="uploadForm" class="uploadForm">
+            <!-- <div id="etape_upload" class="etape_upload" style="display:none"> -->
+            <div id="etape_1" class="etape_1" style="display:none"><!-- Mathieu Thollet lot 1.2 -->
+                <!-- <div id="uploadForm" class="uploadForm"> --><!-- Mathieu Thollet lot 1.2 -->
                 
                     <div class="elementForm">
                         <p class="rubrique">A quelle question répondez-vous ?</p>
@@ -184,7 +185,9 @@
                         <input type="input" id="itemTitle" name="itemTitle" value="" />
                         <p class="sousrubrique">Faites attention que votre témoignage ne traite que d'une idée, avec un parti pris clair.<br/>Cela permettra à chacun de bien cibler sa réponse.</p>
                     </div>
-                    
+                   
+                   <!--
+                   	Mathieu Thollet lot 1.2 
                     <div class="elementForm">
                         <p class="rubrique principale">Vous avez deux choix :</p>
                         <p class="rubrique">A. Chargez votre média (jpeg, png, mp3, mp4) :</p>
@@ -200,12 +203,33 @@
 							<button type="submit" id="sendTextMediaButton">Envoyer votre texte</button>
 						</div>
                     </div>
-                </div>
+                   -->
+                   
+		            <!-- Mathieu Thollet lot 1.2 -->
+	                <p class="rubrique">Donnez votre sentiment :</p>
+	                <div class="inputs">
+	                    <div class="sliders">
+	                        <div class="elementForm">
+	                            <span><%= gauche %></span><input type="range" id="uploadSliderIc" min="0" max="100" value="50" /><span><%= droite %></span>
+	                        </div>
+	                        <div class="elementForm">
+	                            <span><%= bas %></span><input type="range" id="uploadSliderRu" min="0" max="100" value="50" /><span><%= haut %></span>
+	                        </div>
+	                    </div>
+	                </div>               
+	                <p class="rubrique">Choisissez un mot-clé :</p>
+	                <div id="formKeywords" class="keywords"></div>
+	                <!-- /Mathieu Thollet lot 1.2 -->
+	                
+                <!--</div>--><!-- Mathieu Thollet lot 1.2 -->
                 
+                <!-- Mathieu Thollet lot 1.2 -->
+                <!--
                 <div id="uploadedMedia" class="uploadedMedia">
                     <div class="mediaParent"></div>
                 </div>
-				
+                -->
+				<!-- /Mathieu Thollet lot 1.2 -->
 				
                 <div class="buttonParent">
 					<p class="rubrique etape etape2">....... Prochaine étape 2/4</p>
@@ -213,7 +237,10 @@
                 </div>
             </div>
             
-            <div id="etape_vote" class="etape_vote" style="display:none">
+            <!-- <div id="etape_vote" class="etape_vote" style="display:none"> --></div>
+            <div id="etape_2" class="etape_vote" style="display:none"><!-- Mathieu Thollet lot 1.2 -->
+	            <!-- Mathieu Thollet lot 1.2 -->
+	            <!--
                 <p class="rubrique">Donnez votre sentiment :</p>
                 <div class="inputs">
                     <div class="sliders">
@@ -225,21 +252,55 @@
                         </div>
                     </div>
                 </div>
+               -->
+                <p class="rubrique">Placez votre témoignage sur la carte :</p>
+                <div>
+                    <div id="formMap" class="mapParent">
+                        <img class="map" src="<%= urlCarte %>" alt="" />
+                        <img class="item" src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='' />
+                    </div>
+                </div>
+                <!-- /Mathieu Thollet lot 1.2 -->
                 <div class="buttonParent">
 					<p class="rubrique etape etape3">....... Prochaine étape 3/4</p>
                     <button id="toEtape3Button">&gt;</button>
                 </div>
             </div>
             
-            <div id="etape_keyword" class="etape_keyword" style="display:none">
+            <!--<div id="etape_keyword" class="etape_keyword" style="display:none">-->
+            <div id="etape_3" class="etape_3" style="display:none"><!-- Mathieu Thollet lot 1.2 -->
+	            <!-- Mathieu Thollet lot 1.2 -->
+	            <!--
                 <p class="rubrique">Choisissez un mot-clé :</p>
                 <div id="formKeywords" class="keywords"></div>
+               -->
+                <div class="elementForm">
+                    <p class="rubrique principale">Vous avez deux choix :</p>
+                    <p class="rubrique">A. Chargez votre média (jpeg, png, mp3, mp4) :</p>
+					<p class="sousrubrique">Attention : le poids de votre media ne doit pas dépasser 20 Mo.</p>
+                    <form id="fileUploadForm" enctype="multipart/form-data" method="POST">
+                        <input type="file" id="fileSelect" name="file[]" />
+                        <button type="submit" id="uploadButton">Envoyer votre media</button>
+            			<p class="uploadStatus"></p>
+                    </form>
+					<div class="envoiTexte">
+						<p class="rubrique">B. Ou bien envoyez-nous un simple témoignage écrit :</p>
+						<textarea type="text" id="newTextMedia"></textarea>
+						<button type="submit" id="sendTextMediaButton">Envoyer votre texte</button>
+					</div>
+                </div>
+                <div id="uploadedMedia" class="uploadedMedia">
+                    <div class="mediaParent"></div>
+                </div>
+                <!-- /Mathieu Thollet lot 1.2 -->
                 <div class="buttonParent">
 					<p class="rubrique etape etape4">....... Prochaine étape 4/4</p>
                     <button id="toEtape4Button">&gt;</button>
                 </div>
             </div>
             
+            <!-- Mathieu Thollet lot 1.2 -->
+            <!--
             <div id="etape_map" class="etape_map" style="display:none">
                 <p class="rubrique">Placez votre témoignage sur la carte :</p>
                 <div>
@@ -253,6 +314,7 @@
                     <button id="toEtape5Button">&gt;</button>
                 </div>					
             </div>
+            -->
             
             <div id="etape_conclusion" class="etape_conclusion" style="display:none">
                 <p>Merci de votre contribution !</p>

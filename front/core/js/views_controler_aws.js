@@ -1032,14 +1032,14 @@ var AppView = Backbone.View.extend({
 		
 		t.changeLayoutForUpload();
 		
-		// Mathieu Thollet
+		// Mathieu Thollet lot 1.1 
 		//t.initLoginForm();
 		t.uploadUserId = t.currentUserId ? t.currentUserId : 0;
 		if (t.uploadUserId == 0)
 			t.initLoginForm();
 		else
-			t.initUploadForm();
-		// /Mathieu Thollet
+			t.initStep1Form();
+		// /Mathieu Thollet lot 1.1
 	},
 
 	changeLayoutForUpload: function() {
@@ -1112,7 +1112,8 @@ var AppView = Backbone.View.extend({
 				// console.log("login : user id = ", jsonResult.id);
 				t.uploadUserId = t.currentUserId = jsonResult.id;				
 				t.authentification ( [ pseudo, password, t.adminParams[2] ] , function() {
-					t.initUploadForm();
+					//t.initUploadForm();
+					t.initStep1Form();	// Mathieu Thollet lot 1.2
 				});
 			}
 		};
@@ -1177,7 +1178,8 @@ var AppView = Backbone.View.extend({
 						// console.log("inscription : user id = ", jsonResult.id);				
 						t.uploadUserId = t.currentUserId = jsonResult.id;
 						t.authentification ( [ pseudo, password, t.adminParams[2] ] , function() {
-							t.initUploadForm();
+							//t.initUploadForm();
+							t.initStep1Form();	// Mathieu Thollet lot 1.2
 						});
 					}
 				};
@@ -1233,16 +1235,21 @@ var AppView = Backbone.View.extend({
 		document.getElementById('uploadButton').disabled = bool;
 	},
 	
-	initUploadForm: function() {
+	//initUploadForm: function() {
+	initStep1Form: function() {		// Mathieu Thollet lot 1.2
 		
 		var t = this;
 		
 		// On affiche le formulaire d'upload
 		$("#etape_user").css("display", "none");
-		$("#etape_upload").css("display", "block");
+		//$("#etape_upload").css("display", "block");
+		$("#etape_1").css("display", "block");	// Mathieu Thollet lot 1.2
 		
 		// Titre 
 		$("#itemTitle").val("");
+		
+		// Mots clé 
+		t.displayUploadKeyWordSelectionView(); 	// Mathieu Thollet lot 1.2
 		
 		// Media
 		$(".uploadedMedia").html("");
@@ -1254,9 +1261,12 @@ var AppView = Backbone.View.extend({
 		// Champ d'état du téléchargement
 		$(".uploadStatus").html("");
 		
+		/* Mathieu Thollet lot 1.2 */
+		/*
 		$("#toEtape2Button").siblings(".etape").css("display", "none");
 		$("#toEtape2Button").css("display", "none");
-		
+		*/
+		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
 
 		//
 		// a. Envoi d'un simple texte
@@ -1268,7 +1278,8 @@ var AppView = Backbone.View.extend({
 			var textTitle = $("#itemTitle").val();
 			var textContent = $("#newTextMedia").val();
 			
-			t.validUploadEtape2( "Text", textTitle, null, textContent);
+			//t.validUploadEtape2( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
+			t.validUploadEtape3( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
 		});
 		
 		
@@ -1488,7 +1499,8 @@ var AppView = Backbone.View.extend({
 		}
 
 		// Script du bouton suite (pas encore visible, en attente de la conversion)
-		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape2( mediaType, mediaTitle, mediaFileName, null ); } );
+		//$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape2( mediaType, mediaTitle, mediaFileName, null ); } );	// Mathieu Thollet Lot 1.2
+		$("#toEtape4Button").off().on("click", function(){ t.validUploadEtape3( mediaType, mediaTitle, mediaFileName, null ); } );
 	},
 
 	tryToLoadConvertedMedia: function( mediaAWSKey, callback ) {
@@ -1534,10 +1546,26 @@ var AppView = Backbone.View.extend({
 		}, 5000);
 	},
 
+	/* Mathieu Thollet lot 1.2 */
+	validUploadEtape1: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {
+		
+		var t = this;
+		
+		t.uploadVote = $('input:radio[name=sentiment]:checked').val() == "choix1" ? 1 : -1;
+
+		$("#etape_2").css("display", "block");	
+		$("#etape_1").css("display", "none");	
+		
+		t.displayUploadMapView();		// Mathieu Thollet Lot 1.2
+	},
+	/* /Mathieu Thollet lot 1.2 */
+	
+	/* Mathieu Thollet lot 1.2 */
+	/*
 	validUploadEtape2: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {
 		
 		var t = this;
-
+		
 		if (t.tryToLoadConvertedTimeout) clearInterval(t.tryToLoadConvertedTimeout);
 
 		console.log("validUploadEtape2", t.mediaViewAndModel);
@@ -1558,9 +1586,25 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").off().on("click", function(){ t.validUploadEtape3(); } );
 		
 		$("#etape_vote").css("display", "block");
-		$("#etape_upload").css("display", "none");		
+		$("#etape_upload").css("display", "none");
 	},
+	*/
+	validUploadEtape2: function( mapX, mapY ) {
+		
+		var t = this;	
+		t.uploadMapX = mapX;
+		t.uploadMapY = mapY;
+		
+		var item = $(".global .uploadParent .uploadContent .uploadBody .mapParent .item");
+		if (Draggable.get(item)) Draggable.get(item).kill();
 
+		$("#etape_2").css("display", "none");
+		$("#etape_3").css("display", "block");
+	},
+	/* /Mathieu Thollet lot 1.2 */
+	
+	/* Mathieu Thollet lot 1.2 */
+	/*	
 	validUploadEtape3: function() {
 		
 		var t = this;
@@ -1571,16 +1615,37 @@ var AppView = Backbone.View.extend({
 		t.uploadVote = $('input:radio[name=sentiment]:checked').val() == "choix1" ? 1 : -1;
 		
 		$("#toEtape3Button").off("click");
-		$("#etape_vote").css("display", "none");		
+		$("#etape_vote").css("display", "none");	
 		
-		t.displayUploadKeyWordSelectionView();
+		t.displayUploadKeyWordSelectionView();	
 	},
+	*/
+	validUploadEtape3: function() {
+		var t = this;
+		
+		if (t.mediaViewAndModel && t.mediaViewAndModel.view) {
+			console.log("validUploadEtape2 view", t.mediaViewAndModel);
+			t.mediaViewAndModel.view.close();
+		}
+
+		$(".uploadParent .uploadedMedia").empty();
+
+		t.uploadMediaType = mediaType;
+		t.uploadMediaTitle = mediaTitle;
+		t.uploadMediaFileName = mediaFileName;
+		t.textMediaContent = textMediaContent;
+		
+		t.envoiItemUpload();
+	},
+	/* /Mathieu Thollet lot 1.2 */
+
 	
 	displayUploadKeyWordSelectionView: function() {
 
 		var t = this;
 		
-		$("#etape_keyword").css("display", "block");
+		//$("#etape_keyword").css("display", "block");
+		$("#etape_3").css("display", "block");	// Mathieu Thollet lot 1.2
 		
 		$("#toEtape4Button").css("display", "none");
 		$("#toEtape4Button").siblings(".etape").css("display", "none");
@@ -1642,12 +1707,17 @@ var AppView = Backbone.View.extend({
 				keywordTitle = keywordTitle.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 				
 				// console.log("change", keyWordId, keywordTitle);
-				
-				t.displayButtonToValidateUploadKeyWord(keyWordId, keywordTitle);
+						
+				t.uploadKeyWordId = keyWordId;	// Mathieu Thollet Lot 1.2
+				t.uploadKeyWordContent = keywordTitle;	// Mathieu Thollet Lot 1.2
+
+				//t.displayButtonToValidateUploadKeyWord(keyWordId, keywordTitle);	// Mathieu Thollet Lot 1.2
 			}
 		});
 	},	
 	
+	/* Mathieu Thollet lot 1.2 */
+	/*
 	displayButtonToValidateUploadKeyWord: function( keyWordId, keywordTitle ) {
 		
 		var t = this;
@@ -1658,7 +1728,6 @@ var AppView = Backbone.View.extend({
 		$("#toEtape4Button").css("display", "inline");
 		$("#toEtape4Button").off().on("click", function(){ t.validUploadEtape4(keyWordId, keywordTitle); } );
 	},
-
 	validUploadEtape4: function( keyWordId, keywordTitle ) {
 		
 		var t = this;	
@@ -1668,18 +1737,22 @@ var AppView = Backbone.View.extend({
 		// console.log("validUploadEtape4", keyWordId, keywordTitle);
 		
 		$("#toEtape4Button").off("click");
-		$("#etape_keyword").css("display", "none");		
+		$("#etape_keyword").css("display", "none");
 		
 		t.displayUploadMapView();
 	},
-	
+	*/
+	/* /Mathieu Thollet lot 1.2 */
 	displayUploadMapView: function() {
 		
 		var t = this;
 		
-		$("#etape_map").css("display", "block");
-		$("#toEtape5Button").css("display", "none");
-		$("#toEtape5Button").siblings(".etape").css("display", "none");
+		//$("#etape_map").css("display", "block");	// Mathieu Thollet Lot 1.2
+		//$("#toEtape5Button").css("display", "none");	// Mathieu Thollet Lot 1.2
+		//$("#toEtape5Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
+		$("#toEtape5Button").css("display", "none");	// Mathieu Thollet Lot 1.2
+		$("#toEtape5Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
+
 		
 		// Drag and drop du perso sur la carte :
 		var mapParent =  $(".global .uploadParent .uploadContent .uploadBody .mapParent");
@@ -1725,8 +1798,10 @@ var AppView = Backbone.View.extend({
 			// console.log(positionX, positionY, mapWidth, mapHeight, "mapX", mapX, "mapY", mapY);
 
 			// Au premier déplacement, on affiche le bouton de validation :
-			$("#toEtape5Button").css("display", "inline");
-			$("#toEtape5Button").siblings(".etape").css("display", "inline");
+			//$("#toEtape5Button").css("display", "inline");	// Mathieu Thollet lot 1.2
+			//$("#toEtape5Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
+			$("#toEtape3Button").css("display", "inline");	// Mathieu Thollet lot 1.2
+			$("#toEtape3Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
 		};
 
 		
@@ -1734,11 +1809,16 @@ var AppView = Backbone.View.extend({
 		TweenLite.set(item, { x: mapWidth * 0.5, y: mapHeight * 0.5 });
 		
 		// Bouton de validation de l'étape de la carte :
-		$("#toEtape5Button").siblings(".etape").css("display", "inline");
-		$("#toEtape5Button").css("display", "inline");
-		$("#toEtape5Button").off().on("click", function(){ t.validUploadEtape5( mapX, mapY); } );
+		//$("#toEtape5Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
+		//$("#toEtape5Button").css("display", "inline");	// Mathieu Thollet lot 1.2
+		//$("#toEtape5Button").off().on("click", function(){ t.validUploadEtape5( mapX, mapY); } );	// Mathieu Thollet lot 1.2
+		$("#toEtape3Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
+		$("#toEtape3Button").css("display", "inline");	// Mathieu Thollet lot 1.2
+		$("#toEtape3Button").off().on("click", function(){ t.validUploadEtape2( mapX, mapY); } );	// Mathieu Thollet lot 1.2
 	},
 	
+	/* Mathieu Thollet lot 1.2 */
+	/*
 	validUploadEtape5: function( mapX, mapY ) {
 		
 		var t = this;	
@@ -1753,6 +1833,7 @@ var AppView = Backbone.View.extend({
 		
 		t.envoiItemUpload();
 	},
+	*/
 
 	envoiItemUpload: function() {
 		
@@ -1881,7 +1962,8 @@ var AppView = Backbone.View.extend({
 		{ 
 			$("#etape_conclusion").css("display", "none");
 			$("#toEtape1Button").off("click");
-			t.initUploadForm(); 
+			//t.initUploadForm(); 
+			t.initStep1Form();	// Mathieu Thollet lot 1.2
 		} );
 		
 		// On doit ajouter l'item uploadé dans la liste des  items de la query associée

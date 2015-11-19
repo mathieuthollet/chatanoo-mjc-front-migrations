@@ -774,11 +774,13 @@ textarea
 	padding: 40px 50px 20px 50px;
 }
 
-.global .uploadParent .uploadContent .uploadBody .uploadForm {
+/* Mathieu Thollet lot 1.2 : commenté, semble inutile */
+/*.global .uploadParent .uploadContent .uploadBody .uploadForm {
 	float:left;
-}
+}*/
 
-.global .uploadParent .uploadContent .uploadBody .uploadForm select {
+/*.global .uploadParent .uploadContent .uploadBody .uploadForm select {*/
+.global .uploadParent .uploadContent .uploadBody select#formQueries {
 	text-transform: uppercase;
 }
 
@@ -798,13 +800,15 @@ textarea
 	width:190px !important;
 }
 
-.global .uploadParent .uploadContent .uploadBody .uploadForm .elementForm .envoiTexte textarea {
+/*.global .uploadParent .uploadContent .uploadBody .uploadForm .elementForm .envoiTexte textarea {*/
+.global .uploadParent .uploadContent .uploadBody .elementForm .envoiTexte textarea#newTextMedia {
 	width: 500px;
 	margin-right: 5px;
 }
 
 /* vote */
-.global .uploadParent .uploadContent .uploadBody .etape_vote {
+/*.global .uploadParent .uploadContent .uploadBody .etape_vote {*/
+.global .uploadParent .uploadContent .uploadBody .etape_2 {		/* Mathieu Thollet lot 1.2 */
 	padding: 40px 50px 20px 50px;
 }
 
@@ -839,7 +843,8 @@ textarea
 }
 
 /* mots-clés */
-.global .uploadParent .uploadContent .uploadBody .etape_keyword {
+/*.global .uploadParent .uploadContent .uploadBody .etape_keyword {*/
+.global .uploadParent .uploadContent .uploadBody .etape_keyword 	/* Mathieu Thollet lot 1.2 */
 	padding: 40px 50px 20px 50px;
 }
 
