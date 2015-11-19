@@ -684,7 +684,7 @@ textarea
 .global .uploadParent .uploadContent .uploadBody .rubrique {
 	background-image:url(../images/carre_rouge.png);
 	background-repeat:no-repeat;
-	padding-left: 33px;
+	/*padding-left: 33px;*/ /* Mathieu Thollet lot 1.2 */
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
@@ -733,6 +733,12 @@ textarea
 	padding: 0;	/* Mathieu Thollet Lot 1.2 */
 }
 
+/* Mathieu Thollet Lot 1.2 */
+.global .uploadParent .uploadContent .uploadBody .etape_2 .buttonParent {
+    bottom: 20px;
+    position: absolute;
+}
+/* /Mathieu Thollet Lot 1.2 */
 
 /* login / inscription */
 
@@ -871,8 +877,3 @@ textarea
 	padding: 40px 50px 20px 50px;
 }
 
-
-/* */
-
-button {
-  }
