@@ -1750,8 +1750,8 @@ var AppView = Backbone.View.extend({
 		//$("#etape_map").css("display", "block");	// Mathieu Thollet Lot 1.2
 		//$("#toEtape5Button").css("display", "none");	// Mathieu Thollet Lot 1.2
 		//$("#toEtape5Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
-		$("#toEtape5Button").css("display", "none");	// Mathieu Thollet Lot 1.2
-		$("#toEtape5Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
+		$("#toEtape3Button").css("display", "none");	// Mathieu Thollet Lot 1.2
+		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 
 		
 		// Drag and drop du perso sur la carte :

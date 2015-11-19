@@ -217,7 +217,7 @@
 	                        </div>
 	                    </div>
 	                </div>               
-	                <p class="rubrique">Choisissez un mot-clé :</p>
+	                <p class="rubrique">Choisissez un tag :</p>
 	                <div id="formKeywords" class="keywords"></div>
 	                <!-- /Mathieu Thollet lot 1.2 -->
 	                
@@ -237,7 +237,7 @@
                 </div>
             </div>
             
-            <!-- <div id="etape_vote" class="etape_vote" style="display:none"> --></div>
+            <!-- <div id="etape_vote" class="etape_vote" style="display:none"> -->
             <div id="etape_2" class="etape_vote" style="display:none"><!-- Mathieu Thollet lot 1.2 -->
 	            <!-- Mathieu Thollet lot 1.2 -->
 	            <!--
