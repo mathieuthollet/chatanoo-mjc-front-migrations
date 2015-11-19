@@ -1551,12 +1551,14 @@ var AppView = Backbone.View.extend({
 		
 		var t = this;
 		
-		t.uploadVote = $('input:radio[name=sentiment]:checked').val() == "choix1" ? 1 : -1;
-
-		$("#etape_2").css("display", "block");	
-		$("#etape_1").css("display", "none");	
-		
-		t.displayUploadMapView();		// Mathieu Thollet Lot 1.2
+		if ($('#itemTitle').val() != '') {
+			t.uploadVote = $('input:radio[name=sentiment]:checked').val() == "choix1" ? 1 : -1;
+			$("#etape_2").css("display", "block");	
+			$("#etape_1").css("display", "none");	
+			t.displayUploadMapView();
+		}
+		else
+			alert('Vous devez saisir un titre');
 	},
 	/* /Mathieu Thollet lot 1.2 */
 	
@@ -1644,11 +1646,10 @@ var AppView = Backbone.View.extend({
 
 		var t = this;
 		
-		//$("#etape_keyword").css("display", "block");
-		$("#etape_3").css("display", "block");	// Mathieu Thollet lot 1.2
+		//$("#etape_keyword").css("display", "block");	// Mathieu Thollet lot 1.2
 		
-		$("#toEtape4Button").css("display", "none");
-		$("#toEtape4Button").siblings(".etape").css("display", "none");
+		//$("#toEtape4Button").css("display", "none");	// Mathieu Thollet lot 1.2
+		//$("#toEtape4Button").siblings(".etape").css("display", "none");	// Mathieu Thollet lot 1.2
 		
 		var success = function(jsonResult) {
 			
