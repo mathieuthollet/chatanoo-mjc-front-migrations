@@ -1268,6 +1268,11 @@ var AppView = Backbone.View.extend({
 		*/
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
 
+	/* Mathieu Thollet lot 1.2 */
+	},
+	
+	initStep3Form: function() {
+	/* Mathieu Thollet lot 1.2 */
 		//
 		// a. Envoi d'un simple texte
 		//
@@ -1602,6 +1607,8 @@ var AppView = Backbone.View.extend({
 
 		$("#etape_2").css("display", "none");
 		$("#etape_3").css("display", "block");
+		
+		initStep3Form();
 	},
 	/* /Mathieu Thollet lot 1.2 */
 	
