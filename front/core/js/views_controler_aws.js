@@ -1629,7 +1629,7 @@ var AppView = Backbone.View.extend({
 		t.displayUploadKeyWordSelectionView();	
 	},
 	*/
-	validUploadEtape3: function() {
+	validUploadEtape3: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {
 		var t = this;
 		
 		if (t.mediaViewAndModel && t.mediaViewAndModel.view) {
