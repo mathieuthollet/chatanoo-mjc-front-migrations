@@ -1487,8 +1487,8 @@ var MJCAppView = AppView.extend({
 		}
 	},
 	
-	//validUploadEtape3: function() {	// Mathieu Thollet Lot 1.2
-	validUploadEtape1: function() {
+	validUploadEtape3: function() {
+		
 		var t = this;
 		
 		// console.log("validUploadEtape3", $("#uploadSliderIc").val(), $("#uploadSliderRu").val());
@@ -1512,15 +1512,10 @@ var MJCAppView = AppView.extend({
 		// Vote : valeur du vote
 		t.uploadVote = rate;
 		
-		//$("#toEtape3Button").off("click");	// Mathieu Thollet Lot 1.2
-		//$("#etape_vote").css("display", "none");		// Mathieu Thollet Lot 1.2	
+		$("#toEtape3Button").off("click");
+		$("#etape_vote").css("display", "none");		
 		
-		//t.displayUploadKeyWordSelectionView();	// Mathieu Thollet Lot 1.2
-		/* Mathieu Thollet Lot 1.2 */
-		$("#etape_2").css("display", "block");	
-		$("#etape_1").css("display", "none");	
-		t.displayUploadMapView();
-		/* /Mathieu Thollet Lot 1.2 */
+		t.displayUploadKeyWordSelectionView();
 	},
 	
 	// Upload - Sélection des mots-clés :
@@ -1531,10 +1526,8 @@ var MJCAppView = AppView.extend({
 				
 		$("#etape_keyword").css("display", "block");
 		
-		//$("#toEtape4Button").css("display", "none");	// Mathieu Thollet lot 1.2
-		//$("#toEtape4Button").siblings(".etape").css("display", "none");	// Mathieu Thollet lot 1.2
-		$("#toEtape2Button").css("display", "none");	// Mathieu Thollet lot 1.2
-		$("#toEtape2Button").siblings(".etape").css("display", "none");	// Mathieu Thollet lot 1.2
+		$("#toEtape4Button").css("display", "none");
+		$("#toEtape4Button").siblings(".etape").css("display", "none");
 
 		var metas = new MetaCollection();
 		var metaModel;
@@ -1646,18 +1639,15 @@ var MJCAppView = AppView.extend({
 				}
 			}
 			
-			//if (keywords.length > 0)
-			if (keywords.length > 0 && $('#itemTitle').val() != '')
+			if (keywords.length > 0)
 			{
 				// On fait apparaître le bouton suite
 				t.displayButtonToValidateUploadKeyWord(keywords);
 			}
 			else
 			{
-				//$("#toEtape4Button").siblings(".etape").css("display", "none");	// Mathieu Lot 1.2
-				//$("#toEtape4Button").css("display", "none");		// Mathieu Lot 1.2
-				$("#toEtape2Button").siblings(".etape").css("display", "none");		// Mathieu Lot 1.2
-				$("#toEtape2Button").css("display", "none");		// Mathieu Lot 1.2
+				$("#toEtape4Button").siblings(".etape").css("display", "none");
+				$("#toEtape4Button").css("display", "none");
 			}
 		});
 	
@@ -1672,12 +1662,9 @@ var MJCAppView = AppView.extend({
 		// console.log("displayButtonToValidateUploadKeyWord", keyWordId);
 		
 		
-		//$("#toEtape4Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
-		//$("#toEtape4Button").css("display", "inline");	// Mathieu Lot 1.2
-		$("#toEtape2Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
-		$("#toEtape2Button").css("display", "inline");	// Mathieu Lot 1.2
-		//$("#toEtape4Button").off("click").on("click", function(){ t.validUploadEtape4( keywords); } );	// Mathieu Lot 1.2
-		t.uploadKeyWords = keywords;	// Mathieu Lot 1.2
+		$("#toEtape4Button").siblings(".etape").css("display", "inline");
+		$("#toEtape4Button").css("display", "inline");
+		$("#toEtape4Button").off("click").on("click", function(){ t.validUploadEtape4( keywords); } );
 	},
 
 	validUploadEtape4: function( keywords ) {
