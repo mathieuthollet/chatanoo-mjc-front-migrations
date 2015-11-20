@@ -1267,7 +1267,6 @@ var AppView = Backbone.View.extend({
 			if ($(this).val() != '' && typeof t.uploadKeyWords != "undefined")
 				t.displayButtonToValidateUploadKeyWord(keywords);
 			else {
-				$("#toEtape2Button").siblings(".etape").css("display", "none");		// Mathieu Lot 1.2
 				$("#toEtape2Button").css("display", "none");		// Mathieu Lot 1.2
 			}
 		});
