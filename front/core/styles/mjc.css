@@ -860,6 +860,7 @@ textarea
 .global .uploadParent .uploadContent .uploadBody .keywords .keyword {
 	float:left;
 	padding:15px;
+	padding-top: 0; /* Mathieu Thollet lot 1.2 */
 	cursor:pointer;
 }
 
