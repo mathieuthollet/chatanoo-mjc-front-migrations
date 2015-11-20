@@ -1266,7 +1266,6 @@ var AppView = Backbone.View.extend({
 		$("#toEtape2Button").siblings(".etape").css("display", "none");
 		$("#toEtape2Button").css("display", "none");
 		*/
-		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
 		$('#itemTitle').keydown(function() {
 			if ($(this).val() != '' && typeof t.uploadKeyWords != "undefined")
 				t.displayButtonToValidateUploadKeyWord(keywords);
@@ -1275,6 +1274,7 @@ var AppView = Backbone.View.extend({
 				$("#toEtape2Button").css("display", "none");		// Mathieu Lot 1.2
 			}
 		});
+		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
 		/* Mathieu Thollet lot 1.2 */
 	},
 	
