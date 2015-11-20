@@ -1272,6 +1272,7 @@ var AppView = Backbone.View.extend({
 	},
 	
 	initStep3Form: function() {
+		var t = this;
 	/* Mathieu Thollet lot 1.2 */
 		//
 		// a. Envoi d'un simple texte
