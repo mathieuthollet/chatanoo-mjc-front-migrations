@@ -277,18 +277,26 @@
                -->
                 <div class="elementForm">
                     <p class="rubrique principale">Vous avez deux choix :</p>
-                    <p class="rubrique">A. Chargez votre média (jpeg, png, mp3, mp4) :</p>
-					<p class="sousrubrique">Attention : le poids de votre media ne doit pas dépasser 20 Mo.</p>
-                    <form id="fileUploadForm" enctype="multipart/form-data" method="POST">
-                        <input type="file" id="fileSelect" name="file[]" />
-                        <button type="submit" id="uploadButton">Envoyer votre media</button>
-            			<p class="uploadStatus"></p>
-                    </form>
-					<div class="envoiTexte">
-						<p class="rubrique">B. Ou bien envoyez-nous un simple témoignage écrit :</p>
-						<textarea type="text" id="newTextMedia"></textarea>
-						<button type="submit" id="sendTextMediaButton">Envoyer votre texte</button>
-					</div>
+                    <table border="0">
+                    	<tr>
+                    		<td width="50%">
+			                    <p class="rubrique">A. Chargez votre média (jpeg, png, mp3, mp4) :</p>
+								<p class="sousrubrique">Attention : le poids de votre media ne doit pas dépasser 20 Mo.</p>
+			                    <form id="fileUploadForm" enctype="multipart/form-data" method="POST">
+			                        <input type="file" id="fileSelect" name="file[]" />
+			                        <button type="submit" id="uploadButton">Envoyer votre media</button>
+			            			<p class="uploadStatus"></p>
+			                    </form>
+                    		</td>
+                    		<td width="50%">
+								<div class="envoiTexte">
+									<p class="rubrique">B. Ou bien envoyez-nous un simple témoignage écrit :</p>
+									<textarea type="text" id="newTextMedia"></textarea>
+									<button type="submit" id="sendTextMediaButton">Envoyer votre texte</button>
+								</div>
+							</td>
+                    	</tr>
+                    </table>
                 </div>
                 <div id="uploadedMedia" class="uploadedMedia">
                     <div class="mediaParent"></div>

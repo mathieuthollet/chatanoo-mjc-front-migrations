@@ -698,6 +698,8 @@ textarea
 .global .uploadParent .uploadContent .uploadBody .rubrique.etape {
 	display:inline;
 	/* padding:3px 10px 5px 30px; */
+    background-image: none;	/* Mathieu Thollet lot 1.2 */
+    padding-left: 0;	/* Mathieu Thollet lot 1.2 */
 }
 
 .global .uploadParent .uploadContent .uploadBody .sousrubrique {
