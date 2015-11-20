@@ -729,9 +729,7 @@ textarea
 
 .global .uploadParent .uploadContent .uploadBody .buttonParent {
 	clear:both;
-	/*padding:50px 5px 0px 0px;*/ 	/* Mathieu Thollet Lot 1.2 */
-	bottom: 20px;	/* Mathieu Thollet Lot 1.2 */
-    position: absolute;	/* Mathieu Thollet Lot 1.2 */
+	padding:50px 5px 0px 0px;
 }
 
 /* login / inscription */

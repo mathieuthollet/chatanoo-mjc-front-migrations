@@ -1285,7 +1285,6 @@ var AppView = Backbone.View.extend({
 			var textContent = $("#newTextMedia").val();
 			
 			//t.validUploadEtape2( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
-			t.validUploadEtape3( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
 		});
 		
 		
