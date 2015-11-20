@@ -684,7 +684,7 @@ textarea
 .global .uploadParent .uploadContent .uploadBody .rubrique {
 	background-image:url(../images/carre_rouge.png);
 	background-repeat:no-repeat;
-	/*padding-left: 33px;*/ /* Mathieu Thollet lot 1.2 */
+	padding-left: 33px;
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
