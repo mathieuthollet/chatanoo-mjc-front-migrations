@@ -1962,6 +1962,7 @@ var AppView = Backbone.View.extend({
 		var t = this;
 		
 		// Fin de l'upload
+		$("#etape_3").css("display", "none");	// Mathieu Thollet Lot 1.2		
 		$("#etape_conclusion").css("display", "block");		
 		$("#toEtape6Button").off().on("click", function()
 		{ 
