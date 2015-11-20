@@ -1267,8 +1267,15 @@ var AppView = Backbone.View.extend({
 		$("#toEtape2Button").css("display", "none");
 		*/
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
-
-	/* Mathieu Thollet lot 1.2 */
+		$('#itemTitle').change(function() {
+			if ($(this).val() != '' && typeof t.uploadKeyWords != "undefined")
+				t.displayButtonToValidateUploadKeyWord(keywords);
+			else {
+				$("#toEtape2Button").siblings(".etape").css("display", "none");		// Mathieu Lot 1.2
+				$("#toEtape2Button").css("display", "none");		// Mathieu Lot 1.2
+			}
+		});
+		/* Mathieu Thollet lot 1.2 */
 	},
 	
 	initStep3Form: function() {
@@ -1557,14 +1564,10 @@ var AppView = Backbone.View.extend({
 		
 		var t = this;
 		
-		if ($('#itemTitle').val() != '') {
-			t.uploadVote = $('input:radio[name=sentiment]:checked').val() == "choix1" ? 1 : -1;
-			$("#etape_2").css("display", "block");	
-			$("#etape_1").css("display", "none");	
-			t.displayUploadMapView();
-		}
-		else
-			alert('Vous devez saisir un titre');
+		t.uploadVote = $('input:radio[name=sentiment]:checked').val() == "choix1" ? 1 : -1;
+		$("#etape_2").css("display", "block");	
+		$("#etape_1").css("display", "none");	
+		t.displayUploadMapView();
 	},
 	/* /Mathieu Thollet lot 1.2 */
 	

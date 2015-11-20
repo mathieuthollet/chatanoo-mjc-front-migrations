@@ -1517,13 +1517,9 @@ var MJCAppView = AppView.extend({
 		
 		//t.displayUploadKeyWordSelectionView();	// Mathieu Thollet Lot 1.2
 		/* Mathieu Thollet Lot 1.2 */
-		if ($('#itemTitle').val() != '') {
-			$("#etape_2").css("display", "block");	
-			$("#etape_1").css("display", "none");	
-			t.displayUploadMapView();
-		}
-		else
-			alert('Vous devez saisir un titre');
+		$("#etape_2").css("display", "block");	
+		$("#etape_1").css("display", "none");	
+		t.displayUploadMapView();
 		/* /Mathieu Thollet Lot 1.2 */
 	},
 	
@@ -1650,7 +1646,8 @@ var MJCAppView = AppView.extend({
 				}
 			}
 			
-			if (keywords.length > 0)
+			//if (keywords.length > 0)
+			if (keywords.length > 0 && $('#itemTitle').val() != '')
 			{
 				// On fait apparaître le bouton suite
 				t.displayButtonToValidateUploadKeyWord(keywords);
