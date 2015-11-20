@@ -1038,7 +1038,7 @@ var AppView = Backbone.View.extend({
 		if (t.uploadUserId == 0)
 			t.initLoginForm();
 		else
-			t.initStep1Form();
+			t.initUploadForm();
 		// /Mathieu Thollet lot 1.1
 	},
 
@@ -1112,8 +1112,7 @@ var AppView = Backbone.View.extend({
 				// console.log("login : user id = ", jsonResult.id);
 				t.uploadUserId = t.currentUserId = jsonResult.id;				
 				t.authentification ( [ pseudo, password, t.adminParams[2] ] , function() {
-					//t.initUploadForm();
-					t.initStep1Form();	// Mathieu Thollet lot 1.2
+					t.initUploadForm();
 				});
 			}
 		};
@@ -1178,8 +1177,7 @@ var AppView = Backbone.View.extend({
 						// console.log("inscription : user id = ", jsonResult.id);				
 						t.uploadUserId = t.currentUserId = jsonResult.id;
 						t.authentification ( [ pseudo, password, t.adminParams[2] ] , function() {
-							//t.initUploadForm();
-							t.initStep1Form();	// Mathieu Thollet lot 1.2
+							t.initUploadForm();
 						});
 					}
 				};
@@ -1235,8 +1233,7 @@ var AppView = Backbone.View.extend({
 		document.getElementById('uploadButton').disabled = bool;
 	},
 	
-	//initUploadForm: function() {
-	initStep1Form: function() {		// Mathieu Thollet lot 1.2
+	initUploadForm: function() {
 		
 		var t = this;
 		
@@ -1273,6 +1270,14 @@ var AppView = Backbone.View.extend({
 				$("#toEtape2Button").siblings(".etape").css("display", "none");		// Mathieu Lot 1.2
 				$("#toEtape2Button").css("display", "none");		// Mathieu Lot 1.2
 			}
+		});
+		$('#backToEtape1Button').click(function() {
+			$("#etape_2").css("display", "block");
+			$("#etape_1").css("display", "block");
+		});
+		$('#backToEtape2Button').click(function() {
+			$("#etape_3").css("display", "block");
+			$("#etape_2").css("display", "block");
 		});
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
 		/* Mathieu Thollet lot 1.2 */
@@ -1975,8 +1980,7 @@ var AppView = Backbone.View.extend({
 		{ 
 			$("#etape_conclusion").css("display", "none");
 			$("#toEtape1Button").off("click");
-			//t.initUploadForm(); 
-			t.initStep1Form();	// Mathieu Thollet lot 1.2
+			t.initUploadForm(); 
 		} );
 		
 		// On doit ajouter l'item uploadé dans la liste des  items de la query associée
