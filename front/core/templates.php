@@ -262,7 +262,7 @@
                 </div>
                 <!-- /Mathieu Thollet lot 1.2 -->
                 <div class="buttonParent">
-                	<button id="backToEtape1Button">lt;</button><!-- Mathieu Thollet Lot 1.2-->
+                	<button id="backToEtape1Button">&lt;</button><!-- Mathieu Thollet Lot 1.2-->
 					<p class="rubrique etape etape3"><!--....... Prochaine étape 3/4-->Etape 2/3<!--Mathieu Thollet Lot 1.2--></p>
                     <button id="toEtape3Button">&gt;</button>
                 </div>
@@ -295,7 +295,7 @@
                 </div>
                 <!-- /Mathieu Thollet lot 1.2 -->
                 <div class="buttonParent">
-                	<button id="backToEtape2Button">lt;</button><!-- Mathieu Thollet Lot 1.2-->
+                	<button id="backToEtape2Button">&lt;</button><!-- Mathieu Thollet Lot 1.2-->
 					<p class="rubrique etape etape4"><!--....... Prochaine étape 4/4-->Etape 3/3<!--Mathieu Thollet Lot 1.2--></p>
                     <button id="toEtape4Button">&gt;</button>
                 </div>

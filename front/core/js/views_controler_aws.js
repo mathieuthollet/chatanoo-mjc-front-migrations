@@ -1272,11 +1272,11 @@ var AppView = Backbone.View.extend({
 			}
 		});
 		$('#backToEtape1Button').click(function() {
-			$("#etape_2").css("display", "block");
+			$("#etape_2").css("display", "none");
 			$("#etape_1").css("display", "block");
 		});
 		$('#backToEtape2Button').click(function() {
-			$("#etape_3").css("display", "block");
+			$("#etape_3").css("display", "none");
 			$("#etape_2").css("display", "block");
 		});
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
@@ -1529,8 +1529,10 @@ var AppView = Backbone.View.extend({
 
 		var success = function() {
 			// Bouton suite visible suite à la conversion
-			$("#toEtape2Button").siblings(".etape").css("display", "inline");
-			$("#toEtape2Button").css("display", "inline");
+			//$("#toEtape2Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
+			//$("#toEtape2Button").css("display", "inline");	// Mathieu Thollet lot 1.2
+			$("#toEtape4Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
+			$("#toEtape4Button").css("display", "inline");	// Mathieu Thollet lot 1.2
 		};
 
 		$(".uploadStatus").html("Conversion et chargement du média...");
@@ -1664,8 +1666,8 @@ var AppView = Backbone.View.extend({
 		
 		//$("#etape_keyword").css("display", "block");	// Mathieu Thollet lot 1.2
 		
-		//$("#toEtape4Button").css("display", "none");	// Mathieu Thollet lot 1.2
-		//$("#toEtape4Button").siblings(".etape").css("display", "none");	// Mathieu Thollet lot 1.2
+		$("#toEtape4Button").css("display", "none");	// Mathieu Thollet lot 1.2
+		$("#toEtape4Button").siblings(".etape").css("display", "none");	// Mathieu Thollet lot 1.2
 		
 		var success = function(jsonResult) {
 			
