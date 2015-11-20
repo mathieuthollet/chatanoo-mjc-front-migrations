@@ -279,7 +279,7 @@
                     <p class="rubrique principale">Vous avez deux choix :</p>
                     <table border="0">
                     	<tr>
-                    		<td width="50%">
+                    		<td width="48%" valign="top">
 			                    <p class="rubrique">A. Chargez votre média (jpeg, png, mp3, mp4) :</p>
 								<p class="sousrubrique">Attention : le poids de votre media ne doit pas dépasser 20 Mo.</p>
 			                    <form id="fileUploadForm" enctype="multipart/form-data" method="POST">
@@ -288,7 +288,8 @@
 			            			<p class="uploadStatus"></p>
 			                    </form>
                     		</td>
-                    		<td width="50%">
+                    		<td width="4%"></td>
+                    		<td width="48%" valign="top">
 								<div class="envoiTexte">
 									<p class="rubrique">B. Ou bien envoyez-nous un simple témoignage écrit :</p>
 									<textarea type="text" id="newTextMedia"></textarea>

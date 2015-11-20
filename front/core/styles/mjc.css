@@ -803,7 +803,9 @@ textarea
 
 /*.global .uploadParent .uploadContent .uploadBody .uploadForm .elementForm .envoiTexte textarea {*/
 .global .uploadParent .uploadContent .uploadBody .elementForm .envoiTexte textarea#newTextMedia {
-	width: 500px;
+	/*width: 500px;*/	/* Mathieu Thollet lot 1.2 */
+	width: 100%; /* Mathieu Thollet lot 1.2 */
+	max-width: 500px;	/* Mathieu Thollet lot 1.2 */
 	margin-right: 5px;
 }
 
