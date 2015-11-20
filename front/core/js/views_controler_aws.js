@@ -1553,7 +1553,7 @@ var AppView = Backbone.View.extend({
 	},
 
 	/* Mathieu Thollet lot 1.2 */
-	validUploadEtape1: function( mediaType, mediaTitle, mediaFileName, textMediaContent ) {
+	validUploadEtape1: function() {
 		
 		var t = this;
 		
