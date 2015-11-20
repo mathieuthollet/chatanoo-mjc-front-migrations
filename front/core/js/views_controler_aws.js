@@ -1267,7 +1267,7 @@ var AppView = Backbone.View.extend({
 		$("#toEtape2Button").css("display", "none");
 		*/
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
-		$('#itemTitle').change(function() {
+		$('#itemTitle').keydown(function() {
 			if ($(this).val() != '' && typeof t.uploadKeyWords != "undefined")
 				t.displayButtonToValidateUploadKeyWord(keywords);
 			else {
