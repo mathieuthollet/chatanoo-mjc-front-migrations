@@ -308,6 +308,7 @@ var MJCAppView = AppView.extend({
 		// --> Onglet par défaut : questions
 		t.selectVue(1, 0, 0, 0, 0, false);
 		$(".onglet.questions").addClass("active");
+		$('.footer .tabs').hide();	// Mathieu Thollet Lot 1 bis
 
 		// Permet de gérer les click au niveau des "div" parent d'un lien (plutôt qu'au niveau du lien lui-même)
 		$(document).delegate("a", "click", function(evt) {
@@ -464,6 +465,8 @@ var MJCAppView = AppView.extend({
 			$(".onglet.carte").addClass("inactive");
 			$(".onglet.users").addClass("inactive");
 			
+			$('.footer .tabs').hide();	// Mathieu Thollet Lot 1 bis
+			
 			if (dontUpdateRouter !== false) {
 				// Routeur
 				App.Router.addToHistory("");
@@ -474,6 +477,7 @@ var MJCAppView = AppView.extend({
 			$(".onglet.questions").off().on("click", function() {
 				t.selectVue(1, 0, 0, 0, 0);
 				$(this).addClass("active");
+				$('.footer .tabs').hide();	// Mathieu Thollet Lot 1 bis
 			});
 			
 			$(".onglet.motcles").off().on("click", function() {
@@ -569,6 +573,7 @@ var MJCAppView = AppView.extend({
 		console.log("** loadQuery **");
 
 		$(".onglet.items").addClass("active");
+		$('.footer .tabs').show();	// Mathieu Thollet Lot 1 bis
 		
 		// On masque l'accueil et on affiche la mosaique
 		t.accueilElement.css("display", "none");
