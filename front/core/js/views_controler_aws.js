@@ -1004,6 +1004,9 @@ var AppView = Backbone.View.extend({
 	
 		var t = this;
 		
+		$(".onglet").removeClass("active");	// Mathieu Thollet Lot 1 bis
+		$(".onglet.motadire").addClass("active");	// Mathieu Thollet Lot 1 bis
+		
 		var mosaique = $("#mosaique");
 		var mosaiqueWidth  = mosaique.width();
 		var mosaiqueHeight = mosaique.height();
