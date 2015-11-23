@@ -1062,7 +1062,7 @@ var AppView = Backbone.View.extend({
 	initLoginForm: function () {
 		
 		var t = this;
-		t.initUploadQuerySelect();
+		//t.initUploadQuerySelect(); // Mathieu Lot 1.1
 
 		// Fomulaire de Login
 		var loginForm = document.getElementById('loginForm');
@@ -1236,6 +1236,8 @@ var AppView = Backbone.View.extend({
 	initUploadForm: function() {
 		
 		var t = this;
+		
+		t.initUploadQuerySelect(); // Mathieu Lot 1.1
 		
 		// On affiche le formulaire d'upload
 		$("#etape_user").css("display", "none");
