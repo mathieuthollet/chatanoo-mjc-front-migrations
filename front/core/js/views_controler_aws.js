@@ -1281,7 +1281,6 @@ var AppView = Backbone.View.extend({
 			$("#etape_2").css("display", "block");
 		});
 		$("#toEtape4Button").css("display", "none");
-		$("#toEtape4Button").siblings(".etape").css("display", "none");
 		$("#toEtape2Button").off().on("click", function(){ t.validUploadEtape1(); } );
 		/* Mathieu Thollet lot 1.2 */
 	},
@@ -1534,7 +1533,6 @@ var AppView = Backbone.View.extend({
 			// Bouton suite visible suite à la conversion
 			//$("#toEtape2Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
 			//$("#toEtape2Button").css("display", "inline");	// Mathieu Thollet lot 1.2
-			$("#toEtape4Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
 			$("#toEtape4Button").css("display", "inline");	// Mathieu Thollet lot 1.2
 		};
 
