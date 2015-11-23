@@ -1647,7 +1647,7 @@ var MJCAppView = AppView.extend({
 			}
 			
 			//if (keywords.length > 0)
-			if (keywords.length > 0 && $('#itemTitle').val() != '')
+			if (keywords.length > 0)
 			{
 				// On fait apparaître le bouton suite
 				t.displayButtonToValidateUploadKeyWord(keywords);
@@ -1671,11 +1671,12 @@ var MJCAppView = AppView.extend({
 		// keywordTitle = keywordTitle.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 		// console.log("displayButtonToValidateUploadKeyWord", keyWordId);
 		
-		
-		//$("#toEtape4Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
-		//$("#toEtape4Button").css("display", "inline");	// Mathieu Lot 1.2
-		$("#toEtape2Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
-		$("#toEtape2Button").css("display", "inline");	// Mathieu Lot 1.2
+		if ($('#itemTitle').val() != '') {	// Mathieu Lot 1.2
+			//$("#toEtape4Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
+			//$("#toEtape4Button").css("display", "inline");	// Mathieu Lot 1.2
+			$("#toEtape2Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
+			$("#toEtape2Button").css("display", "inline");	// Mathieu Lot 1.2
+		}
 		//$("#toEtape4Button").off("click").on("click", function(){ t.validUploadEtape4( keywords); } );	// Mathieu Lot 1.2
 		t.uploadKeyWords = keywords;	// Mathieu Lot 1.2
 	},

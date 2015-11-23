@@ -1264,8 +1264,10 @@ var AppView = Backbone.View.extend({
 		$("#toEtape2Button").css("display", "none");
 		*/
 		$('#itemTitle').keydown(function() {
-			if ($(this).val() != '' && $('.keyword.selected').length > 0)
-				t.displayButtonToValidateUploadKeyWord(keywords);
+			if ($(this).val() != '' && $('.keyword.selected').length > 0) {
+				$("#toEtape2Button").siblings(".etape").css("display", "inline");	// Mathieu Lot 1.2
+				$("#toEtape2Button").css("display", "inline");	// Mathieu Lot 1.2
+			}
 			else {
 				$("#toEtape2Button").css("display", "none");		// Mathieu Lot 1.2
 			}
