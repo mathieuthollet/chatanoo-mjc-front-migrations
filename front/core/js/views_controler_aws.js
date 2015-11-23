@@ -1254,7 +1254,7 @@ var AppView = Backbone.View.extend({
 		$(".uploadedMedia").html("");
 		
 		// Texte
-		$(".newTextMedia").val("");
+		$("#newTextMedia").val("");
 		$(".envoiTexte").css("display", "block");
 		
 		// Champ d'état du téléchargement
