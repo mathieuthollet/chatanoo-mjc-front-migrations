@@ -1299,9 +1299,10 @@ var AppView = Backbone.View.extend({
 		
 			var textTitle = $("#itemTitle").val();
 			var textContent = $("#newTextMedia").val();
-			
-			//t.validUploadEtape2( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
-			t.validUploadEtape3( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
+			if (textContent != '') {		// Mathieu Thollet lot 1.2
+				//t.validUploadEtape2( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
+				t.validUploadEtape3( "Text", textTitle, null, textContent);	// Mathieu Thollet lot 1.2
+			}
 		});
 		
 		
