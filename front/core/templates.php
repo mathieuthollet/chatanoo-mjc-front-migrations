@@ -208,7 +208,7 @@
                    -->
                    
 		            <!-- Mathieu Thollet lot 1.2 -->
-	                <p class="rubrique">Donnez votre sentiment :</p>
+	                <p class="rubrique">Quelle est la nature de votre témoignage ?</p>
 	                <div class="inputs">
 	                    <div class="sliders">
 	                        <div class="elementForm">
@@ -219,7 +219,7 @@
 	                        </div>
 	                    </div>
 	                </div>               
-	                <p class="rubrique">Choisissez un tag :</p>
+	                <p class="rubrique">Choisissez jusqu'à 3 tags :</p>
 	                <div id="formKeywords" class="keywords"></div>
 	                <!-- /Mathieu Thollet lot 1.2 -->
 	                
