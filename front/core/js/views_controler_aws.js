@@ -1973,7 +1973,8 @@ var AppView = Backbone.View.extend({
 		
 		// Fin de l'upload
 		$("#etape_3").css("display", "none");	// Mathieu Thollet Lot 1.2		
-		$("#etape_conclusion").css("display", "block");		
+		// Mathieu Thollet Lot 1.2
+		/*$("#etape_conclusion").css("display", "block");		
 		$("#toEtape6Button").off().on("click", function()
 		{ 
 			$("#toEtape6Button").off("click");
@@ -1990,7 +1991,8 @@ var AppView = Backbone.View.extend({
 		
 		// On doit ajouter l'item uploadé dans la liste des  items de la query associée
 		// et rafraichir les vues :
-		
+		*/
+		t.closeUploadView();	// Mathieu Thollet lot 1.2
 		t.loadQuery( t.uploadQueryId );
 	},
 
