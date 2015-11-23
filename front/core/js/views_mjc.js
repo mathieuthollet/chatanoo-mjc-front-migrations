@@ -478,27 +478,32 @@ var MJCAppView = AppView.extend({
 				t.selectVue(1, 0, 0, 0, 0);
 				$(this).addClass("active");
 				$('.footer .tabs').hide();	// Mathieu Thollet Lot 1 bis
+				t.closeUploadView();	// Mathieu Thollet Lot 1 bis
 			});
 			
 			$(".onglet.motcles").off().on("click", function() {
 				t.selectVue(0, 1, 0, 0, 0);
 				$(this).addClass("active");
+				t.closeUploadView();	// Mathieu Thollet Lot 1 bis
 			});
 			
 			$(".onglet.items").off().on("click", function() {
 				t.selectVue(0, 0, 1, 0, 0);
 				$(this).addClass("active");
+				t.closeUploadView();	// Mathieu Thollet Lot 1 bis
 			});
 			
 			$(".onglet.carte").off().on("click", function() {
 				t.redrawMap();
 				t.selectVue(0, 0, 0, 1, 0);
 				$(this).addClass("active");
+				t.closeUploadView();	// Mathieu Thollet Lot 1 bis
 			});
 			
 			$(".onglet.users").off().on("click", function() {
 				t.selectVue(0, 0, 0, 0, 1);
 				$(this).addClass("active");
+				t.closeUploadView();	// Mathieu Thollet Lot 1 bis
 			});
 			
 			if (dontUpdateRouter !== false) {

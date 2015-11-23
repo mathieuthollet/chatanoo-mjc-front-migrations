@@ -110,9 +110,11 @@
 
 <script id="uploadFormTemplate" type="text/template">
     <div class="uploadContent borderTopRounded">
+    	<!--
         <div class="uploadHeader borderTopRounded">
             <div class="uploadClose">x</div>
         </div>
+     	--><!-- Mathieu Thollet Lot 1 bis -->
         <div class="uploadBody">		
             <div id="etape_user" class="etape_user">
                 <div class="tabLoginInscription">
