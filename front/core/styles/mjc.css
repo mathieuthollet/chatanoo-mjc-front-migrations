@@ -617,6 +617,15 @@ textarea
 	/* background-color:#C00306; */
 }
 
+/* Mathieu Thollet Lot 1 bis */
+.global .tabs .onglet.questions {
+    left: 2px;
+    position: fixed;
+    top: 1px;
+}
+/* Mathieu Thollet Lot 1 bis */
+
+
 .global .tabs .onglet.active {
 	background-color:#6c6c6c;
 }
