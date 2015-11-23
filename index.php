@@ -128,7 +128,7 @@
             </div>
             
         	<div class="tabs">
-                <div class="onglet questions active">Les questions</div>
+                <div class="onglet questions active"><!--Les questions-->&lt;&nbsp;&nbsp;&nbsp; Autre question<!--Mathieu Thollet Lot 1 bis--></div>
                 <div class="onglet items">Les opinions</div>
                 <div class="onglet users">Les participants</div>
                 <div class="onglet carte">Les lieux</div>
