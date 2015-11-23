@@ -596,6 +596,7 @@ textarea
 	padding-top:10px;
 	float:left;
 	font-size:0.85em;
+	display: none; /* Mathieu Thollet Lot 1 bis */
 }
 
 .global .tabs .onglet {
