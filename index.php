@@ -7,7 +7,8 @@
     
 	<link rel='stylesheet' href='front/core/styles/mjc.css' type='text/css' />
    	<link rel='stylesheet' href='front/core/mediaelement/mediaelementplayer.min.css' type='text/css' />    
-	
+	<link rel="stylesheet" href="http://openlayers.org/en/v3.11.2/css/ol.css" type="text/css"><!-- Mathieu Lot 2 test -->
+    
     <style>
         .global .centre .ecrans .accueil {
             background-size: cover;
@@ -37,8 +38,8 @@
     <script src="front/core/js/libs/greensock/TweenMax.min.js"></script>
     <script src="front/core/js/libs/greensock/utils/Draggable.min.js"></script>
     <script src="front/core/js/libs/greensock/TimelineLite.min.js"></script>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1.36/aws-sdk.js"></script>
+    <script src="http://openlayers.org/en/v3.11.2/build/ol.js" type="text/javascript"></script><!-- Mathieu Lot 2 test -->
     
  	<!-- Emoji --> 
 	<link rel="stylesheet" href="front/core/styles/jquery.emojipicker.css" type="text/css" />
