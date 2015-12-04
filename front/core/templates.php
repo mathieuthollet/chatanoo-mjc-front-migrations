@@ -259,9 +259,9 @@
                 <div>
                     <div id="formMap" class="mapParent">
                         <!--<img class="map" src="<%= urlCarte %>" alt="" />-->
-                        <!-- Mathieu Lot 2 test -->
+                        <!-- Mathieu Lot 2 -->
 					    <div id="map" class="map"></div>
-					    <!-- Mathieu Lot 2 test -->
+					    <!-- Mathieu Lot 2 -->
                         <img class="item" src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='' />
                     </div>
                 </div>

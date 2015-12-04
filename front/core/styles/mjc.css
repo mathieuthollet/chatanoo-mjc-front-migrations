@@ -844,19 +844,21 @@ textarea
 	
 	margin:20px;
 	
-	-moz-transform:scale(0.25);
+	/* Mathieu Lot 2 */
+	/*-moz-transform:scale(0.25);
 	-webkit-transform:scale(0.25);
 	-o-transform:scale(0.25);
 	transform:scale(0.25);
-	
 	-moz-transform-origin:0% 0%;
 	-webkit-transform-origin:0% 0%;
 	-o-transform-origin:0% 0%;
-	transform-origin:0% 0%;
+	transform-origin:0% 0%;*/
 }
 
 .global .uploadParent .uploadContent .uploadBody .mapParent .map {
 	position:absolute;
+	width: 400px;	/* Mathieu Lot 2 */
+	height: 300px;	/* Mathieu Lot 2 */
 }
 
 .global .uploadParent .uploadContent .uploadBody .mapParent .item {
