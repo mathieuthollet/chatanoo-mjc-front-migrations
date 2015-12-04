@@ -856,8 +856,6 @@ textarea
 
 .global .uploadParent .uploadContent .uploadBody .mapParent .map {
 	position:absolute;
-	width: 1600px;	/* Mathieu Lot 2 */
-	height: 1200px;	/* Mathieu Lot 2 */
 }
 
 .global .uploadParent .uploadContent .uploadBody .mapParent .item {
