@@ -258,7 +258,24 @@
                 <p class="rubrique">Placez votre témoignage sur la carte :</p>
                 <div>
                     <div id="formMap" class="mapParent">
-                        <img class="map" src="<%= urlCarte %>" alt="" />
+                        <!--<img class="map" src="<%= urlCarte %>" alt="" />-->
+                        <!-- Mathieu Lot 2 test -->
+					    <div id="map" class="map"></div>
+					    <script type="text/javascript">
+					      var map = new ol.Map({
+					        target: 'map',
+					        layers: [
+					          new ol.layer.Tile({
+					            source: new ol.source.MapQuest({layer: 'sat'})
+					          })
+					        ],
+					        view: new ol.View({
+					          center: ol.proj.fromLonLat([37.41, 8.82]),
+					          zoom: 4
+					        })
+					      });
+					    </script>
+					    <!-- Mathieu Lot 2 test -->
                         <img class="item" src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='' />
                     </div>
                 </div>
