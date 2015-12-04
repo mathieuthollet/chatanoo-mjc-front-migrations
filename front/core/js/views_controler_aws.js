@@ -1780,7 +1780,21 @@ var AppView = Backbone.View.extend({
 		//$("#toEtape5Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		$("#toEtape3Button").css("display", "none");	// Mathieu Thollet Lot 1.2
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
-
+		
+		// Mathieu Lot 2 test
+	      var map = new ol.Map({
+	        target: 'map',
+	        layers: [
+	          new ol.layer.Tile({
+	            source: new ol.source.MapQuest({layer: 'sat'})
+	          })
+	        ],
+	        view: new ol.View({
+	          center: ol.proj.fromLonLat([37.41, 8.82]),
+	          zoom: 4
+	        })
+	      });
+	    // /Mathieu Lot 2 test
 		
 		// Drag and drop du perso sur la carte :
 		var mapParent =  $(".global .uploadParent .uploadContent .uploadBody .mapParent");
