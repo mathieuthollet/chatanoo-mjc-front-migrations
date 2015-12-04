@@ -1782,7 +1782,7 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		
 		// Mathieu Lot 2
-	      var map = new ol.Map({
+	      var openLayersMap = new ol.Map({
 	        target: 'map',
 	        layers: [
 	          new ol.layer.Tile({
