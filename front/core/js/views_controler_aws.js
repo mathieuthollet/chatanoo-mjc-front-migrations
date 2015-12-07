@@ -1782,32 +1782,7 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		
 		// Mathieu Lot 2
-		var pointFeature = new ol.Feature(new ol.geom.Point([0, 0]));
-	    var openLayersMap = new ol.Map({
-	        target: 'map',
-	        layers: [
-	          new ol.layer.Tile({
-	            source: new ol.source.MapQuest({layer: 'sat'})
-	          })
-			 ,new ol.layer.Vector({
-			    source: new ol.source.Vector({
-			      features: [pointFeature]
-			    }),
-			    style: new ol.style.Style({
-			      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-			        opacity: 1,
-			        src: 'http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png',
-			        scale: 0.25
-			      })),
-			    })
-			  })
-	        ],
-	        view: new ol.View({
-	          center: ol.proj.fromLonLat([37.41, 8.82]),
-	          zoom: 4
-	        })
-	      });
-	    // /Mathieu Lot 2
+		initOpenLayerslMap();
 		
 		// Drag and drop du perso sur la carte :
 		var mapParent =  $(".global .uploadParent .uploadContent .uploadBody .mapParent");

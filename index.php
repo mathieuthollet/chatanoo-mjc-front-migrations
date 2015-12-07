@@ -40,6 +40,7 @@
     <script src="front/core/js/libs/greensock/TimelineLite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1.36/aws-sdk.js"></script>
     <script src="http://openlayers.org/en/v3.11.2/build/ol.js" type="text/javascript"></script><!-- Mathieu Lot 2 -->
+    <script src="front/core/js/openlayersmap.js"></script><!-- Mathieu Lot 2 -->
     
  	<!-- Emoji --> 
 	<link rel="stylesheet" href="front/core/styles/jquery.emojipicker.css" type="text/css" />
