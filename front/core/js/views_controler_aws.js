@@ -1794,8 +1794,8 @@ var AppView = Backbone.View.extend({
 	          zoom: 4
 	        })
 	      });
-	    var openLayerControlPoint = new OpenLayers.Control.DrawFeature(vectors, OpenLayers.Handler.Point);
-	    openLayersMap.addControl(openLayerControlPoint);
+	    var openLayersControlPoint = new ol.Control.DrawFeature(vectors, OpenLayers.Handler.Point);
+	    openLayersMap.addControl(openLayersControlPoint);
 	    // /Mathieu Lot 2
 		
 		// Drag and drop du perso sur la carte :
