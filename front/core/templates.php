@@ -259,10 +259,11 @@
                 <div>
                     <div id="formMap" class="mapParent">
                         <!--<img class="map" src="<%= urlCarte %>" alt="" />-->
+                        <!--<img class="item" src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='' />-->
                         <!-- Mathieu Lot 2 TODO width depuis MAP_WIDTH et HEIGHT depuis MAP_HEIGHT -->
 					    <div id="map" class="map"></div>
 					    <!-- //Mathieu Lot 2 -->
-                        <img class="item" src='http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png' alt='' />
+                        
                     </div>
                 </div>
                 <!-- /Mathieu Thollet lot 1.2 -->

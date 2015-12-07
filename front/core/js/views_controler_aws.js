@@ -1788,14 +1788,34 @@ var AppView = Backbone.View.extend({
 	          new ol.layer.Tile({
 	            source: new ol.source.MapQuest({layer: 'sat'})
 	          })
+			 ,new ol.layer.Vector({
+			    source: new ol.source.Vector({
+			      features: [pointFeature, lineFeature, polygonFeature]
+			    }),
+			    style: new ol.style.Style({
+			      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+			        anchor: [0.5, 46],
+			        anchorXUnits: 'fraction',
+			        anchorYUnits: 'pixels',
+			        opacity: 0.95,
+			        src: 'http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png',
+			        scale: 0.25
+			      })),
+			      stroke: new ol.style.Stroke({
+			        width: 3,
+			        color: [255, 0, 0, 1]
+			      }),
+			      fill: new ol.style.Fill({
+			        color: [0, 0, 255, 0.6]
+			      })
+			    })
+			  })
 	        ],
 	        view: new ol.View({
 	          center: ol.proj.fromLonLat([37.41, 8.82]),
 	          zoom: 4
 	        })
 	      });
-	    var openLayersControlPoint = new ol.Control.DrawFeature(vectors, OpenLayers.Handler.Point);
-	    openLayersMap.addControl(openLayersControlPoint);
 	    // /Mathieu Lot 2
 		
 		// Drag and drop du perso sur la carte :
