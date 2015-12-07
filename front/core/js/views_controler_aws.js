@@ -1782,6 +1782,7 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		
 		// Mathieu Lot 2
+		var pointFeature = new ol.Feature(new ol.geom.Point([0, 0]));
 	    var openLayersMap = new ol.Map({
 	        target: 'map',
 	        layers: [
@@ -1794,20 +1795,10 @@ var AppView = Backbone.View.extend({
 			    }),
 			    style: new ol.style.Style({
 			      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-			        anchor: [0.5, 46],
-			        anchorXUnits: 'fraction',
-			        anchorYUnits: 'pixels',
-			        opacity: 0.95,
+			        opacity: 1,
 			        src: 'http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png',
 			        scale: 0.25
 			      })),
-			      stroke: new ol.style.Stroke({
-			        width: 3,
-			        color: [255, 0, 0, 1]
-			      }),
-			      fill: new ol.style.Fill({
-			        color: [0, 0, 255, 0.6]
-			      })
 			    })
 			  })
 	        ],
