@@ -1,5 +1,5 @@
 /* Mathieu Lot 2 */
-function initOpenLayerslMap() {
+function initOpenLayersMap() {
 	/**
 	 * Define a namespace for the application.
 	 */
@@ -59,7 +59,8 @@ function initOpenLayerslMap() {
 	  var feature = map.forEachFeatureAtPixel(evt.pixel,
 	      function(feature, layer) {
 	        return feature;
-	      });
+	      }
+	  );
 	
 	  if (feature) {
 	    this.coordinate_ = evt.coordinate;
@@ -130,32 +131,19 @@ function initOpenLayerslMap() {
 	
 	var pointFeature = new ol.Feature(new ol.geom.Point([0, 0]));
 	
-	var lineFeature = new ol.Feature(
-	    new ol.geom.LineString([[-1e7, 1e6], [-1e6, 3e6]]));
-	
-	var polygonFeature = new ol.Feature(
-	    new ol.geom.Polygon([[[-3e6, -1e6], [-3e6, 1e6],
-	        [-1e6, 1e6], [-1e6, -1e6], [-3e6, -1e6]]]));
-	
-	
 	var map = new ol.Map({
 	  interactions: ol.interaction.defaults().extend([new app.Drag()]),
 	  layers: [
 	    new ol.layer.Tile({
-	      source: new ol.source.TileJSON({
-	        url: 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp'
-	      })
+	      source: new ol.source.MapQuest({layer: 'sat'})
 	    }),
 	    new ol.layer.Vector({
 	      source: new ol.source.Vector({
-	        features: [pointFeature, lineFeature, polygonFeature]
+	        features: [pointFeature]
 	      }),
 	      style: new ol.style.Style({
 	        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-	          anchor: [0.5, 46],
-	          anchorXUnits: 'fraction',
-	          anchorYUnits: 'pixels',
-	          opacity: 0.95,
+	          scale: 0.25,
 	          src: 'http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png'
 	        })),
 	        stroke: new ol.style.Stroke({
