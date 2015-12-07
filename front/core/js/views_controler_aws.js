@@ -1791,7 +1791,7 @@ var AppView = Backbone.View.extend({
 	          })
 			 ,new ol.layer.Vector({
 			    source: new ol.source.Vector({
-			      features: [pointFeature, lineFeature, polygonFeature]
+			      features: [pointFeature]
 			    }),
 			    style: new ol.style.Style({
 			      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
