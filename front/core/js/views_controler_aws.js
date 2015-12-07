@@ -1782,7 +1782,7 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		
 		// Mathieu Lot 2
-	    /*  var openLayersMap = new ol.Map({
+	    var openLayersMap = new ol.Map({
 	        target: 'map',
 	        layers: [
 	          new ol.layer.Tile({
@@ -1793,7 +1793,9 @@ var AppView = Backbone.View.extend({
 	          center: ol.proj.fromLonLat([37.41, 8.82]),
 	          zoom: 4
 	        })
-	      });*/
+	      });
+	    var openLayerControlPoint = new OpenLayers.Control.DrawFeature(vectors, OpenLayers.Handler.Point);
+	    openLayersMap.addControl(openLayerControlPoint);
 	    // /Mathieu Lot 2
 		
 		// Drag and drop du perso sur la carte :

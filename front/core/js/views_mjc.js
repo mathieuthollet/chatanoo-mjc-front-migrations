@@ -333,7 +333,6 @@ var MJCAppView = AppView.extend({
 			var reste = bodyHeight - headerHeight - footerHeight;
 			$(".accueil").height( reste );
 			$(".mosaique").height( reste );
-			alert('test');
 			t.redrawViews();
 			t.updateTermes();
 		};
