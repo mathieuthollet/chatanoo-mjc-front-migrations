@@ -126,14 +126,14 @@ function initOpenLayersMap() {
 	  var lonlat = ol.proj.transform(this.coordinate_, 'EPSG:3857', 'EPSG:4326');
 	  App.Views.appView.mapX = lonlat[0];
 	  App.Views.appView.mapY = lonlat[1];
-	  console.log(App.Views.appView.mapY, App.Views.appView.mapX);
+	  //console.log(App.Views.appView.mapY, App.Views.appView.mapX);
 	  this.coordinate_ = null;
 	  this.feature_ = null;
 	  return false;
 	};
 	
 	
-	var pointFeature = new ol.Feature(new ol.geom.Point([0, 0]));
+	var pointFeature = new ol.Feature(new ol.geom.Point([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte]));
 	
 	var map = new ol.Map({
 	  interactions: ol.interaction.defaults().extend([new app.Drag()]),
