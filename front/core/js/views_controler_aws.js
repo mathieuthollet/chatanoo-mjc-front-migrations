@@ -1110,7 +1110,7 @@ var AppView = Backbone.View.extend({
 			
 			if (jsonResult == null)
 			{
-				// Identifiants non valides
+				alert('Pseudo ou mot de passe incorrect');	// Mathieu Lot 2
 			}
 			else
 			{
@@ -1361,7 +1361,7 @@ var AppView = Backbone.View.extend({
 			}
 		
 			// Champ d'état du téléchargement
-			$(".uploadStatus").html("Envoi du média en cours...");
+			$(".uploadStatus").html("<img src='/front/core/images/ajax-loader.gif'/> Envoi du média en cours...");	// Mathieu Lot 2 ajout ajax loader
 		
 			var loadingAnimation = t.startLoadingAnimation();
 
@@ -1545,7 +1545,7 @@ var AppView = Backbone.View.extend({
 			$("#toEtape4Button").css("display", "inline");	// Mathieu Thollet lot 1.2
 		};
 
-		$(".uploadStatus").html("Conversion et chargement du média...");
+		$(".uploadStatus").html("<img src='/front/core/images/ajax-loader.gif'/> Conversion et chargement du média...");	// Mathieu Lot 2 ajout ajax loader
 
 		// On interroge le bucket "output" pour savoir si le media est disponible
 

@@ -609,6 +609,10 @@ textarea
 	cursor:pointer;
 }
 
+.global .tabs .onglet.motadire {
+	margin-right: 15px;	/* Mathieu Lot 2 */
+}
+
 .global .tabs .onglet.inactive {
 	color:#E0E0E0;
 	cursor:default;
