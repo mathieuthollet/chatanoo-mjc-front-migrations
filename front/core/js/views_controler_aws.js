@@ -289,6 +289,9 @@ var AppView = Backbone.View.extend({
 					break;
 					
 					case "MapZoom":
+					App.Views.appView.zoomCarte = jsonItem.content;
+					App.Views.appView.centerLatCarte = 2.48;
+					App.Views.appView.centerLongCarte = 48.835;					
 					break;
 					
 					case "MapType":
@@ -1782,7 +1785,10 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		
 		// Mathieu Lot 2
+		$('#map').width(App.Views.appView.largeurCarte);
+		$('#map').height(App.Views.appView.longueurCarte);
 		initOpenLayersMap();
+		// /Mathieu Lot 2
 		
 		// Drag and drop du perso sur la carte :
 		var mapParent =  $(".global .uploadParent .uploadContent .uploadBody .mapParent");

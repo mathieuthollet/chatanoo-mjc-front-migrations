@@ -15,9 +15,9 @@ function initOpenLayersMap() {
 	app.Drag = function() {
 	
 	  ol.interaction.Pointer.call(this, {
-	    handleDownEvent: app.Drag.prototype.handleDownEvent,
+	    /*handleDownEvent: app.Drag.prototype.handleDownEvent,
 	    handleDragEvent: app.Drag.prototype.handleDragEvent,
-	    handleMoveEvent: app.Drag.prototype.handleMoveEvent,
+	    handleMoveEvent: app.Drag.prototype.handleMoveEvent,*/
 	    handleUpEvent: app.Drag.prototype.handleUpEvent
 	  });
 	
@@ -123,8 +123,10 @@ function initOpenLayersMap() {
 	 * @return {boolean} `false` to stop the drag sequence.
 	 */
 	app.Drag.prototype.handleUpEvent = function(evt) {
-	  this.coordinate_ = null;
-	  this.feature_ = null;
+	  var lonlat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+	  var lon = lonlat[0];
+	  var lat = lonlat[1];
+	  alert(lon + ', ' + lat);
 	  return false;
 	};
 	
@@ -158,8 +160,8 @@ function initOpenLayersMap() {
 	  ],
 	  target: 'map',
 	  view: new ol.View({
-	    center: [0, 0],
-	    zoom: 2
+	    center: [App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte],
+	    zoom: App.Views.appView.zoomCarte
 	  })
 	});
 }
