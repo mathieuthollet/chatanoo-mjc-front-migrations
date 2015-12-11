@@ -1222,8 +1222,10 @@ var MJCAppView = AppView.extend({
 						if (layer) layer.draw();*/
 						var layer =  itemIcon.parent;
 						for (i=1; i<=100; i++) {
-							itemIcon.move( { x: moveX/100, y: moveY/100 } );
-							if (layer) layer.draw();
+							setTimeout(function () {
+								itemIcon.move( { x: moveX/100, y: moveY/100 } );
+								if (layer) layer.draw();
+							}, i*20);
 						}
 						/* /Mathieu Lot 2 */
 						// console.log("APRES", layer);
