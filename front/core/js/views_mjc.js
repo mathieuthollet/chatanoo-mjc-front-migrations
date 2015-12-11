@@ -655,9 +655,9 @@ var MJCAppView = AppView.extend({
 					break;
 					
 					case "MapZoom":
-					App.Views.appView.zoomCarte = jsonItem.content;
-					App.Views.appView.centerLatCarte = 2.48;
-					App.Views.appView.centerLongCarte = 48.835;
+					App.Views.appView.zoomCarte = jsonItem.content;	// Mathieu Lot 2
+					App.Views.appView.centerLatCarte = 2.48;	// Mathieu Lot 2
+					App.Views.appView.centerLongCarte = 48.835;	// Mathieu Lot 2
 					break;
 					
 					case "MapType":
