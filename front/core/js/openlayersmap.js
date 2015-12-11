@@ -126,6 +126,7 @@ function initOpenLayersMap() {
 	  var lonlat = ol.proj.transform(this.coordinate_, 'EPSG:3857', 'EPSG:4326');
 	  App.Views.appView.mapX = lonlat[0];
 	  App.Views.appView.mapY = lonlat[1];
+	  console.log(App.Views.appView.mapY, App.Views.appView.mapX);
 	  this.coordinate_ = null;
 	  this.feature_ = null;
 	  return false;
