@@ -854,7 +854,7 @@ var AppView = Backbone.View.extend({
 		};
 		
 		var success = success || function(jsonResult) {
-			// console.log(jsonResult);
+			console.log(jsonResult);
 		};
 		
 		//t.ajax("items", jsonInput, success);	// Mathieu Lot 2
