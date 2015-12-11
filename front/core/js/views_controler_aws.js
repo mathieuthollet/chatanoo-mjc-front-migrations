@@ -857,7 +857,7 @@ var AppView = Backbone.View.extend({
 			// console.log(jsonResult);
 		};
 		
-		t.ajax("items", jsonInput, success);
+		//t.ajax("items", jsonInput, success);
 	},
 
 	getDataVoteById: function(voteId, success) {
