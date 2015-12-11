@@ -1787,9 +1787,13 @@ var AppView = Backbone.View.extend({
 		// Mathieu Lot 2
 		$('#map').width(App.Views.appView.largeurCarte);
 		$('#map').height(App.Views.appView.longueurCarte);
+		t.mapX = App.Views.appView.centerLatCarte;
+		t.mapY = App.Views.appView.centerLongCarte;
 		initOpenLayersMap();
 		// /Mathieu Lot 2
 		
+		// Mathieu Lot 2
+		/*
 		// Drag and drop du perso sur la carte :
 		var mapParent =  $(".global .uploadParent .uploadContent .uploadBody .mapParent");
 		var item = $(".item", mapParent);
@@ -1810,7 +1814,6 @@ var AppView = Backbone.View.extend({
 		var mapY = (t.longitudeDroite + longitudeGauche) * 0.5;
 		
 		// console.log(mapX, mapY);
-		
 		var onDragEnd = function(e) {
 			
 			var itemDragged = e.currentTarget;
@@ -1839,10 +1842,9 @@ var AppView = Backbone.View.extend({
 			$("#toEtape3Button").css("display", "inline");	// Mathieu Thollet lot 1.2
 			$("#toEtape3Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
 		};
-
-		
 		var draggable = Draggable.create(item, { onDragEnd:onDragEnd });
 		TweenLite.set(item, { x: mapWidth * 0.5, y: mapHeight * 0.5 });
+		*/
 		
 		// Bouton de validation de l'étape de la carte :
 		//$("#toEtape5Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
@@ -1850,7 +1852,7 @@ var AppView = Backbone.View.extend({
 		//$("#toEtape5Button").off().on("click", function(){ t.validUploadEtape5( mapX, mapY); } );	// Mathieu Thollet lot 1.2
 		$("#toEtape3Button").siblings(".etape").css("display", "inline");	// Mathieu Thollet lot 1.2
 		$("#toEtape3Button").css("display", "inline");	// Mathieu Thollet lot 1.2
-		$("#toEtape3Button").off().on("click", function(){ t.validUploadEtape2( mapX, mapY); } );	// Mathieu Thollet lot 1.2
+		$("#toEtape3Button").off().on("click", function(){ t.validUploadEtape2( t.mapX, t.mapY); } );	// Mathieu Thollet lot 1.2
 	},
 	
 	/* Mathieu Thollet lot 1.2 */

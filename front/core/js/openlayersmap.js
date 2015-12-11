@@ -124,9 +124,8 @@ function initOpenLayersMap() {
 	 */
 	app.Drag.prototype.handleUpEvent = function(evt) {
 	  var lonlat = ol.proj.transform(this.coordinate_, 'EPSG:3857', 'EPSG:4326');
-	  var lon = lonlat[0];
-	  var lat = lonlat[1];
-	  alert(lon + ', ' + lat);
+	  App.Views.appView.mapX = lonlat[0];
+	  App.Views.appView.mapY = lonlat[1];
 	  this.coordinate_ = null;
 	  this.feature_ = null;
 	  return false;
