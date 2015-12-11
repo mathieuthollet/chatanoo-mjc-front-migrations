@@ -1216,11 +1216,16 @@ var MJCAppView = AppView.extend({
 						
 						// console.log("APRES", votesCollection.length, positions.length, "position", lastPosition.x, lastPosition.y);
 						
-						itemIcon.move( { x: moveX, y: moveY } );
-						
+						/* Mathieu Lot 2 */
+						/*itemIcon.move( { x: moveX, y: moveY } );
 						var layer =  itemIcon.parent;
-						if (layer) layer.draw();
-						
+						if (layer) layer.draw();*/
+						var layer =  itemIcon.parent;
+						for (i=1; i<=100; i++) {
+							itemIcon.move( { x: moveX/100, y: moveY/100 } );
+							if (layer) layer.draw();
+						}
+						/* /Mathieu Lot 2 */
 						// console.log("APRES", layer);
 					}
 				}
