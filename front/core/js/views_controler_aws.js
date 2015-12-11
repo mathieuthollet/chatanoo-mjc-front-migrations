@@ -1785,8 +1785,8 @@ var AppView = Backbone.View.extend({
 		$("#toEtape3Button").siblings(".etape").css("display", "none");	// Mathieu Thollet Lot 1.2
 		
 		// Mathieu Lot 2
-		$('#map').width(App.Views.appView.largeurCarte);
-		$('#map').height(App.Views.appView.longueurCarte);
+		$('#map').width(App.Views.appView.largeurCarte).height(App.Views.appView.longueurCarte);
+		$('#formMap').width(App.Views.appView.largeurCarte).height(App.Views.appView.longueurCarte);
 		t.mapX = App.Views.appView.centerLatCarte;
 		t.mapY = App.Views.appView.centerLongCarte;
 		initOpenLayersMap();
