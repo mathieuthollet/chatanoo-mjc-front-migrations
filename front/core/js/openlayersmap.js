@@ -133,7 +133,7 @@ function initOpenLayersMap() {
 	};
 	
 	
-	var pointFeature = new ol.Feature(new ol.geom.Point([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte]));
+	var pointFeature = new ol.Feature(new ol.geom.Point(ol.proj.transform([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte], 'EPSG:4326', 'EPSG:3857')));
 	
 	var map = new ol.Map({
 	  interactions: ol.interaction.defaults().extend([new app.Drag()]),
@@ -162,7 +162,7 @@ function initOpenLayersMap() {
 	  ],
 	  target: 'map',
 	  view: new ol.View({
-	    center: [App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte],
+	    center: ol.proj.transform([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte], 'EPSG:4326', 'EPSG:3857'),
 	    zoom: App.Views.appView.zoomCarte
 	  })
 	});
