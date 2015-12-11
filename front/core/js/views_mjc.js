@@ -1225,7 +1225,7 @@ var MJCAppView = AppView.extend({
 							setTimeout(function () {
 								itemIcon.move( { x: moveX/100, y: moveY/100 } );
 								if (layer) layer.draw();
-							}, i*20);
+							}, i*10);
 						}
 						/* /Mathieu Lot 2 */
 						// console.log("APRES", layer);
