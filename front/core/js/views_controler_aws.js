@@ -252,8 +252,8 @@ var AppView = Backbone.View.extend({
 			// console.log("datas", jsonResult.length);
 			
 			// Mathieu Lot 2
-			App.Views.appView.centerLatCarte = jsonResult.Carto[0].y;
-			App.Views.appView.centerLongCarte = jsonResult.Carto[0].x;
+			App.Views.appView.centerLatCarte = parseFloat(jsonResult.Carto[0].x);
+			App.Views.appView.centerLongCarte = parseFloat(jsonResult.Carto[0].y);
 			// /Mathieu Lot 2
 			
 			// ... puis des méta-données de la  de la query (mots-clés)
