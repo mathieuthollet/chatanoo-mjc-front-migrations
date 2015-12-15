@@ -251,6 +251,11 @@ var AppView = Backbone.View.extend({
 			
 			// console.log("datas", jsonResult.length);
 			
+			// Mathieu Lot 2
+			App.Views.appView.centerLatCarte = jsonResult.datas.Carto[0].x;
+			App.Views.appView.centerLongCarte = sonResult.datas.Carto[0].y;
+			// /Mathieu Lot 2
+			
 			// ... puis des méta-données de la  de la query (mots-clés)
 			t.fetchMetasOfQuery(queryId);
 		};
@@ -290,8 +295,6 @@ var AppView = Backbone.View.extend({
 					
 					case "MapZoom":
 					App.Views.appView.zoomCarte = jsonItem.content;	// Mathieu Lot 2
-					App.Views.appView.centerLatCarte = 12.303;	// Mathieu Lot 2 TODO rendre dynamique quand on pourra récupérer le meta
-					App.Views.appView.centerLongCarte = 42.940;	// Mathieu Lot 2 TODO rendre dynamique quand on pourra récupérer le meta
 					break;
 					
 					case "MapType":
