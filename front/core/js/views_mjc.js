@@ -1281,7 +1281,7 @@ var MJCAppView = AppView.extend({
 		var ecrans = $(".ecrans");
 		
 		var popUpWith = Math.max( 510, ecrans.width() * 0.5);
-		var popUpHeight = /*460*/564/*Mathieu Thollet lot 3*/;
+		var popUpHeight = /*460*/616/*Mathieu Thollet lot 3*/;
 		var popUpLeft = ecrans.width() * 0.5 - 20;
 		var popUpTop = 20;
 		
