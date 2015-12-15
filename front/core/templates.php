@@ -50,11 +50,10 @@
             <div class="popupClose">x</div>
         </div>
         <div class="popupColumns">
+            <div class="popupTitle"></div>
+            <div class="popupTags"></div>
+            <div class="popupMedia"></div>
             <div class="popupLeftColumn">
-                <div class="popupTitle">
-                </div>
-                <div class="popupMedia">
-                </div>
                 <div class="popupSliders">
                     <div class="inputs">
                         <div class="sliders">
@@ -62,12 +61,7 @@
                             <span><%= bas %></span><input type="range" id="sliderRu" min="0" max="100" value="50" /><span><%= haut %></span>
                         </div>
                     </div>
-                    <div class="button">
-                        <button class="voteButton">Vote</button>
-                    </div>
                 </div>
-            </div>
-            <div class="popupRightColumn">
                 <div class="ecrivezVotez">Ecrivez votre avis puis votez :</div>
 				<div class="popupInputComment">
 					<div class="emojiPickerIconWrap">
@@ -75,6 +69,11 @@
 						<div class="emojiButton emojiPickerIcon black"></div>
                 	</div>
                 </div>
+                <div class="button">
+                    <button class="voteButton">Vote</button>
+                </div>
+            </div>
+            <div class="popupRightColumn">
                 <div class="popupComments" id="comments">
                 </div>
             </div>

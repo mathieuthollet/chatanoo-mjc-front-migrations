@@ -692,6 +692,7 @@ var AppView = Backbone.View.extend({
 
 		var popUpElement = popupView.$el;
 		var mediaTitle = $(".popupTitle", popUpElement);
+		var mediaTags = $(".popupTags", popUpElement);	// Mathieu Lot 3
 		var mediaParent = $(".popupMedia", popUpElement);
 		var mediaWidth = popupView.mediaWidth;
 		var mediaHeight = popupView.mediaHeight;
