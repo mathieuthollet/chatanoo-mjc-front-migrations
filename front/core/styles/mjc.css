@@ -441,7 +441,7 @@ textarea
 }
 
 .global .popup .popupContent .popupColumns {
-	padding-top:25px;
+	padding-top:/*25px*/15px/*Mathieu Thollet lot 3*/;
 }
 
 .global .popup .popupContent .popupLeftColumn {
