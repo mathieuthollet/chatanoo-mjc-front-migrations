@@ -579,7 +579,8 @@ var AppView = Backbone.View.extend({
 
 		var options =  {
 			
-			width:popUpWidth, height:popUpHeight, 
+			width: popUpWidth, 
+			height: popUpHeight, 
 			gauche: t.axeHorizontal.gauche,
 			droite: t.axeHorizontal.droite,
 			bas: t.axeVertical.bas,
