@@ -409,7 +409,7 @@ textarea
 	position: absolute;
 	background-color:rgba(255,255,255,0.95);
 	width:510px;
-	height: 460px;
+	height: /*460px*/564px/*Mathieu Thollet lot 3*/;
 	font-size: 0.8em;
 	margin-top:100px;
 	padding-bottom: 30px;
@@ -577,7 +577,7 @@ textarea
 
 .global .popup .popupComments {
 	width:190px;
-	height:280px;
+	height:/*280px*/200px/*Mathieu Thollet lot 3*/;
 	margin-top:/*20px*/10px/*Mathieu Thollet lot 3*/;
 	border:#CCCCCC 1px solid;
 	overflow:scroll;
