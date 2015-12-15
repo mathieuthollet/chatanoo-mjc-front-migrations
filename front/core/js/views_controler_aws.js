@@ -420,7 +420,7 @@ var AppView = Backbone.View.extend({
 		
 		t.ajax("medias", jsonInput, success);
 	},
-
+	
 
 	/* Commentaires des items */
 	
@@ -692,7 +692,7 @@ var AppView = Backbone.View.extend({
 
 		var popUpElement = popupView.$el;
 		var mediaTitle = $(".popupTitle", popUpElement);
-		var mediaTags = $(".popupTags", popUpElement);	// Mathieu Lot 3
+		var mediaTags = $(".popupTags", popUpElement);	// Mathieu Thollet Lot 3
 		var mediaParent = $(".popupMedia", popUpElement);
 		var mediaWidth = popupView.mediaWidth;
 		var mediaHeight = popupView.mediaHeight;
@@ -700,6 +700,16 @@ var AppView = Backbone.View.extend({
 		if ((titre == "") || (titre == null)) titre = "(Sans titre)";
 		
 		mediaTitle.html(titre + "<br/><span class='username'>par " + pseudo + "</span>");
+		/* Mathieu Thollet Lot 3 */
+		var tagsArray = [motCle1, motCle2, motCle3];
+		var tags = '';
+		tagsArray.forEach(function(mot) {
+		    if (mot != null) {
+		    	tags += ' <span style="color:' + mot.couleur + '">' + mot.texte + '</span> ';
+		    }
+		});
+		mediaTags.html(tags);
+		/* /Mathieu Thollet Lot 3 */
 		
 		var success = function(jsonResult) {
 
