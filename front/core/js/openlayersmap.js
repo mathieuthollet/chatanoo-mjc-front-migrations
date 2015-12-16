@@ -178,11 +178,11 @@ function initOpenLayersMapLesLieux(items) {
 	    new ol.layer.Tile({
 	      source: new ol.source.OSM({})
 	    }),
-	    /*new ol.layer.Vector({
+	    new ol.layer.Vector({
 	      source: new ol.source.Vector({
-	        features: [pointFeature]
+	        /*features: [pointFeature]*/
 	      }),
-	      style: new ol.style.Style({
+	      /*style: new ol.style.Style({
 	        image: new ol.style.Icon(/** @type {olx.style.IconOptions} * / ({
 	          scale: 0.25,
 	          src: 'http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png'
@@ -194,8 +194,8 @@ function initOpenLayersMapLesLieux(items) {
 	        fill: new ol.style.Fill({
 	          color: [0, 0, 255, 0.6]
 	        })
-	      })
-	    })*/
+	      })*/
+	    })
 	  ],
 	  target: 'carte',
 	  view: new ol.View({
