@@ -124,7 +124,7 @@
             </div>
             
             <div class="creativecommons">
-                Dispositif mutualisé par l'association Concert-Urbain sous un contrat Creative Commons (CC BY-NC-ND 3.0 FR) 
+                Dispositif mutualisé par l'association Concert-Urbain sous licence Creative Commons (CC BY-NC-ND 3.0 FR) 
                 <img src="../core/images/cc.png"" alt="" />
             </div>
             
