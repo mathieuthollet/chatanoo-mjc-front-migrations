@@ -399,6 +399,7 @@ textarea
 /* Vue Carte */
 
 .global .mosaique .carte {
+	width: 100%;	/* Mathieu Thollet Lot 2 */
 }
 
 

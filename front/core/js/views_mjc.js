@@ -339,6 +339,7 @@ var MJCAppView = AppView.extend({
 			var reste = bodyHeight - headerHeight - footerHeight;
 			$(".accueil").height( reste );
 			$(".mosaique").height( reste );
+			$("#carte").height( reste );	// Mathieu Thollet Lot 2
 			t.redrawViews();
 			t.updateTermes();
 		};
@@ -847,7 +848,8 @@ var MJCAppView = AppView.extend({
 		
 		if (layer) layer.draw();
 		
-		//t.redrawMap();	// Mathieu Thollet Lot 2 
+		if ($('#carte').is(':visible'))	// Mathieu Thollet Lot 2
+			t.redrawMap();	 
 	},
 	
 	redrawMap: function() {	
