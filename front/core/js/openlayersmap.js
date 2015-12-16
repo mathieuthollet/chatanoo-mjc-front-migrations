@@ -139,7 +139,7 @@ function initOpenLayersMap() {
 	  interactions: ol.interaction.defaults().extend([new app.Drag()]),
 	  layers: [
 	    new ol.layer.Tile({
-	      source: new ol.source.MapQuest({layer: 'sat'})
+	      source: new ol.source.OSM({})
 	    }),
 	    new ol.layer.Vector({
 	      source: new ol.source.Vector({
