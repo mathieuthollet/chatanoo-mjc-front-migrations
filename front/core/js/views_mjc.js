@@ -499,10 +499,10 @@ var MJCAppView = AppView.extend({
 			});
 			
 			$(".onglet.carte").off().on("click", function() {
-				t.redrawMap();
 				t.selectVue(0, 0, 0, 1, 0);
 				$(this).addClass("active");
 				t.closeUploadView();	// Mathieu Thollet Lot 1 bis
+				t.redrawMap();
 			});
 			
 			$(".onglet.users").off().on("click", function() {
@@ -847,7 +847,7 @@ var MJCAppView = AppView.extend({
 		
 		if (layer) layer.draw();
 		
-		t.redrawMap();
+		//t.redrawMap();	// Mathieu Thollet Lot 2 
 	},
 	
 	redrawMap: function() {	

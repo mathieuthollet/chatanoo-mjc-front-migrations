@@ -167,9 +167,13 @@ function initOpenLayersMapNewMedia() {
 /*****************************************************/
 
 
+mapLesLieux = null;
 
 /* Ouverture de la carte dans le cadre de la page "les lieux" */
 function initOpenLayersMapLesLieux(items) {
+
+	if (mapLesLieux != null)
+		mapLesLieux.destroy();
 
 	//var pointFeature = new ol.Feature(new ol.geom.Point(ol.proj.transform([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte], 'EPSG:4326', 'EPSG:3857')));
 	
