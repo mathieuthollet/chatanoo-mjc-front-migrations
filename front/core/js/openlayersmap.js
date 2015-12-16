@@ -166,23 +166,6 @@ function initOpenLayersMap() {
 	    zoom: App.Views.appView.zoomCarte
 	  })
 	});
-	
-	
-	map.on('singleclick', function(evt) {                         
-	  var map = evt.map;
-	  var feature = map.forEachFeatureAtPixel(evt.pixel,
-	      function(feature, layer) {
-	        return feature;
-	      });
-	  var deltaX = evt.coordinate[0] - this.coordinate_[0];
-	  var deltaY = evt.coordinate[1] - this.coordinate_[1];
-	  var geometry = /** @type {ol.geom.SimpleGeometry} */
-	      (this.feature_.getGeometry());
-	  geometry.translate(deltaX, deltaY);
-	  this.coordinate_[0] = evt.coordinate[0];
-	  this.coordinate_[1] = evt.coordinate[1];      
-	  var lonlat = ol.proj.transform(this.coordinate_, 'EPSG:3857', 'EPSG:4326');
-	  App.Views.appView.mapX = lonlat[0];
-	  App.Views.appView.mapY = lonlat[1];
- 	});     
+
+ 
 }
