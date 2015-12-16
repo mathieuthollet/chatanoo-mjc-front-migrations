@@ -170,6 +170,7 @@ Chatanoo.QueryView = Backbone.ChatanooView.extend({
 	{
 		var queryId = this.model.get("id");
 		App.Views.appView.loadQuery(queryId);
+		$(window).resize();	// Mathieu Thollet bug image sur mot du bas
 	}
 });
 
