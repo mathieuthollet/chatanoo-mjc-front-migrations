@@ -602,6 +602,7 @@ textarea
 	float:left;
 	font-size:0.85em;
 	display: none; /* Mathieu Thollet Lot 1 bis */
+	width: 100%;	/* Mathieu Thollet Lot 2 */
 }
 
 .global .tabs .onglet {
@@ -615,7 +616,7 @@ textarea
 }
 
 .global .tabs .onglet.motadire {
-	margin-right: 15px;	/* Mathieu Lot 2 */
+	float: right;	/* Mathieu Lot 2 */
 }
 
 .global .tabs .onglet.inactive {
