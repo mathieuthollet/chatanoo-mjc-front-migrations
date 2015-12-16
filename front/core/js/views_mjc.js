@@ -236,6 +236,7 @@ Chatanoo.MapItemsView = Chatanoo.MosaiqueItemsView.extend({
 		
 		this.removeSubviews();
 		
+		/*
 		// 1. Background de la carte
 		var bgImageModel = new Backbone.Model( { id:0, url: this.map } );
 		var bgView = new Chatanoo.ImageView( { model: bgImageModel } );
@@ -250,8 +251,12 @@ Chatanoo.MapItemsView = Chatanoo.MosaiqueItemsView.extend({
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item, no++);
 		}, this);
+		*/
+		/* Mathieu Thollet Lot 2 */
+		initOpenLayersMapLesLieux(this.collection.models);
 
 	},
+	
 	
 	renderItem: function (item, no)
 	{
