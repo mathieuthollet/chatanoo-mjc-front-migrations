@@ -4,6 +4,8 @@
 
 /* Ouverture de la carte dans le cadre de l'ajout d'un nouveau média */
 function initOpenLayersMapNewMedia() {
+	
+	/* Gestion Drag & drop BOF */
 	/**
 	 * Define a namespace for the application.
 	 */
@@ -124,9 +126,12 @@ function initOpenLayersMapNewMedia() {
 	  this.feature_ = null;
 	  return false;
 	};
+	/* Gestion Drag & drop EOF */
 	
+	// Création du point
 	var pointFeature = new ol.Feature(new ol.geom.Point(ol.proj.transform([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte], 'EPSG:4326', 'EPSG:3857')));
 
+	// Rendu de la carte
 	var map = new ol.Map({
 	  interactions: ol.interaction.defaults().extend([new app.Drag()]),
 	  layers: [
@@ -170,26 +175,40 @@ function initOpenLayersMapNewMedia() {
 mapLesLieux = null;
 
 /* Ouverture de la carte dans le cadre de la page "les lieux" */
-function initOpenLayersMapLesLieux(items) {
+function initOpenLayersMapLesLieux() {
 
+	// Destruction de la cate précédente si elle existe déjà
 	if (mapLesLieux != null) {
 		mapLesLieux.setTarget(null);
 		mapLesLieux = null;
 	}
 
-	//var pointFeature = new ol.Feature(new ol.geom.Point(ol.proj.transform([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte], 'EPSG:4326', 'EPSG:3857')));
+	// Liste des points
+	var pointFeatures = new Array();
+	var itemsCollection = App.Collections.itemsCollection;
+	itemsCollection.each(function(item) {
+		var cartos = item.get("cartos");
+		if (cartos) {
+			if (cartos.get("y") && cartos.get("x")) {
+				pointFeatures.push(
+					new ol.Feature(new ol.geom.Point(ol.proj.transform([parseFloat(cartos.get("x")), parseFloat(cartos.get("y"))], 'EPSG:4326', 'EPSG:3857')))
+				);
+			}
+		}
+	});
 	
+	// Rendu de la carte
 	mapLesLieux = new ol.Map({
 	  layers: [
 	    new ol.layer.Tile({
 	      source: new ol.source.OSM({})
 	    })
-	    /*, new ol.layer.Vector({
+	    , new ol.layer.Vector({
 	      source: new ol.source.Vector({
-	        features: [pointFeature]
+	        features: pointFeatures
 	      }),
 	      style: new ol.style.Style({
-	        image: new ol.style.Icon(/** @type {olx.style.IconOptions} * / ({
+	        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
 	          scale: 0.25,
 	          src: 'http://cdn.aws.chatanoo.org/mjc/nogent/divers/cercleRouge.png'
 	        })),
@@ -201,7 +220,7 @@ function initOpenLayersMapLesLieux(items) {
 	          color: [0, 0, 255, 0.6]
 	        })
 	      })
-	    })*/
+	    })
 	  ],
 	  target: 'carte',
 	  view: new ol.View({

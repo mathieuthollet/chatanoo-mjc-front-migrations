@@ -868,7 +868,7 @@ var MJCAppView = AppView.extend({
 		// Recalcul de la position de la carte de chaque item
 		t.updateItemsMapPosition( geoms );
 		*/
-		initOpenLayersMapLesLieux(App.Collections.itemsCollection);		
+		initOpenLayersMapLesLieux();		
 	},
 
 	buildView: function() {
