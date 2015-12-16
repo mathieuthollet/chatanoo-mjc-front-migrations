@@ -123,6 +123,7 @@ function initOpenLayersMap() {
 	 * @return {boolean} `false` to stop the drag sequence.
 	 */
 	app.Drag.prototype.handleUpEvent = function(evt) {
+		app.Drag.prototype.handleMoveEvent(evt);	// Mathieu pour que ça marche au clic aussi
 	  var lonlat = ol.proj.transform(this.coordinate_, 'EPSG:3857', 'EPSG:4326');
 	  App.Views.appView.mapX = lonlat[0];
 	  App.Views.appView.mapY = lonlat[1];
