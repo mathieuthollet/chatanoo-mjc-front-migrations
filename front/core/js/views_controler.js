@@ -16,7 +16,7 @@ var AppView = Backbone.View.extend({
 		this.serviceURL = "http://ws.dring93.org/services";
 		this.uploadURL = "http://ms.dring93.org/upload";
 		this.mediaCenterURL = "http://ms.dring93.org/m/";
-		this.mapURL = "medias/cartes/CARTE_DRING13.jpg";
+		//this.mapURL = "medias/cartes/CARTE_DRING13.jpg";	// Mathieu Thollet Lot 2
 		
 		this.initAdminParams( "mazerte", "desperados", "qJlCaSsBbYBYypwF9TT8KmCOxhuZ3wIj" );
 		
@@ -959,7 +959,7 @@ var AppView = Backbone.View.extend({
 		
 		
 		t.popupUpload = new Chatanoo.UploadView( { el : popUpElement } );
-		t.popupUpload.urlCarte = t.mapURL;
+		//t.popupUpload.urlCarte = t.mapURL;	// Mathieu Thollet Lot 2
 		t.popupUpload.render( options );
 
 		var popUpContent = $(".uploadContent", popUpElement);

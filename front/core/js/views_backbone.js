@@ -640,7 +640,7 @@ Chatanoo.AudioView = Backbone.ChatanooView.extend({
 
 Chatanoo.UploadView = Backbone.View.extend({
 
-	urlCarte: "medias/cartes/NON_PRECISEE.jpg",
+	//urlCarte: "medias/cartes/NON_PRECISEE.jpg",	// Mathieu Thollet Lot 2
 
 	initialize: function (param) {
 		this.template = _.template($("#uploadFormTemplate").html())
@@ -651,7 +651,7 @@ Chatanoo.UploadView = Backbone.View.extend({
 		var t = this;
 
 		// Par défaut :
-		var model = { gauche:"individuel", droite:"collectif", bas:"réaliste", haut:"utopique", urlCarte: this.urlCarte };
+		var model = { gauche:"individuel", droite:"collectif", bas:"réaliste", haut:"utopique"/*, urlCarte: this.urlCarte *//*Mathieu Thollet Lot 2*/};
 
 		if (options)
 		{

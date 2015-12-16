@@ -17,7 +17,7 @@ var AppView = Backbone.View.extend({
 		this.serviceURL = "http://core.aws.chatanoo.org/services";
 		this.uploadURL = "http://ms.dring93.org/upload";
 		this.mediaCenterURL = "http://medias.aws.chatanoo.org";
-		this.mapURL = "medias/cartes/CARTE_DRING13.jpg";
+		//this.mapURL = "medias/cartes/CARTE_DRING13.jpg";	// Mathieu Thollet Lot 2
 		this.queriesPrefix = "";
 		
 		this.initAdminParams( "mazerte", "desperados", "90f1de8a-6c03-45d8-8c8a-89b10893" );
@@ -1044,7 +1044,7 @@ var AppView = Backbone.View.extend({
 		};
 
 		t.popupUpload = new Chatanoo.UploadView( { el : popUpElement } );
-		t.popupUpload.urlCarte = t.mapURL;
+		//t.popupUpload.urlCarte = t.mapURL;	// Mathieu Thollet Lot 2
 		t.popupUpload.render( options );
 
 		var popUpContent = $(".uploadContent", popUpElement);
@@ -1804,7 +1804,7 @@ var AppView = Backbone.View.extend({
 		$('#formMap').width(App.Views.appView.largeurCarte).height(App.Views.appView.longueurCarte);
 		t.mapX = App.Views.appView.centerLatCarte;
 		t.mapY = App.Views.appView.centerLongCarte;
-		initOpenLayersMap();
+		initOpenLayersMapNewMedia();
 		// /Mathieu Lot 2
 		
 		// Mathieu Lot 2
