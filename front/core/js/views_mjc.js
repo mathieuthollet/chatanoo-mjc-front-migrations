@@ -224,17 +224,16 @@ Chatanoo.MapItemsView = Chatanoo.MosaiqueItemsView.extend({
 	el: "#carte",
 	className:"carte",
 	
-	initialize: function (itemCollection/*, mapUrl*//*Mathieu Thollet Lot 2*/) {
+	initialize: function (itemCollection, mapUrl) {
 		
-		//this.map = mapUrl;	// Mathieu Thollet Lot 2
+		this.map = mapUrl;
 		
 		Chatanoo.MosaiqueItemsView.prototype.initialize.call(this, itemCollection);
 		
 	},
 
 	render: function () {
-
-		/*		
+		
 		this.removeSubviews();
 		
 		// 1. Background de la carte
@@ -251,13 +250,9 @@ Chatanoo.MapItemsView = Chatanoo.MosaiqueItemsView.extend({
 		_.each(this.collection.models, function (item) {
 			this.renderItem(item, no++);
 		}, this);
-		*/
-		/* Mathieu Thollet Lot 2 */
-		initOpenLayersMapLesLieux(this.collection.models);
 
 	},
 	
-	/* Mathieu Thollet lot 2 */ /*
 	renderItem: function (item, no)
 	{
 		var itemView = new Chatanoo.MapItemView({
@@ -269,15 +264,17 @@ Chatanoo.MapItemsView = Chatanoo.MosaiqueItemsView.extend({
 		// cf CollectionView
 		this.addSubview(itemView);	
 	}
-	*/
+	
 });
+
 Chatanoo.MapItemView = Chatanoo.CoolPasCoolItemView.extend({
 	
 	initialize: function (param) {
-		/*this.template = _.template($("#itemMapTemplate").html())*/ // Mathieu Thollet Lot 2
+		this.template = _.template($("#itemMapTemplate").html())
 	}
 	
 });
+
 
 
 
@@ -1032,7 +1029,7 @@ var MJCAppView = AppView.extend({
 		
 		// 4) Construction de l'écran de la carte
 		if (App.Views.MapItemsView) App.Views.MapItemsView.close();
-		App.Views.MapItemsView = new Chatanoo.MapItemsView( itemsCollection/*, this.mapURL*/ /*Mathieu Thollet Lot 2*/);
+		App.Views.MapItemsView = new Chatanoo.MapItemsView( itemsCollection, this.mapURL );
 		
 		t.updateMap(geoms, mosaiqueWidth, mosaiqueHeight);
 	},
