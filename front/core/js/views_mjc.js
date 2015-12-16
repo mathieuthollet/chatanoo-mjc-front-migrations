@@ -271,15 +271,13 @@ Chatanoo.MapItemsView = Chatanoo.MosaiqueItemsView.extend({
 	}
 	*/
 });
-/* Mathieu Thollet Lot 2 */ /*
 Chatanoo.MapItemView = Chatanoo.CoolPasCoolItemView.extend({
 	
 	initialize: function (param) {
-		this.template = _.template($("#itemMapTemplate").html())
+		/*this.template = _.template($("#itemMapTemplate").html())*/ // Mathieu Thollet Lot 2
 	}
 	
 });
-*/
 
 
 
