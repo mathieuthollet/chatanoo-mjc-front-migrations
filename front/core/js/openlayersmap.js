@@ -173,7 +173,7 @@ function initOpenLayersMapLesLieux(items) {
 
 	//var pointFeature = new ol.Feature(new ol.geom.Point(ol.proj.transform([App.Views.appView.centerLatCarte, App.Views.appView.centerLongCarte], 'EPSG:4326', 'EPSG:3857')));
 	
-	var map = new ol.Map({
+	mapLesLieux = new ol.Map({
 	  layers: [
 	    new ol.layer.Tile({
 	      source: new ol.source.OSM({})
