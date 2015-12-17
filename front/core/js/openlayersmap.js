@@ -248,8 +248,23 @@ function initOpenLayersMapLesLieux() {
 	    mapLesLieux.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 	        alert('test');
 			var v = App.eventManager;
-			if (v) v.trigger("itemSelection", itemId, null, motCle1, motCle2, motCle3, titre, pseudo);
+			if (v) v.trigger("itemSelection", feature.B.itemId, null, feature.B.motCle1, feature.B.motCle2, feature.B.motCle3, feature.B.titre, feature.B.pseudo);
 	    });
 	});
  
+ 	// Change le cursor en pointer sur les points
+    var target = map.getTarget();
+    var jTarget = typeof target === "string" ? $("#" + target) : $(target);
+    // change mouse cursor when over marker
+    $(mapLesLieux.getViewport()).on('mousemove', function (e) {
+        var pixel = mapLesLieux.getEventPixel(e.originalEvent);
+        var hit = mapLesLieux.forEachFeatureAtPixel(pixel, function (feature, layer) {
+            return true;
+        });
+        if (hit) {
+            jTarget.css("cursor", "pointer");
+        } else {
+            jTarget.css("cursor", "");
+        }
+    });
 }
