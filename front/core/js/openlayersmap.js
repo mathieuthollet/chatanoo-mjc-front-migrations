@@ -245,7 +245,7 @@ function initOpenLayersMapLesLieux() {
 
 	// Clic sur les points
 	mapLesLieux.on("click", function(e) {
-	    map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+	    mapLesLieux.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 	        alert('test');
 			var v = App.eventManager;
 			if (v) v.trigger("itemSelection", itemId, null, motCle1, motCle2, motCle3, titre, pseudo);
