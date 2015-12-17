@@ -190,8 +190,22 @@ function initOpenLayersMapLesLieux() {
 		var cartos = item.get("cartos");
 		if (cartos) {
 			if (cartos.get("y") && cartos.get("x")) {
+				var itemId = item.get("id");
+				var motCle1 = item.get("motCle1");
+				var motCle2 = item.get("motCle2");
+				var motCle3 = item.get("motCle3");
+				var titre = item.get("title");
+				var user = item.get("user").get("pseudo");
 				pointFeatures.push(
-					new ol.Feature(new ol.geom.Point(ol.proj.transform([parseFloat(cartos.get("x")), parseFloat(cartos.get("y"))], 'EPSG:4326', 'EPSG:3857')))
+					new ol.Feature({
+						geometry: new ol.geom.Point(ol.proj.transform([parseFloat(cartos.get("x")), parseFloat(cartos.get("y"))], 'EPSG:4326', 'EPSG:3857'))
+						, itemId: itemId 
+						, motCle1: motCle1
+						, motCle2: motCle2
+						, motCle3: motCle3
+						, titre: titre
+						, pseudo: user
+					})
 				);
 			}
 		}
@@ -229,5 +243,13 @@ function initOpenLayersMapLesLieux() {
 	  })
 	});
 
+	// Clic sur les points
+	map.on("click", function(e) {
+	    map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+	        alert('test');
+			var v = App.eventManager;
+			if (v) v.trigger("itemSelection", itemId, null, motCle1, motCle2, motCle3, titre, pseudo);
+	    });
+	});
  
 }
