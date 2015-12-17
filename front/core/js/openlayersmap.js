@@ -244,7 +244,7 @@ function initOpenLayersMapLesLieux() {
 	});
 
 	// Clic sur les points
-	map.on("click", function(e) {
+	mapLesLieux.on("click", function(e) {
 	    map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 	        alert('test');
 			var v = App.eventManager;
