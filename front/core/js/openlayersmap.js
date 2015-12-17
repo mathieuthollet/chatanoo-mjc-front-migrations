@@ -253,7 +253,7 @@ function initOpenLayersMapLesLieux() {
 	});
  
  	// Change le cursor en pointer sur les points
-    var target = map.getTarget();
+    var target = mapLesLieux.getTarget();
     var jTarget = typeof target === "string" ? $("#" + target) : $(target);
     // change mouse cursor when over marker
     $(mapLesLieux.getViewport()).on('mousemove', function (e) {
