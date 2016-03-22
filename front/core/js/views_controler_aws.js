@@ -640,13 +640,20 @@ var AppView = Backbone.View.extend({
 
 	createVideoView: function( element, itemId, mediaId, videoID, width, height) {
 
-		console.log("createVideoView");
+		console.log("createVideoView", mediaId, videoID);
 
 		var t = this;
 
+		// Cas général :
 		var extension = ".mp4";
 		var mime = "video/mp4";
 		var mediaPath = t.awsURL + t.getVideoKey(videoID);
+	
+		// Cas particulier YouTube	
+		if (videoID.indexOf("http://www.youtube.com/watch?v=") == 0) {
+			mime = "video/youtube";
+			mediaPath = videoID;
+		}
 
 		var model = new MediaModel( { itemId: itemId, id: mediaId, url: mediaPath, mime:mime, width:width, height:height, autoplay: true } );
 		var videoView = new Chatanoo.VideoView( { el: element, model: model } ).loadVideo();

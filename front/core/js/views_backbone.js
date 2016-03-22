@@ -512,7 +512,10 @@ Chatanoo.VideoView = Backbone.ChatanooView.extend({
 		var t = this;
 
 		this.render();
+		
+		var player = new MediaElementPlayer('#playerVideo');
 
+		/*
 		var autoPlay = this.model.get("autoPlay");
 
 		var success =  function(mediaElement, domObject) {
@@ -537,6 +540,7 @@ Chatanoo.VideoView = Backbone.ChatanooView.extend({
 		var features = ['playpause','progress','current','fullscreen']; // ,'duration','volume'
 
 		this.mediaElement = $('video', this.$el).mediaelementplayer({ flashName:'mediaelement/flashmediaelement.swf', autoRewind:true, success:success, enablePluginDebug:false, hideControls:hideControls, alwaysShowControls:alwaysShowControls, features:features, plugins: ['flash'] });
+		*/
 
 		this.addRemovedEvent();
 

@@ -96,7 +96,7 @@
 </script>
 
 <script id="videoTemplate" type="text/template">
-    <video width='<%= width %>' height='<%= height %>' id='playervideo' <%= html5options %> >
+    <video id="playerVideo" width='<%= width %>' height='<%= height %>' id='playervideo' <%= html5options %> >
         <source src='<%= url %>' type='<%= mime %>' />
     </video>
 </script>
